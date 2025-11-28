@@ -5,22 +5,24 @@ import PolaroidImage from '../PolaroidImage';
 const HoundslySection = () => {
     const products = [
         {
-            name: 'Calming Shampoo',
-            description: 'Lavender & Chamomile for anxious pups.',
-            price: '£12.00',
-            image: '/assets/shampoo.jpg' // Placeholder
+            name: 'Houndsly Shampoo',
+            description: 'Our signature range of natural, vegan shampoos designed to gently cleanse and soothe. Perfect for sensitive skin.',
+            image: '/assets/shampoo.jpg', // Placeholder
+            link: 'https://houndsly.co.uk/collections/shampoo'
         },
         {
             name: 'Paw Balm',
             description: 'Soothing protection for cracked paws.',
             price: '£8.50',
-            image: '/assets/balm.jpg' // Placeholder
+            image: '/assets/balm.jpg', // Placeholder
+            link: 'https://houndsly.co.uk/collections/shampoo' // Defaulting to same link for now as requested context implies general shop link, or I can leave it empty/hash
         },
         {
             name: 'Detangling Spray',
             description: 'For a silky, knot-free coat.',
             price: '£10.00',
-            image: '/assets/spray.jpg' // Placeholder
+            image: '/assets/spray.jpg', // Placeholder
+            link: 'https://houndsly.co.uk/collections/shampoo'
         }
     ];
 
@@ -62,15 +64,18 @@ const HoundslySection = () => {
                                 <span className="font-bold text-lg" style={{ color: colors.orange }}>
                                     {product.price}
                                 </span>
-                                <button
-                                    className="px-4 py-2 rounded-full text-sm font-bold transition-colors"
+                                <a
+                                    href={product.link}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="px-4 py-2 rounded-full text-sm font-bold transition-colors inline-block"
                                     style={{
                                         backgroundColor: colors.tealLight,
                                         color: colors.teal
                                     }}
                                 >
-                                    Add to Cart
-                                </button>
+                                    Buy Now
+                                </a>
                             </div>
                         </div>
                     ))}

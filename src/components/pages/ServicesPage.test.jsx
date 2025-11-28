@@ -19,9 +19,9 @@ describe('ServicesPage', () => {
                 <ServicesPage />
             </MemoryRouter>
         );
-        expect(screen.getByText('The Bath & Brush')).toBeInTheDocument();
+        expect(screen.getByText('Maintenance Groom')).toBeInTheDocument();
         expect(screen.getByText('The Full Groom')).toBeInTheDocument();
-        expect(screen.getByText('Puppy Introduction')).toBeInTheDocument();
+        expect(screen.getByText('🐶 Puppy Introduction')).toBeInTheDocument();
     });
 
     it('displays the timeline', () => {

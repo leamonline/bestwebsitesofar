@@ -10,7 +10,7 @@ describe('HoundslySection', () => {
 
     it('renders product cards', () => {
         render(<HoundslySection />);
-        expect(screen.getByText('Calming Shampoo')).toBeInTheDocument();
+        expect(screen.getByText('Houndsly Shampoo')).toBeInTheDocument();
         expect(screen.getByText('Paw Balm')).toBeInTheDocument();
         expect(screen.getByText('Detangling Spray')).toBeInTheDocument();
     });
@@ -20,9 +20,15 @@ describe('HoundslySection', () => {
         expect(screen.getByRole('button', { name: /View All Products/i })).toBeInTheDocument();
     });
 
-    it('renders "Add to Cart" buttons', () => {
+    it('renders "Buy Now" links', () => {
         render(<HoundslySection />);
-        const buttons = screen.getAllByRole('button', { name: /Add to Cart/i });
-        expect(buttons.length).toBeGreaterThanOrEqual(3);
+        const links = screen.getAllByRole('link', { name: /Buy Now/i });
+        expect(links.length).toBeGreaterThanOrEqual(3);
+    });
+
+    it('does not render price for Houndsly Shampoo but does for others', () => {
+        render(<HoundslySection />);
+        expect(screen.queryByText('£12.00')).not.toBeInTheDocument();
+        expect(screen.getByText('£8.50')).toBeInTheDocument();
     });
 });

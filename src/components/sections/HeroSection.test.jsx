@@ -5,7 +5,7 @@ import HeroSection from './HeroSection';
 describe('HeroSection', () => {
     it('renders without crashing', () => {
         render(<HeroSection isLoaded={true} />);
-        expect(screen.getByText(/Where every dog gets the/i)).toBeInTheDocument();
+        expect(screen.getByText(/Est. 1983/i)).toBeInTheDocument();
     });
 
     it('renders "Book Your Visit" button', () => {

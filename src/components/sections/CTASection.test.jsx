@@ -240,7 +240,7 @@ describe('CTASection', () => {
       const { container } = render(<CTASection />);
       const svg = container.querySelector('svg');
 
-      expect(svg).toHaveAttribute('viewBox', '0 0 1440 80');
+      expect(svg).toHaveAttribute('viewBox', '0 0 1440 120');
     });
   });
 

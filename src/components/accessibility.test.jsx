@@ -1,6 +1,7 @@
-import { describe, it, expect } from 'vitest';
-import { render, waitFor } from '@testing-library/react';
-import { axe } from 'jest-axe';
+import { describe, it, expect, vi } from 'vitest';
+import { render, waitFor, act } from '@testing-library/react';
+import { axe, toHaveNoViolations } from 'jest-axe';
+import { MemoryRouter } from 'react-router-dom';
 
 import SmarterDogHomepage from './SmarterDogHomepage';
 import ServiceCard from './ServiceCard';
@@ -15,7 +16,11 @@ import { colors } from '../constants/colors';
 describe('Accessibility Tests', () => {
   describe('Full Page', () => {
     it('SmarterDogHomepage should not have any accessibility violations', async () => {
-      const { container } = render(<SmarterDogHomepage />);
+      const { container } = render(
+        <MemoryRouter>
+          <SmarterDogHomepage />
+        </MemoryRouter>
+      );
 
       // Wait for any animations and state updates to settle
       await waitFor(() => {
@@ -76,8 +81,17 @@ describe('Accessibility Tests', () => {
     }, 10000);
 
     it('Navigation should not have any accessibility violations', async () => {
-      const { container } = render(<Navigation isLoaded={true} />);
-      const results = await axe(container);
+      let container;
+      let results;
+      await act(async () => {
+        const renderResult = render(
+          <MemoryRouter>
+            <Navigation isLoaded={true} />
+          </MemoryRouter>
+        );
+        container = renderResult.container;
+      });
+      results = await axe(container);
 
       expect(results).toHaveNoViolations();
     }, 10000);
@@ -99,7 +113,11 @@ describe('Accessibility Tests', () => {
 
   describe('Color Contrast', () => {
     it('should have sufficient color contrast for text on colored backgrounds', async () => {
-      const { container } = render(<SmarterDogHomepage />);
+      const { container } = render(
+        <MemoryRouter>
+          <SmarterDogHomepage />
+        </MemoryRouter>
+      );
 
       await waitFor(() => {
         expect(container.querySelector('nav')).toBeInTheDocument();
@@ -117,7 +135,11 @@ describe('Accessibility Tests', () => {
 
   describe('Keyboard Navigation', () => {
     it('interactive elements should be keyboard accessible', async () => {
-      const { container } = render(<Navigation isLoaded={true} />);
+      const { container } = render(
+        <MemoryRouter>
+          <Navigation isLoaded={true} />
+        </MemoryRouter>
+      );
 
       const results = await axe(container);
 
@@ -127,7 +149,11 @@ describe('Accessibility Tests', () => {
 
   describe('ARIA Attributes', () => {
     it('should have valid ARIA attributes', async () => {
-      const { container } = render(<SmarterDogHomepage />);
+      const { container } = render(
+        <MemoryRouter>
+          <SmarterDogHomepage />
+        </MemoryRouter>
+      );
 
       await waitFor(() => {
         expect(container.querySelector('nav')).toBeInTheDocument();
@@ -146,7 +172,11 @@ describe('Accessibility Tests', () => {
 
   describe('Form Elements', () => {
     it('buttons should have accessible names', async () => {
-      const { container } = render(<SmarterDogHomepage />);
+      const { container } = render(
+        <MemoryRouter>
+          <SmarterDogHomepage />
+        </MemoryRouter>
+      );
 
       await waitFor(() => {
         expect(container.querySelector('nav')).toBeInTheDocument();
@@ -164,7 +194,11 @@ describe('Accessibility Tests', () => {
 
   describe('Images', () => {
     it('images should have alt text', async () => {
-      const { container } = render(<SmarterDogHomepage />);
+      const { container } = render(
+        <MemoryRouter>
+          <SmarterDogHomepage />
+        </MemoryRouter>
+      );
 
       await waitFor(() => {
         expect(container.querySelector('nav')).toBeInTheDocument();
@@ -182,7 +216,11 @@ describe('Accessibility Tests', () => {
 
   describe('Semantic HTML', () => {
     it('should use semantic HTML elements', async () => {
-      const { container } = render(<SmarterDogHomepage />);
+      const { container } = render(
+        <MemoryRouter>
+          <SmarterDogHomepage />
+        </MemoryRouter>
+      );
 
       await waitFor(() => {
         expect(container.querySelector('nav')).toBeInTheDocument();

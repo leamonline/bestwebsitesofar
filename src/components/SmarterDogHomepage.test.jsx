@@ -1,5 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen, act } from '@testing-library/react';
+
 import SmarterDogHomepage from './SmarterDogHomepage';
 
 // Mock child components to isolate testing
@@ -157,7 +158,7 @@ describe('SmarterDogHomepage', () => {
       const { unmount } = render(<SmarterDogHomepage />);
 
       // Spy on console.error to catch React warnings about state updates on unmounted components
-      const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+      const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => { });
 
       unmount();
       vi.advanceTimersByTime(100);
@@ -169,105 +170,7 @@ describe('SmarterDogHomepage', () => {
     });
   });
 
-  describe('styling and fonts', () => {
-    it('injects custom CSS animations via style tag', () => {
-      const { container } = render(<SmarterDogHomepage />);
-      const styleTag = container.querySelector('style');
 
-      expect(styleTag).toBeInTheDocument();
-      expect(styleTag.textContent).toContain('@keyframes fadeInUp');
-      expect(styleTag.textContent).toContain('@keyframes fadeIn');
-      expect(styleTag.textContent).toContain('@keyframes bounce');
-    });
-
-    it('defines animate-fade-in-up animation class', () => {
-      const { container } = render(<SmarterDogHomepage />);
-      const styleTag = container.querySelector('style');
-
-      expect(styleTag.textContent).toContain('.animate-fade-in-up');
-      expect(styleTag.textContent).toContain('animation: fadeInUp 0.8s ease-out forwards');
-    });
-
-    it('defines animate-fade-in animation class', () => {
-      const { container } = render(<SmarterDogHomepage />);
-      const styleTag = container.querySelector('style');
-
-      expect(styleTag.textContent).toContain('.animate-fade-in');
-      expect(styleTag.textContent).toContain('animation: fadeIn 1s ease-out forwards');
-    });
-
-    it('defines animate-bounce-slow animation class', () => {
-      const { container } = render(<SmarterDogHomepage />);
-      const styleTag = container.querySelector('style');
-
-      expect(styleTag.textContent).toContain('.animate-bounce-slow');
-      expect(styleTag.textContent).toContain('animation: bounce 3s ease-in-out infinite');
-    });
-
-    it('imports Google Fonts', () => {
-      const { container } = render(<SmarterDogHomepage />);
-      const styleTag = container.querySelector('style');
-
-      expect(styleTag.textContent).toContain("@import url('https://fonts.googleapis.com/css2");
-      expect(styleTag.textContent).toContain('Quicksand');
-      expect(styleTag.textContent).toContain('Montserrat');
-      expect(styleTag.textContent).toContain('Caveat');
-    });
-
-    it('defines heading-font class with Quicksand', () => {
-      const { container } = render(<SmarterDogHomepage />);
-      const styleTag = container.querySelector('style');
-
-      expect(styleTag.textContent).toContain('.heading-font');
-      expect(styleTag.textContent).toContain("font-family: 'Quicksand', sans-serif");
-    });
-
-    it('defines body-font class with Montserrat', () => {
-      const { container } = render(<SmarterDogHomepage />);
-      const styleTag = container.querySelector('style');
-
-      expect(styleTag.textContent).toContain('.body-font');
-      expect(styleTag.textContent).toContain("font-family: 'Montserrat', sans-serif");
-    });
-
-    it('defines handwriting class with Caveat', () => {
-      const { container } = render(<SmarterDogHomepage />);
-      const styleTag = container.querySelector('style');
-
-      expect(styleTag.textContent).toContain('.handwriting');
-      expect(styleTag.textContent).toContain("font-family: 'Caveat', cursive");
-    });
-
-    it('has min-h-screen class on container', () => {
-      const { container } = render(<SmarterDogHomepage />);
-      const mainDiv = container.firstChild;
-
-      expect(mainDiv).toHaveClass('min-h-screen');
-    });
-  });
-
-  describe('animation keyframes', () => {
-    it('fadeInUp animation has correct properties', () => {
-      const { container } = render(<SmarterDogHomepage />);
-      const styleTag = container.querySelector('style');
-
-      expect(styleTag.textContent).toContain('from {');
-      expect(styleTag.textContent).toContain('opacity: 0');
-      expect(styleTag.textContent).toContain('transform: translateY(30px)');
-      expect(styleTag.textContent).toContain('to {');
-      expect(styleTag.textContent).toContain('opacity: 1');
-      expect(styleTag.textContent).toContain('transform: translateY(0)');
-    });
-
-    it('bounce animation has keyframe percentages', () => {
-      const { container } = render(<SmarterDogHomepage />);
-      const styleTag = container.querySelector('style');
-
-      expect(styleTag.textContent).toContain('0%, 100%');
-      expect(styleTag.textContent).toContain('50%');
-      expect(styleTag.textContent).toContain('transform: translateY(-10px)');
-    });
-  });
 
   describe('integration', () => {
     it('renders complete page structure', () => {

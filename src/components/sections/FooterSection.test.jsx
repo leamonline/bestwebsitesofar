@@ -29,7 +29,14 @@ describe('FooterSection', () => {
     it('renders company description', () => {
       render(<FooterSection />);
 
-      expect(screen.getByText(/Family-run since 1982/i)).toBeInTheDocument();
+      expect(screen.getByText(/Family-run since 1983/i)).toBeInTheDocument();
+    });
+
+    it('text uses teal color', () => {
+      render(<FooterSection />);
+      const description = screen.getByText(/Family-run since 1983/i);
+
+      expect(description).toHaveStyle({ color: 'rgb(42, 111, 107)' });
     });
 
     it('renders social media icons', () => {
@@ -48,39 +55,27 @@ describe('FooterSection', () => {
   });
 
   describe('opening hours section', () => {
-    it('renders "Opening Hours" heading', () => {
+    it('renders opening hours heading', () => {
       render(<FooterSection />);
-
-      expect(screen.getByText('Opening Hours')).toBeInTheDocument();
+      expect(screen.getByRole('heading', { name: 'Opening Hours' })).toBeInTheDocument();
     });
 
-    it('renders all days of the week', () => {
+    it('renders days of the week', () => {
       render(<FooterSection />);
-
-      expect(screen.getByText('Monday')).toBeInTheDocument();
-      expect(screen.getByText('Tuesday')).toBeInTheDocument();
+      expect(screen.getByText('Mon & Tue')).toBeInTheDocument();
       expect(screen.getByText('Wednesday')).toBeInTheDocument();
-      expect(screen.getByText('Thu–Sun')).toBeInTheDocument();
+      expect(screen.getByText('Thursday')).toBeInTheDocument();
+      expect(screen.getByText('Fri–Sun')).toBeInTheDocument();
     });
 
-    it('renders operating hours', () => {
+    it('Wednesday hours have pink color (Closed)', () => {
       render(<FooterSection />);
+      // Find the row containing Wednesday
+      const wednesdayRow = screen.getByText('Wednesday').closest('p');
+      const timeSpan = wednesdayRow.querySelectorAll('span')[1];
 
-      const hours = screen.getAllByText('8:30am – 3:00pm');
-      expect(hours).toHaveLength(3);
-    });
-
-    it('renders "Closed" for Thursday-Sunday', () => {
-      render(<FooterSection />);
-
-      expect(screen.getByText('Closed')).toBeInTheDocument();
-    });
-
-    it('"Closed" text has pink color', () => {
-      render(<FooterSection />);
-      const closedText = screen.getByText('Closed');
-
-      expect(closedText).toHaveStyle({ color: 'rgb(255, 46, 99)' });
+      expect(timeSpan).toHaveTextContent('Closed');
+      expect(timeSpan).toHaveStyle({ color: 'rgb(255, 46, 99)' });
     });
 
     it('WhatsApp badge has green background and white text', () => {
@@ -97,13 +92,6 @@ describe('FooterSection', () => {
       expect(footer.style.backgroundColor).toBe('rgb(255, 204, 0)');
     });
 
-    it('text uses teal color', () => {
-      render(<FooterSection />);
-      const description = screen.getByText(/Family-run since 1982/i);
-
-      expect(description).toHaveStyle({ color: 'rgb(42, 111, 107)' });
-    });
-
     it('headings use teal color', () => {
       render(<FooterSection />);
       const openingHoursHeading = screen.getByText('Opening Hours');
@@ -118,16 +106,7 @@ describe('FooterSection', () => {
       expect(copyrightSection.style.borderColor).toBe('rgb(232, 245, 245)');
     });
 
-    it('Wednesday hours have green color', () => {
-      const { container } = render(<FooterSection />);
-      // Find Wednesday's time span
-      const wednesdayRow = Array.from(container.querySelectorAll('p')).find(p =>
-        p.textContent.includes('Wednesday')
-      );
-      const timeSpan = wednesdayRow.querySelectorAll('span')[1];
 
-      expect(timeSpan).toHaveStyle({ color: 'rgb(0, 217, 74)' });
-    });
   });
 
   describe('responsive layout', () => {

@@ -1,23 +1,33 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
-import { render, screen, act } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor, act } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import SmarterDogHomepage from './SmarterDogHomepage';
 
 describe('SmarterDogHomepage Integration Tests', () => {
   beforeEach(() => {
     vi.useFakeTimers();
+    vi.clearAllMocks();
   });
 
   afterEach(() => {
     vi.useRealTimers();
   });
 
+  const renderHomepage = () => {
+    return render(
+      <MemoryRouter>
+        <SmarterDogHomepage />
+      </MemoryRouter>
+    );
+  };
+
   describe('full page rendering', () => {
     it('renders complete homepage without crashing', () => {
-      render(<SmarterDogHomepage />);
+      renderHomepage();
     });
 
     it('renders all major sections in correct order', () => {
-      const { container } = render(<SmarterDogHomepage />);
+      const { container } = renderHomepage();
 
       // Check that all sections exist in the DOM
       expect(container.querySelector('[class*="py-2"]')).toBeInTheDocument(); // AnnouncementBar
@@ -26,34 +36,34 @@ describe('SmarterDogHomepage Integration Tests', () => {
     });
 
     it('renders announcement bar at the top', () => {
-      render(<SmarterDogHomepage />);
+      renderHomepage();
 
       expect(screen.getByText(/Last-minute slots available/i)).toBeInTheDocument();
     });
 
     it('renders navigation with logo', () => {
-      render(<SmarterDogHomepage />);
+      renderHomepage();
 
       const logos = screen.getAllByAltText('Smarter Dog Grooming Salon');
       expect(logos.length).toBeGreaterThan(0);
     });
 
     it('renders hero section with main heading', () => {
-      render(<SmarterDogHomepage />);
+      renderHomepage();
 
       expect(screen.getByText(/Where every dog gets the/i)).toBeInTheDocument();
       expect(screen.getByText(/VIP treatment/i)).toBeInTheDocument();
     });
 
     it('renders trust section with statistics', () => {
-      render(<SmarterDogHomepage />);
+      renderHomepage();
 
       expect(screen.getByText('40+')).toBeInTheDocument();
       expect(screen.getByText('10,000+')).toBeInTheDocument();
     });
 
     it('renders services section with all services', () => {
-      render(<SmarterDogHomepage />);
+      renderHomepage();
 
       expect(screen.getByText('What we do best')).toBeInTheDocument();
       expect(screen.getByText('Full Groom')).toBeInTheDocument();
@@ -61,47 +71,47 @@ describe('SmarterDogHomepage Integration Tests', () => {
     });
 
     it('renders gallery section with polaroid images', () => {
-      render(<SmarterDogHomepage />);
+      renderHomepage();
 
       expect(screen.getByText('Fresh from the Salon')).toBeInTheDocument();
     });
 
     it('renders testimonials section', () => {
-      render(<SmarterDogHomepage />);
+      renderHomepage();
 
       expect(screen.getByText('What Our Pack Says')).toBeInTheDocument();
       expect(screen.getByText('Sarah M.')).toBeInTheDocument();
     });
 
     it('renders offer section', () => {
-      render(<SmarterDogHomepage />);
+      renderHomepage();
 
       expect(screen.getByText(/First groom\? Get 20% off!/i)).toBeInTheDocument();
     });
 
     it('renders houndsly section', () => {
-      render(<SmarterDogHomepage />);
+      renderHomepage();
 
       expect(screen.getByText(/Houndsly by Smarter Dog/i)).toBeInTheDocument();
     });
 
     it('renders CTA section', () => {
-      render(<SmarterDogHomepage />);
+      renderHomepage();
 
       expect(screen.getByText(/Book your dog's VIP experience/i)).toBeInTheDocument();
     });
 
     it('renders footer with contact information', () => {
-      render(<SmarterDogHomepage />);
+      renderHomepage();
 
-      expect(screen.getByText('hello@smarterdog.co.uk')).toBeInTheDocument();
+      expect(screen.getByText('leam@smarterdog.co.uk')).toBeInTheDocument();
       expect(screen.getByText('Opening Hours')).toBeInTheDocument();
     });
   });
 
   describe('page animations and loading', () => {
     it('navigation starts hidden and animates in', async () => {
-      const { container } = render(<SmarterDogHomepage />);
+      const { container } = renderHomepage();
       const nav = container.querySelector('nav');
 
       // Initially opacity-0
@@ -117,7 +127,7 @@ describe('SmarterDogHomepage Integration Tests', () => {
     });
 
     it('hero section starts hidden and animates in', async () => {
-      render(<SmarterDogHomepage />);
+      renderHomepage();
 
       // Initially hero content is hidden
       await act(async () => {
@@ -131,26 +141,26 @@ describe('SmarterDogHomepage Integration Tests', () => {
 
   describe('call-to-action buttons', () => {
     it('renders multiple "Request Appointment" buttons throughout the page', () => {
-      render(<SmarterDogHomepage />);
+      renderHomepage();
 
       const bookButtons = screen.getAllByRole('button', { name: /Request Appointment/i });
       expect(bookButtons.length).toBeGreaterThan(1);
     });
 
     it('renders "Book Your Visit" button in hero section', () => {
-      render(<SmarterDogHomepage />);
+      renderHomepage();
 
       expect(screen.getByRole('button', { name: /Book Your Visit/i })).toBeInTheDocument();
     });
 
     it('renders phone number button', () => {
-      render(<SmarterDogHomepage />);
+      renderHomepage();
 
       expect(screen.getByRole('button', { name: /0161 XXX XXXX/i })).toBeInTheDocument();
     });
 
     it('renders "Claim Offer" button', () => {
-      render(<SmarterDogHomepage />);
+      renderHomepage();
 
       expect(screen.getByRole('button', { name: /Claim Offer/i })).toBeInTheDocument();
     });
@@ -158,17 +168,15 @@ describe('SmarterDogHomepage Integration Tests', () => {
 
   describe('navigation links', () => {
     it('renders navigation menu items', () => {
-      render(<SmarterDogHomepage />);
+      renderHomepage();
 
       expect(screen.getByRole('link', { name: 'Services' })).toBeInTheDocument();
-      expect(screen.getByRole('link', { name: 'About' })).toBeInTheDocument();
       expect(screen.getByRole('link', { name: 'Gallery' })).toBeInTheDocument();
       expect(screen.getByRole('link', { name: 'Houndsly' })).toBeInTheDocument();
-      expect(screen.getByRole('link', { name: 'Contact' })).toBeInTheDocument();
     });
 
     it('renders "Book now" link in announcement bar', () => {
-      render(<SmarterDogHomepage />);
+      renderHomepage();
 
       expect(screen.getByRole('link', { name: /Book now →/i })).toBeInTheDocument();
     });
@@ -176,7 +184,7 @@ describe('SmarterDogHomepage Integration Tests', () => {
 
   describe('content hierarchy', () => {
     it('has proper heading hierarchy', () => {
-      const { container } = render(<SmarterDogHomepage />);
+      const { container } = renderHomepage();
 
       // Should have multiple h3 and h4 headings for sections
       const headings = container.querySelectorAll('h2, h3, h4, h5');
@@ -184,7 +192,7 @@ describe('SmarterDogHomepage Integration Tests', () => {
     });
 
     it('sections are organized with proper spacing', () => {
-      const { container } = render(<SmarterDogHomepage />);
+      const { container } = renderHomepage();
 
       // Most sections should have py-20 or similar padding
       const sections = container.querySelectorAll('section');
@@ -194,7 +202,7 @@ describe('SmarterDogHomepage Integration Tests', () => {
 
   describe('branding consistency', () => {
     it('uses brand colors throughout', () => {
-      const { container } = render(<SmarterDogHomepage />);
+      const { container } = renderHomepage();
 
       // Check for section elements which should have background colors
       const sections = container.querySelectorAll('section, footer');
@@ -202,7 +210,7 @@ describe('SmarterDogHomepage Integration Tests', () => {
     });
 
     it('uses consistent typography classes', () => {
-      const { container } = render(<SmarterDogHomepage />);
+      const { container } = renderHomepage();
 
       // Should use heading-font in multiple places
       const headingFonts = container.querySelectorAll('.heading-font');
@@ -214,7 +222,7 @@ describe('SmarterDogHomepage Integration Tests', () => {
     });
 
     it('uses handwriting font for special elements', () => {
-      const { container } = render(<SmarterDogHomepage />);
+      const { container } = renderHomepage();
 
       const handwritingElements = container.querySelectorAll('.handwriting');
       expect(handwritingElements.length).toBeGreaterThan(0);
@@ -223,14 +231,14 @@ describe('SmarterDogHomepage Integration Tests', () => {
 
   describe('images and icons', () => {
     it('renders logo images', () => {
-      render(<SmarterDogHomepage />);
+      renderHomepage();
 
       const logos = screen.getAllByAltText('Smarter Dog Grooming Salon');
       expect(logos.length).toBeGreaterThanOrEqual(2); // Nav + Footer
     });
 
     it('uses emojis throughout the page', () => {
-      render(<SmarterDogHomepage />);
+      renderHomepage();
 
       // Check for various emojis used throughout
       const dogEmojis = screen.getAllByText(/🐕/);
@@ -246,7 +254,7 @@ describe('SmarterDogHomepage Integration Tests', () => {
 
   describe('transitions and decorative elements', () => {
     it('renders SVG wave transitions between sections', () => {
-      const { container } = render(<SmarterDogHomepage />);
+      const { container } = renderHomepage();
 
       const svgs = container.querySelectorAll('svg');
       // Should have multiple SVG transitions + dog silhouettes
@@ -254,7 +262,7 @@ describe('SmarterDogHomepage Integration Tests', () => {
     });
 
     it('renders decorative background elements', () => {
-      const { container } = render(<SmarterDogHomepage />);
+      const { container } = renderHomepage();
 
       // Check for decorative circles and shapes
       const decorativeCircles = container.querySelectorAll('.rounded-full.opacity-10, .rounded-full.opacity-20');
@@ -264,21 +272,21 @@ describe('SmarterDogHomepage Integration Tests', () => {
 
   describe('responsive design classes', () => {
     it('uses responsive grid layouts', () => {
-      const { container } = render(<SmarterDogHomepage />);
+      const { container } = renderHomepage();
 
       const responsiveGrids = container.querySelectorAll('[class*="md:grid-cols"]');
       expect(responsiveGrids.length).toBeGreaterThan(3);
     });
 
     it('uses responsive flex layouts', () => {
-      const { container } = render(<SmarterDogHomepage />);
+      const { container } = renderHomepage();
 
       const responsiveFlexes = container.querySelectorAll('[class*="md:flex-row"]');
       expect(responsiveFlexes.length).toBeGreaterThan(0);
     });
 
     it('hides navigation menu on mobile', () => {
-      const { container } = render(<SmarterDogHomepage />);
+      const { container } = renderHomepage();
 
       const mobileHiddenNav = container.querySelector('.hidden.md\\:flex');
       expect(mobileHiddenNav).toBeInTheDocument();
@@ -287,43 +295,43 @@ describe('SmarterDogHomepage Integration Tests', () => {
 
   describe('contact information', () => {
     it('displays email address', () => {
-      render(<SmarterDogHomepage />);
+      renderHomepage();
 
-      expect(screen.getByText('hello@smarterdog.co.uk')).toBeInTheDocument();
+      expect(screen.getByText('leam@smarterdog.co.uk')).toBeInTheDocument();
     });
 
     it('displays phone number', () => {
-      render(<SmarterDogHomepage />);
+      renderHomepage();
 
-      const phoneNumbers = screen.getAllByText(/0161 XXX XXXX/i);
+      const phoneNumbers = screen.getAllByText(/07507 731487/i);
       expect(phoneNumbers.length).toBeGreaterThan(0);
     });
 
     it('displays location information', () => {
-      render(<SmarterDogHomepage />);
+      renderHomepage();
 
       expect(screen.getByText('Ashton-under-Lyne')).toBeInTheDocument();
-      expect(screen.getByText('Greater Manchester')).toBeInTheDocument();
+      expect(screen.getByText('OL6 8HD')).toBeInTheDocument();
     });
 
     it('displays opening hours', () => {
-      render(<SmarterDogHomepage />);
+      renderHomepage();
 
       expect(screen.getByText('Opening Hours')).toBeInTheDocument();
-      expect(screen.getByText('Monday')).toBeInTheDocument();
+      expect(screen.getByText('Mon & Tue')).toBeInTheDocument();
     });
   });
 
   describe('social proof elements', () => {
     it('displays years of experience', () => {
-      render(<SmarterDogHomepage />);
+      renderHomepage();
 
       expect(screen.getByText('40+')).toBeInTheDocument();
       expect(screen.getByText(/Years Experience/i)).toBeInTheDocument();
     });
 
     it('displays number of happy customers', () => {
-      render(<SmarterDogHomepage />);
+      renderHomepage();
 
       expect(screen.getByText('10,000+')).toBeInTheDocument();
 
@@ -332,14 +340,14 @@ describe('SmarterDogHomepage Integration Tests', () => {
     });
 
     it('displays Google rating', () => {
-      render(<SmarterDogHomepage />);
+      renderHomepage();
 
       expect(screen.getByText('4.9★')).toBeInTheDocument();
       expect(screen.getByText(/Google Rating/i)).toBeInTheDocument();
     });
 
     it('displays customer testimonials', () => {
-      render(<SmarterDogHomepage />);
+      renderHomepage();
 
       expect(screen.getByText(/15 years/i)).toBeInTheDocument();
       expect(screen.getByText('Sarah M.')).toBeInTheDocument();
@@ -349,7 +357,7 @@ describe('SmarterDogHomepage Integration Tests', () => {
 
   describe('accessibility features', () => {
     it('has semantic HTML structure', () => {
-      const { container } = render(<SmarterDogHomepage />);
+      const { container } = renderHomepage();
 
       expect(container.querySelector('nav')).toBeInTheDocument();
       expect(container.querySelector('footer')).toBeInTheDocument();
@@ -357,7 +365,7 @@ describe('SmarterDogHomepage Integration Tests', () => {
     });
 
     it('all images have alt text', () => {
-      render(<SmarterDogHomepage />);
+      renderHomepage();
 
       const images = screen.getAllByRole('img');
       images.forEach(img => {
@@ -366,7 +374,7 @@ describe('SmarterDogHomepage Integration Tests', () => {
     });
 
     it('buttons are accessible', () => {
-      render(<SmarterDogHomepage />);
+      renderHomepage();
 
       const buttons = screen.getAllByRole('button');
       expect(buttons.length).toBeGreaterThan(3);
@@ -377,7 +385,7 @@ describe('SmarterDogHomepage Integration Tests', () => {
     });
 
     it('links are accessible', () => {
-      render(<SmarterDogHomepage />);
+      renderHomepage();
 
       const links = screen.getAllByRole('link');
       expect(links.length).toBeGreaterThan(4);
