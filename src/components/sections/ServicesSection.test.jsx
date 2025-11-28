@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import ServicesSection from './ServicesSection';
-import { colors } from '../../constants/colors';
+
 
 // Mock child components
 import { vi } from 'vitest';
@@ -92,7 +92,7 @@ describe('ServicesSection', () => {
       const { container } = render(<ServicesSection />);
       const section = container.querySelector('section');
 
-      expect(section.style.backgroundColor).toBe(colors.pink);
+      expect(section.style.backgroundColor).toBe('rgb(255, 46, 99)');
     });
 
     it('has proper padding classes', () => {
@@ -108,14 +108,14 @@ describe('ServicesSection', () => {
       render(<ServicesSection />);
       const badge = screen.getByText('Our Services');
 
-      expect(badge).toHaveStyle({ backgroundColor: 'white', color: colors.pink });
+      expect(badge).toHaveStyle({ backgroundColor: 'rgb(255, 255, 255)', color: 'rgb(255, 46, 99)' });
     });
 
     it('section title has white color', () => {
       render(<ServicesSection />);
       const title = screen.getByText('What we do best');
 
-      expect(title).toHaveStyle({ color: 'white' });
+      expect(title).toHaveStyle({ color: 'rgb(255, 255, 255)' });
     });
 
     it('hygiene badges have correct colors', () => {
@@ -123,7 +123,7 @@ describe('ServicesSection', () => {
       const badges = screen.getAllByText('Hygiene');
 
       badges.forEach(badge => {
-        expect(badge).toHaveStyle({ backgroundColor: colors.pink, color: 'white' });
+        expect(badge).toHaveStyle({ backgroundColor: 'rgb(255, 46, 99)', color: 'rgb(255, 255, 255)' });
       });
     });
   });

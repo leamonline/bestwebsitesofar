@@ -64,7 +64,7 @@ describe('TestimonialsSection', () => {
       const { container } = render(<TestimonialsSection />);
       const section = container.querySelector('section');
 
-      expect(section.style.backgroundColor).toBe(colors.cyan);
+      expect(section.style.backgroundColor).toBe('rgb(0, 194, 255)');
     });
 
     it('has proper padding classes', () => {
@@ -78,14 +78,14 @@ describe('TestimonialsSection', () => {
       render(<TestimonialsSection />);
       const badge = screen.getByText('Testimonials');
 
-      expect(badge).toHaveStyle({ backgroundColor: 'white', color: colors.cyan });
+      expect(badge).toHaveStyle({ backgroundColor: 'rgb(255, 255, 255)', color: 'rgb(0, 194, 255)' });
     });
 
     it('section title has white color', () => {
       render(<TestimonialsSection />);
       const title = screen.getByText('What Our Pack Says');
 
-      expect(title).toHaveStyle({ color: 'white' });
+      expect(title).toHaveStyle({ color: 'rgb(255, 255, 255)' });
       expect(title).toHaveClass('heading-font');
       expect(title).toHaveClass('font-bold');
     });
@@ -96,7 +96,7 @@ describe('TestimonialsSection', () => {
 
       expect(testimonialCards.length).toBeGreaterThanOrEqual(2);
       testimonialCards.forEach(card => {
-        expect(card).toHaveStyle({ backgroundColor: 'white' });
+        expect(card).toHaveStyle({ backgroundColor: 'rgb(255, 255, 255)' });
       });
     });
 
@@ -105,8 +105,8 @@ describe('TestimonialsSection', () => {
       const quoteMarks = container.querySelectorAll('.text-5xl.mb-4');
 
       expect(quoteMarks.length).toBe(2);
-      expect(quoteMarks[0]).toHaveStyle({ color: colors.pink });
-      expect(quoteMarks[1]).toHaveStyle({ color: colors.green });
+      expect(quoteMarks[0]).toHaveStyle({ color: 'rgb(255, 46, 99)' });
+      expect(quoteMarks[1]).toHaveStyle({ color: 'rgb(0, 217, 74)' });
     });
   });
 
@@ -130,7 +130,7 @@ describe('TestimonialsSection', () => {
       const quotes = container.querySelectorAll('.body-font.text-lg.leading-relaxed');
 
       quotes.forEach(quote => {
-        expect(quote).toHaveStyle({ color: colors.teal });
+        expect(quote).toHaveStyle({ color: 'rgb(42, 111, 107)' });
       });
     });
   });
@@ -218,7 +218,7 @@ describe('TestimonialsSection', () => {
     it('SVG container has cyan background', () => {
       const { container } = render(<TestimonialsSection />);
       const svgContainers = Array.from(container.querySelectorAll('div')).filter(
-        div => div.style.backgroundColor === colors.cyan && div.querySelector('svg')
+        div => div.style.backgroundColor === 'rgb(0, 194, 255)' && div.querySelector('svg')
       );
 
       expect(svgContainers.length).toBeGreaterThan(0);

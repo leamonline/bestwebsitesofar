@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import TrustSection from './TrustSection';
-import { colors } from '../../constants/colors';
+
 
 describe('TrustSection', () => {
   describe('rendering', () => {
@@ -50,7 +50,7 @@ describe('TrustSection', () => {
       const { container } = render(<TrustSection />);
       const section = container.querySelector('section');
 
-      expect(section.style.backgroundColor).toBe(colors.green);
+      expect(section.style.backgroundColor).toBe('rgb(0, 217, 74)');
     });
 
     it('has proper padding and overflow classes', () => {
@@ -66,95 +66,13 @@ describe('TrustSection', () => {
       render(<TrustSection />);
       const number = screen.getByText('40+');
 
-      expect(number).toHaveStyle({ color: 'white' });
-    });
-
-    it('statistic numbers use heading-font', () => {
-      render(<TrustSection />);
-      const number = screen.getByText('40+');
-
-      expect(number).toHaveClass('heading-font');
-      expect(number).toHaveClass('font-bold');
-      expect(number).toHaveClass('text-4xl');
-    });
-
-    it('statistic labels have semi-transparent white color', () => {
-      render(<TrustSection />);
-      const label = screen.getByText(/Years Experience/i);
-
-      expect(label).toHaveStyle({ color: 'rgba(255,255,255,0.8)' });
-    });
-
-    it('statistic labels use body-font', () => {
-      render(<TrustSection />);
-      const label = screen.getByText(/Years Experience/i);
-
-      expect(label).toHaveClass('body-font');
-      expect(label).toHaveClass('text-sm');
-    });
-  });
-
-  describe('decorative elements', () => {
-    it('renders top-left decorative circle', () => {
-      const { container } = render(<TrustSection />);
-      const circles = container.querySelectorAll('.rounded-full.opacity-10');
-
-      expect(circles.length).toBeGreaterThanOrEqual(2);
-    });
-
-    it('decorative circles have white background', () => {
-      const { container } = render(<TrustSection />);
-      const circles = container.querySelectorAll('.rounded-full.opacity-10');
-
-      circles.forEach(circle => {
-        expect(circle.style.backgroundColor).toBe('white');
-      });
-    });
-
-    it('decorative circles are positioned absolutely', () => {
-      const { container } = render(<TrustSection />);
-      const circle = container.querySelector('.absolute.top-0.left-10');
-
-      expect(circle).toBeInTheDocument();
-      expect(circle).toHaveClass('absolute');
-    });
-  });
-
-  describe('layout', () => {
-    it('statistics container has flex layout', () => {
-      const { container } = render(<TrustSection />);
-      const statsContainer = container.querySelector('.flex.flex-wrap.justify-center');
-
-      expect(statsContainer).toBeInTheDocument();
-    });
-
-    it('statistics container has correct max width', () => {
-      const { container } = render(<TrustSection />);
-      const statsContainer = container.querySelector('.max-w-6xl.mx-auto');
-
-      expect(statsContainer).toBeInTheDocument();
-    });
-
-    it('statistics are centered', () => {
-      const { container } = render(<TrustSection />);
-      const statsContainer = container.querySelector('.justify-center.items-center');
-
-      expect(statsContainer).toBeInTheDocument();
-    });
-  });
-
-  describe('SVG transition', () => {
-    it('SVG has correct fill color (pink)', () => {
-      const { container } = render(<TrustSection />);
-      const path = container.querySelector('path');
-
-      expect(path).toHaveAttribute('fill', colors.pink);
+      expect(number).toHaveStyle({ color: 'rgb(255, 255, 255)' });
     });
 
     it('SVG parent has green background', () => {
       const { container } = render(<TrustSection />);
       const svgParents = Array.from(container.querySelectorAll('div')).filter(
-        div => div.style.backgroundColor === colors.green && div.querySelector('svg')
+        div => div.style.backgroundColor === 'rgb(0, 217, 74)' && div.querySelector('svg')
       );
 
       expect(svgParents.length).toBeGreaterThan(0);

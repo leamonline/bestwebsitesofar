@@ -2,7 +2,7 @@ import React from 'react';
 import { colors } from '../../constants/colors';
 import DogSilhouette from '../DogSilhouette';
 
-const OfferSection = () => {
+const OfferSection = ({ onBookClick }) => {
     return (
         <>
             <section className="py-20 relative overflow-hidden" style={{ backgroundColor: colors.green }}>
@@ -44,6 +44,7 @@ const OfferSection = () => {
                                 </p>
                             </div>
                             <button
+                                onClick={onBookClick}
                                 className="px-8 py-4 rounded-full font-bold text-base transition-all duration-300 hover:scale-105 hover:shadow-xl whitespace-nowrap"
                                 style={{
                                     backgroundColor: 'white',

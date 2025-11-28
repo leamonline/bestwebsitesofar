@@ -79,6 +79,12 @@ describe('SmarterDogHomepage Integration Tests', () => {
       expect(screen.getByText(/First groom\? Get 20% off!/i)).toBeInTheDocument();
     });
 
+    it('renders houndsly section', () => {
+      render(<SmarterDogHomepage />);
+
+      expect(screen.getByText(/Houndsly by Smarter Dog/i)).toBeInTheDocument();
+    });
+
     it('renders CTA section', () => {
       render(<SmarterDogHomepage />);
 
@@ -124,10 +130,10 @@ describe('SmarterDogHomepage Integration Tests', () => {
   });
 
   describe('call-to-action buttons', () => {
-    it('renders multiple "Book Now" buttons throughout the page', () => {
+    it('renders multiple "Request Appointment" buttons throughout the page', () => {
       render(<SmarterDogHomepage />);
 
-      const bookButtons = screen.getAllByRole('button', { name: /Book Now/i });
+      const bookButtons = screen.getAllByRole('button', { name: /Request Appointment/i });
       expect(bookButtons.length).toBeGreaterThan(1);
     });
 
@@ -157,6 +163,7 @@ describe('SmarterDogHomepage Integration Tests', () => {
       expect(screen.getByRole('link', { name: 'Services' })).toBeInTheDocument();
       expect(screen.getByRole('link', { name: 'About' })).toBeInTheDocument();
       expect(screen.getByRole('link', { name: 'Gallery' })).toBeInTheDocument();
+      expect(screen.getByRole('link', { name: 'Houndsly' })).toBeInTheDocument();
       expect(screen.getByRole('link', { name: 'Contact' })).toBeInTheDocument();
     });
 

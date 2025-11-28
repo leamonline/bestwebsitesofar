@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { describe, it, expect, vi } from 'vitest';
+import { render, screen, fireEvent } from '@testing-library/react';
 import CTASection from './CTASection';
 import { colors } from '../../constants/colors';
 
@@ -33,16 +33,16 @@ describe('CTASection', () => {
       expect(screen.getByText(/Limited slots available/i)).toBeInTheDocument();
     });
 
-    it('renders "Book Now" button', () => {
+    it('renders "Request Appointment" button', () => {
       render(<CTASection />);
 
-      expect(screen.getByRole('button', { name: 'Book Now' })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: 'Request Appointment' })).toBeInTheDocument();
     });
 
     it('renders phone button with number', () => {
       render(<CTASection />);
 
-      expect(screen.getByRole('button', { name: /📞 0161 XXX XXXX/i })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: /0161 XXX XXXX/i })).toBeInTheDocument();
     });
 
     it('renders phone emoji', () => {
@@ -64,7 +64,7 @@ describe('CTASection', () => {
       const { container } = render(<CTASection />);
       const section = container.querySelector('section');
 
-      expect(section.style.backgroundColor).toBe(colors.pink);
+      expect(section.style.backgroundColor).toBe('rgb(255, 46, 99)');
     });
 
     it('has proper padding classes', () => {
@@ -80,7 +80,7 @@ describe('CTASection', () => {
       render(<CTASection />);
       const handwritingText = screen.getByText('Ready for their pamper?');
 
-      expect(handwritingText).toHaveStyle({ color: 'white' });
+      expect(handwritingText).toHaveStyle({ color: 'rgb(255, 255, 255)' });
       expect(handwritingText).toHaveClass('handwriting');
       expect(handwritingText).toHaveClass('text-3xl');
     });
@@ -89,7 +89,7 @@ describe('CTASection', () => {
       render(<CTASection />);
       const heading = screen.getByText(/Book your dog's VIP experience today/i);
 
-      expect(heading).toHaveStyle({ color: 'white' });
+      expect(heading).toHaveStyle({ color: 'rgb(255, 255, 255)' });
       expect(heading).toHaveClass('heading-font');
       expect(heading).toHaveClass('font-bold');
     });
@@ -98,20 +98,30 @@ describe('CTASection', () => {
       render(<CTASection />);
       const description = screen.getByText(/Open Monday–Wednesday/i);
 
-      expect(description).toHaveStyle({ color: 'rgba(255,255,255,0.9)' });
+      expect(description).toHaveStyle({ color: 'rgba(255, 255, 255, 0.9)' });
     });
 
-    it('"Book Now" button has white background and pink text', () => {
+    it('"Request Appointment" button has white background and pink text', () => {
       render(<CTASection />);
-      const button = screen.getByRole('button', { name: 'Book Now' });
+      const button = screen.getByRole('button', { name: 'Request Appointment' });
 
       expect(button.style.backgroundColor).toBe('white');
-      expect(button.style.color).toBe(colors.pink);
+      expect(button.style.color).toBe('rgb(255, 46, 99)');
+    });
+
+    it('calls onBookClick when "Request Appointment" button is clicked', () => {
+      const handleBookClick = vi.fn();
+      render(<CTASection onBookClick={handleBookClick} />);
+
+      const button = screen.getByRole('button', { name: 'Request Appointment' });
+      fireEvent.click(button);
+
+      expect(handleBookClick).toHaveBeenCalledTimes(1);
     });
 
     it('phone button has transparent background and white border', () => {
       render(<CTASection />);
-      const phoneButton = screen.getByRole('button', { name: /📞 0161 XXX XXXX/i });
+      const phoneButton = screen.getByRole('button', { name: /0161 XXX XXXX/i });
 
       expect(phoneButton.style.borderColor).toBe('white');
       expect(phoneButton.style.color).toBe('white');
@@ -120,9 +130,9 @@ describe('CTASection', () => {
   });
 
   describe('button styling', () => {
-    it('"Book Now" button has correct classes', () => {
+    it('"Request Appointment" button has correct classes', () => {
       render(<CTASection />);
-      const button = screen.getByRole('button', { name: 'Book Now' });
+      const button = screen.getByRole('button', { name: 'Request Appointment' });
 
       expect(button).toHaveClass('px-10');
       expect(button).toHaveClass('py-4');
@@ -135,14 +145,14 @@ describe('CTASection', () => {
 
     it('phone button has border', () => {
       render(<CTASection />);
-      const phoneButton = screen.getByRole('button', { name: /📞 0161 XXX XXXX/i });
+      const phoneButton = screen.getByRole('button', { name: /0161 XXX XXXX/i });
 
       expect(phoneButton).toHaveClass('border-2');
     });
 
     it('phone button has flex layout for icon and text', () => {
       render(<CTASection />);
-      const phoneButton = screen.getByRole('button', { name: /📞 0161 XXX XXXX/i });
+      const phoneButton = screen.getByRole('button', { name: /0161 XXX XXXX/i });
 
       expect(phoneButton).toHaveClass('flex');
       expect(phoneButton).toHaveClass('items-center');
@@ -220,7 +230,7 @@ describe('CTASection', () => {
     it('SVG container has pink background', () => {
       const { container } = render(<CTASection />);
       const svgContainers = Array.from(container.querySelectorAll('div')).filter(
-        div => div.style.backgroundColor === colors.pink && div.querySelector('svg')
+        div => div.style.backgroundColor === 'rgb(255, 46, 99)' && div.querySelector('svg')
       );
 
       expect(svgContainers.length).toBeGreaterThan(0);
@@ -245,7 +255,7 @@ describe('CTASection', () => {
     it('buttons have descriptive text', () => {
       render(<CTASection />);
 
-      expect(screen.getByRole('button', { name: 'Book Now' })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: 'Request Appointment' })).toBeInTheDocument();
       expect(screen.getByRole('button', { name: /0161 XXX XXXX/i })).toBeInTheDocument();
     });
   });

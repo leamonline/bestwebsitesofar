@@ -1,7 +1,7 @@
 import React from 'react';
 import { colors } from '../../constants/colors';
 
-const CTASection = () => {
+const CTASection = ({ onBookClick }) => {
     return (
         <>
             <section
@@ -40,13 +40,14 @@ const CTASection = () => {
                     </p>
                     <div className="flex flex-wrap justify-center gap-4">
                         <button
+                            onClick={onBookClick}
                             className="px-10 py-4 rounded-full font-bold text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl"
                             style={{
                                 backgroundColor: 'white',
                                 color: colors.pink
                             }}
                         >
-                            Book Now
+                            Request Appointment
                         </button>
                         <button
                             className="px-10 py-4 rounded-full font-bold text-lg transition-all duration-300 hover:scale-105 border-2 flex items-center gap-2"

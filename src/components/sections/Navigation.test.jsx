@@ -1,7 +1,7 @@
-import { describe, it, expect } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { describe, it, expect, vi } from 'vitest';
+import { render, screen, fireEvent } from '@testing-library/react';
 import Navigation from './Navigation';
-import { colors } from '../../constants/colors';
+
 
 describe('Navigation', () => {
   describe('rendering', () => {
@@ -26,21 +26,28 @@ describe('Navigation', () => {
       expect(screen.getByRole('link', { name: 'Contact' })).toBeInTheDocument();
     });
 
-    it('renders exactly 4 navigation links', () => {
+    it('renders all navigation links', () => {
+      render(<Navigation isLoaded={true} />);
+      const navLinks = screen.getAllByRole('link');
+      // Services, About, Gallery, Houndsly, Contact
+      expect(navLinks).toHaveLength(5);
+    });
+
+    it('renders exactly 5 navigation links', () => {
       render(<Navigation isLoaded={true} />);
 
       const links = screen.getAllByRole('link');
-      // Filter out logo, should have 4 nav links
+      // Filter out logo, should have 5 nav links
       const navLinks = links.filter(link =>
-        ['Services', 'About', 'Gallery', 'Contact'].includes(link.textContent)
+        ['Services', 'About', 'Gallery', 'Houndsly', 'Contact'].includes(link.textContent)
       );
-      expect(navLinks).toHaveLength(4);
+      expect(navLinks).toHaveLength(5);
     });
 
-    it('renders "Book Now" button', () => {
+    it('renders "Request Appointment" button', () => {
       render(<Navigation isLoaded={true} />);
 
-      expect(screen.getByRole('button', { name: 'Book Now' })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: 'Request Appointment' })).toBeInTheDocument();
     });
   });
 
@@ -96,7 +103,7 @@ describe('Navigation', () => {
       render(<Navigation isLoaded={true} />);
       const servicesLink = screen.getByRole('link', { name: 'Services' });
 
-      expect(servicesLink).toHaveStyle({ color: colors.teal });
+      expect(servicesLink).toHaveStyle({ color: 'rgb(42, 111, 107)' });
     });
 
     it('navigation links have proper classes', () => {
@@ -110,17 +117,26 @@ describe('Navigation', () => {
       expect(servicesLink).toHaveClass('duration-200');
     });
 
-    it('"Book Now" button has green background and white text', () => {
+    it('"Request Appointment" button has green background and white text', () => {
       render(<Navigation isLoaded={true} />);
-      const button = screen.getByRole('button', { name: 'Book Now' });
+      const button = screen.getByRole('button', { name: 'Request Appointment' });
 
-      expect(button.style.backgroundColor).toBe(colors.green);
-      expect(button.style.color).toBe('white');
+      expect(button).toHaveStyle({ backgroundColor: 'rgb(0, 217, 74)', color: 'rgb(255, 255, 255)' });
     });
 
-    it('"Book Now" button has correct classes', () => {
+    it('calls onBookClick when "Request Appointment" button is clicked', () => {
+      const handleBookClick = vi.fn();
+      render(<Navigation isLoaded={true} onBookClick={handleBookClick} />);
+
+      const button = screen.getByRole('button', { name: 'Request Appointment' });
+      fireEvent.click(button);
+
+      expect(handleBookClick).toHaveBeenCalledTimes(1);
+    });
+
+    it('"Request Appointment" button has correct classes', () => {
       render(<Navigation isLoaded={true} />);
-      const button = screen.getByRole('button', { name: 'Book Now' });
+      const button = screen.getByRole('button', { name: 'Request Appointment' });
 
       expect(button).toHaveClass('px-6');
       expect(button).toHaveClass('py-3');
@@ -170,7 +186,7 @@ describe('Navigation', () => {
     it('button is accessible via role', () => {
       render(<Navigation isLoaded={true} />);
 
-      const button = screen.getByRole('button', { name: 'Book Now' });
+      const button = screen.getByRole('button', { name: 'Request Appointment' });
       expect(button).toBeInTheDocument();
     });
   });

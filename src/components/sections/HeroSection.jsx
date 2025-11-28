@@ -3,7 +3,7 @@ import { colors } from '../../constants/colors';
 import DogSilhouette from '../DogSilhouette';
 import PolaroidImage from '../PolaroidImage';
 
-const HeroSection = ({ isLoaded }) => {
+const HeroSection = ({ isLoaded, onBookClick }) => {
     return (
         <>
             <section className="pt-8 pb-20 relative overflow-hidden" style={{ backgroundColor: colors.cyan }}>
@@ -60,6 +60,7 @@ const HeroSection = ({ isLoaded }) => {
                             </p>
                             <div className="flex flex-wrap gap-4">
                                 <button
+                                    onClick={onBookClick}
                                     className="px-8 py-4 rounded-full font-bold text-base transition-all duration-300 hover:scale-105 hover:shadow-xl flex items-center gap-2"
                                     style={{
                                         backgroundColor: colors.yellow,

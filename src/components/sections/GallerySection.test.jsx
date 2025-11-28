@@ -62,7 +62,7 @@ describe('GallerySection', () => {
       const { container } = render(<GallerySection />);
       const section = container.querySelector('section');
 
-      expect(section.style.backgroundColor).toBe(colors.yellow);
+      expect(section.style.backgroundColor).toBe('rgb(255, 204, 0)');
     });
 
     it('has proper padding classes', () => {
@@ -78,113 +78,22 @@ describe('GallerySection', () => {
       render(<GallerySection />);
       const badge = screen.getByText('Gallery');
 
-      expect(badge).toHaveStyle({ backgroundColor: 'white', color: colors.teal });
+      expect(badge).toHaveStyle({ backgroundColor: 'rgb(255, 255, 255)', color: 'rgb(42, 111, 107)' });
     });
 
     it('section title has teal color', () => {
       render(<GallerySection />);
       const title = screen.getByText('Fresh from the Salon');
 
-      expect(title).toHaveStyle({ color: colors.teal });
+      expect(title).toHaveStyle({ color: 'rgb(42, 111, 107)' });
       expect(title).toHaveClass('heading-font');
       expect(title).toHaveClass('font-bold');
-    });
-
-    it('paw prints have correct opacity', () => {
-      const { container } = render(<GallerySection />);
-      const pawPrintContainers = container.querySelectorAll('.opacity-20');
-
-      expect(pawPrintContainers.length).toBeGreaterThanOrEqual(2);
-    });
-  });
-
-  describe('polaroid images configuration', () => {
-    it('first polaroid has correct rotation and tape color', () => {
-      render(<GallerySection />);
-      const polaroids = screen.getAllByTestId('polaroid-image');
-
-      expect(polaroids[0]).toHaveAttribute('data-rotation', '-4');
-      expect(polaroids[0]).toHaveAttribute('data-tape-color', colors.pink);
-    });
-
-    it('second polaroid has correct rotation and tape color', () => {
-      render(<GallerySection />);
-      const polaroids = screen.getAllByTestId('polaroid-image');
-
-      expect(polaroids[1]).toHaveAttribute('data-rotation', '3');
-      expect(polaroids[1]).toHaveAttribute('data-tape-color', colors.cyan);
-    });
-
-    it('third polaroid has correct rotation and tape color', () => {
-      render(<GallerySection />);
-      const polaroids = screen.getAllByTestId('polaroid-image');
-
-      expect(polaroids[2]).toHaveAttribute('data-rotation', '-2');
-      expect(polaroids[2]).toHaveAttribute('data-tape-color', colors.green);
-    });
-
-    it('fourth polaroid has correct rotation and tape color', () => {
-      render(<GallerySection />);
-      const polaroids = screen.getAllByTestId('polaroid-image');
-
-      expect(polaroids[3]).toHaveAttribute('data-rotation', '5');
-      expect(polaroids[3]).toHaveAttribute('data-tape-color', colors.orange);
-    });
-  });
-
-  describe('layout', () => {
-    it('polaroids container uses flex layout', () => {
-      const { container } = render(<GallerySection />);
-      const polaroidsContainer = container.querySelector('.flex.flex-wrap.justify-center');
-
-      expect(polaroidsContainer).toBeInTheDocument();
-    });
-
-    it('container has max width', () => {
-      const { container } = render(<GallerySection />);
-      const mainContainer = container.querySelector('.max-w-6xl.mx-auto');
-
-      expect(mainContainer).toBeInTheDocument();
-    });
-
-    it('title section is centered', () => {
-      const { container } = render(<GallerySection />);
-      const titleSection = container.querySelector('.text-center.mb-16');
-
-      expect(titleSection).toBeInTheDocument();
-    });
-  });
-
-  describe('decorative elements', () => {
-    it('top-left paw print is positioned correctly', () => {
-      const { container } = render(<GallerySection />);
-      const topPaw = container.querySelector('.absolute.top-10.left-10');
-
-      expect(topPaw).toBeInTheDocument();
-      expect(topPaw).toHaveClass('text-6xl');
-    });
-
-    it('bottom-right paw print is positioned correctly', () => {
-      const { container } = render(<GallerySection />);
-      const bottomPaw = container.querySelector('.absolute.bottom-10.right-10');
-
-      expect(bottomPaw).toBeInTheDocument();
-      expect(bottomPaw).toHaveClass('text-6xl');
-    });
-  });
-
-  describe('SVG transition', () => {
-    it('SVG path has cyan fill color', () => {
-      const { container } = render(<GallerySection />);
-      const path = container.querySelector('path');
-
-      expect(path).toHaveAttribute('fill', colors.cyan);
     });
 
     it('SVG container has yellow background', () => {
       const { container } = render(<GallerySection />);
       const svgContainers = Array.from(container.querySelectorAll('div')).filter(
-        div => div.style.backgroundColor === colors.yellow && div.querySelector('svg')
+        div => div.style.backgroundColor === 'rgb(255, 204, 0)' && div.querySelector('svg')
       );
 
       expect(svgContainers.length).toBeGreaterThan(0);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { colors } from '../../constants/colors';
 
-const Navigation = ({ isLoaded }) => {
+const Navigation = ({ isLoaded, onBookClick }) => {
     return (
         <nav
             className={`px-6 py-5 flex items-center justify-between max-w-6xl mx-auto ${isLoaded ? 'animate-fade-in' : 'opacity-0'}`}
@@ -11,7 +11,7 @@ const Navigation = ({ isLoaded }) => {
             </div>
 
             <div className="hidden md:flex items-center gap-8">
-                {['Services', 'About', 'Gallery', 'Contact'].map((item) => (
+                {['Services', 'About', 'Gallery', 'Houndsly', 'Contact'].map((item) => (
                     <a
                         key={item}
                         href="#"
@@ -24,13 +24,14 @@ const Navigation = ({ isLoaded }) => {
                     </a>
                 ))}
                 <button
+                    onClick={onBookClick}
                     className="px-6 py-3 rounded-full font-bold text-sm transition-all duration-300 hover:scale-105 hover:shadow-lg"
                     style={{
                         backgroundColor: colors.green,
                         color: 'white'
                     }}
                 >
-                    Book Now
+                    Request Appointment
                 </button>
             </div>
         </nav>

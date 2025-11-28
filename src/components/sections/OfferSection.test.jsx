@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import OfferSection from './OfferSection';
 import { colors } from '../../constants/colors';
 
@@ -69,7 +69,7 @@ describe('OfferSection', () => {
       const { container } = render(<OfferSection />);
       const section = container.querySelector('section');
 
-      expect(section.style.backgroundColor).toBe(colors.green);
+      expect(section.style.backgroundColor).toBe('rgb(0, 217, 74)');
     });
 
     it('has proper padding classes', () => {
@@ -81,18 +81,28 @@ describe('OfferSection', () => {
       expect(section).toHaveClass('overflow-hidden');
     });
 
-    it('offer badge has white background and green text', () => {
+    it('offer button has white background and green text', () => {
       render(<OfferSection />);
-      const badge = screen.getByText('✨ NEW CUSTOMER OFFER');
+      const button = screen.getByRole('button', { name: /Claim Offer/i });
 
-      expect(badge).toHaveStyle({ backgroundColor: 'white', color: colors.green });
+      expect(button).toHaveStyle({ backgroundColor: 'rgb(255, 255, 255)', color: 'rgb(0, 217, 74)' });
+    });
+
+    it('calls onBookClick when "Claim Offer" button is clicked', () => {
+      const handleBookClick = vi.fn();
+      render(<OfferSection onBookClick={handleBookClick} />);
+
+      const button = screen.getByRole('button', { name: /Claim Offer/i });
+      fireEvent.click(button);
+
+      expect(handleBookClick).toHaveBeenCalledTimes(1);
     });
 
     it('offer title has white color', () => {
       render(<OfferSection />);
       const title = screen.getByText(/First groom\? Get 20% off!/i);
 
-      expect(title).toHaveStyle({ color: 'white' });
+      expect(title).toHaveStyle({ color: 'rgb(255, 255, 255)' });
       expect(title).toHaveClass('heading-font');
       expect(title).toHaveClass('font-bold');
     });
@@ -101,7 +111,7 @@ describe('OfferSection', () => {
       render(<OfferSection />);
       const description = screen.getByText(/Mention this offer when you book/i);
 
-      expect(description).toHaveStyle({ color: 'white', opacity: '0.9' });
+      expect(description).toHaveStyle({ color: 'rgb(255, 255, 255)', opacity: '0.9' });
     });
 
     it('"Claim Offer" button has white background and green text', () => {
@@ -109,7 +119,7 @@ describe('OfferSection', () => {
       const button = screen.getByRole('button', { name: /Claim Offer/i });
 
       expect(button.style.backgroundColor).toBe('white');
-      expect(button.style.color).toBe(colors.green);
+      expect(button.style.color).toBe('rgb(0, 217, 74)');
     });
 
     it('"Claim Offer" button has correct classes', () => {
@@ -130,7 +140,7 @@ describe('OfferSection', () => {
       const { container } = render(<OfferSection />);
       const offerContainer = container.querySelector('.rounded-3xl.p-8');
 
-      expect(offerContainer).toHaveStyle({ backgroundColor: 'rgba(255,255,255,0.1)' });
+      expect(offerContainer).toHaveStyle({ backgroundColor: 'rgba(255, 255, 255, 0.1)' });
     });
 
     it('offer container has rounded corners', () => {
@@ -200,7 +210,7 @@ describe('OfferSection', () => {
     it('SVG container has green background', () => {
       const { container } = render(<OfferSection />);
       const svgContainers = Array.from(container.querySelectorAll('div')).filter(
-        div => div.style.backgroundColor === colors.green && div.querySelector('svg')
+        div => div.style.backgroundColor === 'rgb(0, 217, 74)' && div.querySelector('svg')
       );
 
       expect(svgContainers.length).toBeGreaterThan(0);
