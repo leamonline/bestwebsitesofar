@@ -92,7 +92,7 @@ test.describe('Performance Tests', () => {
   });
 
   test('Total Page Weight', async ({ page }) => {
-    const response = await page.goto('/');
+    await page.goto('/');
 
     // Get all network requests
     const resources = await page.evaluate(() => {

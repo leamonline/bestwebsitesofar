@@ -79,13 +79,13 @@ describe('colors constants', () => {
 
     it('all colors are valid hex codes', () => {
       const hexColorRegex = /^#[0-9A-F]{6}$/i;
-      Object.entries(colors).forEach(([name, color]) => {
+      Object.entries(colors).forEach(([, color]) => {
         expect(color).toMatch(hexColorRegex);
       });
     });
 
     it('all colors are uppercase hex values', () => {
-      Object.entries(colors).forEach(([name, color]) => {
+      Object.entries(colors).forEach(([, color]) => {
         const hexPart = color.substring(1);
         expect(hexPart).toMatch(/^[0-9A-F]{6}$/);
       });

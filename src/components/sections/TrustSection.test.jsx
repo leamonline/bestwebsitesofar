@@ -153,7 +153,6 @@ describe('TrustSection', () => {
 
     it('SVG parent has green background', () => {
       const { container } = render(<TrustSection />);
-      const svgContainer = container.querySelector('div[style*="backgroundColor"]');
       const svgParents = Array.from(container.querySelectorAll('div')).filter(
         div => div.style.backgroundColor === colors.green && div.querySelector('svg')
       );
