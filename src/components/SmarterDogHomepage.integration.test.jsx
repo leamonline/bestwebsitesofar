@@ -229,8 +229,11 @@ describe('SmarterDogHomepage Integration Tests', () => {
       const dogEmojis = screen.getAllByText(/🐕/);
       expect(dogEmojis.length).toBeGreaterThan(0);
 
-      expect(screen.getByText(/✂️/)).toBeInTheDocument();
-      expect(screen.getByText(/🛁/)).toBeInTheDocument();
+      const scissorEmojis = screen.getAllByText(/✂️/);
+      expect(scissorEmojis.length).toBeGreaterThan(0);
+
+      const bathEmojis = screen.getAllByText(/🛁/);
+      expect(bathEmojis.length).toBeGreaterThan(0);
     });
   });
 
