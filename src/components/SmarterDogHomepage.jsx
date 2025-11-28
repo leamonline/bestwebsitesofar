@@ -38,55 +38,7 @@ const SmarterDogHomepage = () => {
         fontFamily: "'Montserrat', sans-serif"
       }}
     >
-      {/* Google Fonts */}
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Montserrat:wght@400;500;600&family=Caveat:wght@400;500;600&display=swap');
-        
-        .heading-font {
-          font-family: 'Quicksand', sans-serif;
-        }
-        
-        .body-font {
-          font-family: 'Montserrat', sans-serif;
-        }
-        
-        .handwriting {
-          font-family: 'Caveat', cursive;
-        }
-        
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        
-        @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-        
-        @keyframes bounce {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-10px); }
-        }
-        
-        .animate-fade-in-up {
-          animation: fadeInUp 0.8s ease-out forwards;
-        }
-        
-        .animate-fade-in {
-          animation: fadeIn 1s ease-out forwards;
-        }
-        
-        .animate-bounce-slow {
-          animation: bounce 3s ease-in-out infinite;
-        }
-      `}</style>
+      {/* Styles moved to index.css */}
 
       <AnnouncementBar />
       <Navigation isLoaded={isLoaded} onBookClick={handleBookClick} />

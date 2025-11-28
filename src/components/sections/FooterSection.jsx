@@ -26,7 +26,7 @@ const FooterSection = () => {
                             className="body-font text-sm leading-relaxed"
                             style={{ color: colors.teal }}
                         >
-                            Family-run since 1982. Where every dog gets treated like the VIP they truly are.
+                            Family-run since 1983. Where every dog gets treated like the VIP they truly are.
                         </p>
                         {/* Social icons */}
                         <div className="flex gap-3 mt-4">
@@ -54,19 +54,19 @@ const FooterSection = () => {
                             style={{ color: colors.teal }}
                         >
                             <p className="flex justify-between">
-                                <span>Monday</span>
-                                <span style={{ color: colors.teal }}>8:30am – 3:00pm</span>
-                            </p>
-                            <p className="flex justify-between">
-                                <span>Tuesday</span>
-                                <span style={{ color: colors.teal }}>8:30am – 3:00pm</span>
+                                <span>Mon & Tue</span>
+                                <span style={{ color: colors.teal }}>8:30am – 3:30pm</span>
                             </p>
                             <p className="flex justify-between">
                                 <span>Wednesday</span>
-                                <span style={{ color: colors.green }}>8:30am – 3:00pm</span>
+                                <span style={{ color: colors.pink }}>Closed</span>
                             </p>
                             <p className="flex justify-between">
-                                <span>Thu–Sun</span>
+                                <span>Thursday</span>
+                                <span style={{ color: colors.teal }}>8:30am – 3:30pm</span>
+                            </p>
+                            <p className="flex justify-between">
+                                <span>Fri–Sun</span>
                                 <span style={{ color: colors.pink }}>Closed</span>
                             </p>
                         </div>
@@ -83,9 +83,9 @@ const FooterSection = () => {
                             className="body-font text-sm space-y-2"
                             style={{ color: colors.teal }}
                         >
+                            <p>183 Kings Road</p>
                             <p>Ashton-under-Lyne</p>
-                            <p>Greater Manchester</p>
-                            <p>United Kingdom</p>
+                            <p>OL6 8HD</p>
                         </div>
                     </div>
 
@@ -100,8 +100,8 @@ const FooterSection = () => {
                             className="body-font text-sm space-y-2"
                             style={{ color: colors.teal }}
                         >
-                            <p>hello@smarterdog.co.uk</p>
-                            <p>0161 XXX XXXX</p>
+                            <p>leam@smarterdog.co.uk</p>
+                            <p>07507 731487</p>
                             <p
                                 className="inline-flex items-center gap-2 mt-3 px-3 py-1 rounded-full text-xs"
                                 style={{ backgroundColor: colors.green, color: 'white' }}

@@ -1,0 +1,167 @@
+import React, { useState, useEffect } from 'react';
+import Navigation from '../sections/Navigation';
+import FooterSection from '../sections/FooterSection';
+import CTASection from '../sections/CTASection';
+import BookingModal from '../BookingModal';
+import DogSilhouette from '../DogSilhouette';
+import SectionDivider from '../SectionDivider';
+import { colors } from '../../constants/colors';
+
+const HoundslyPage = () => {
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    useEffect(() => {
+        const timer = setTimeout(() => setIsLoaded(true), 100);
+        return () => clearTimeout(timer);
+    }, []);
+
+    const products = [
+        {
+            name: 'Calming Shampoo',
+            description: 'Lavender & Chamomile for anxious pups. Gentle, tear-free formula.',
+            price: '£12.00',
+            image: '/assets/shampoo.jpg',
+            tag: 'Best Seller'
+        },
+        {
+            name: 'Paw Balm',
+            description: 'Soothing protection for cracked paws. Made with shea butter and vitamin E.',
+            price: '£8.50',
+            image: '/assets/balm.jpg',
+            tag: 'Essential'
+        },
+        {
+            name: 'Detangling Spray',
+            description: 'For a silky, knot-free coat. Reduces brushing time and static.',
+            price: '£10.00',
+            image: '/assets/spray.jpg',
+            tag: 'New'
+        },
+        {
+            name: 'Nose Butter',
+            description: 'Moisturizing relief for dry, crusty noses. 100% natural ingredients.',
+            price: '£7.00',
+            image: '/assets/nose-butter.jpg'
+        },
+        {
+            name: 'Ear Cleaner',
+            description: 'Gentle solution to remove wax and debris. Helps prevent infections.',
+            price: '£9.00',
+            image: '/assets/ear-cleaner.jpg'
+        }
+    ];
+
+    return (
+        <div className="min-h-screen bg-white">
+            <Navigation isLoaded={isLoaded} onBookClick={() => setIsModalOpen(true)} />
+
+            {/* Hero */}
+            <div className="pt-32 pb-16 px-6 text-center relative overflow-hidden" style={{ backgroundColor: colors.offWhite }}>
+                {/* Background Dog */}
+                <div className="absolute top-10 right-0 md:right-20 z-0 opacity-10 pointer-events-none">
+                    <DogSilhouette
+                        color={colors.orange}
+                        className="w-64 h-auto rotate-12"
+                    />
+                </div>
+
+                <div className="relative z-10">
+                    <span className="handwriting text-3xl block mb-4" style={{ color: colors.orange }}>
+                        Handmade with love
+                    </span>
+                    <h1 className="heading-font text-5xl md:text-6xl font-bold mb-6" style={{ color: colors.teal }}>
+                        Houndsly Shop
+                    </h1>
+                    <p className="body-font text-xl max-w-2xl mx-auto" style={{ color: colors.teal, opacity: 0.8 }}>
+                        Natural, vegan, and cruelty-free grooming products. Made in small batches for your best friend.
+                    </p>
+                </div>
+            </div>
+
+            <SectionDivider type="slant" color={colors.orange} backgroundColor={colors.offWhite} />
+
+            {/* Product Grid */}
+            <section className="py-20 px-6" style={{ backgroundColor: colors.orange }}>
+                <div className="max-w-7xl mx-auto">
+                    <div className="grid md:grid-cols-3 gap-10">
+                        {products.map((product, index) => (
+                            <div
+                                key={index}
+                                className="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
+                            >
+                                <div className="aspect-square bg-gray-100 relative overflow-hidden">
+                                    <div className="absolute inset-0 flex items-center justify-center text-6xl opacity-20 group-hover:scale-110 transition-transform duration-500">
+                                        🛁
+                                    </div>
+                                    {product.tag && (
+                                        <span
+                                            className="absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-bold text-white"
+                                            style={{ backgroundColor: colors.green }}
+                                        >
+                                            {product.tag}
+                                        </span>
+                                    )}
+                                </div>
+                                <div className="p-6">
+                                    <div className="flex justify-between items-start mb-2">
+                                        <h3 className="heading-font text-xl font-bold" style={{ color: colors.teal }}>
+                                            {product.name}
+                                        </h3>
+                                        <span className="font-bold text-lg" style={{ color: colors.orange }}>
+                                            {product.price}
+                                        </span>
+                                    </div>
+                                    <p className="body-font text-sm text-gray-600 mb-6">
+                                        {product.description}
+                                    </p>
+                                    <button
+                                        className="w-full py-3 rounded-full font-bold text-sm transition-colors border-2 hover:text-white"
+                                        style={{
+                                            borderColor: colors.teal,
+                                            color: colors.teal,
+                                        }}
+                                        onMouseEnter={(e) => {
+                                            e.target.style.backgroundColor = colors.teal;
+                                            e.target.style.color = 'white';
+                                        }}
+                                        onMouseLeave={(e) => {
+                                            e.target.style.backgroundColor = 'transparent';
+                                            e.target.style.color = colors.teal;
+                                        }}
+                                    >
+                                        Add to Cart
+                                    </button>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            <SectionDivider type="wave" color={colors.green} backgroundColor={colors.orange} />
+
+            {/* Philosophy */}
+            <section className="py-20 px-6 text-center text-white" style={{ backgroundColor: colors.green }}>
+                <div className="max-w-3xl mx-auto">
+                    <h2 className="heading-font text-4xl font-bold mb-6">
+                        Why Houndsly?
+                    </h2>
+                    <p className="body-font text-lg leading-relaxed opacity-90">
+                        We believe that what goes on your dog is just as important as what goes in them.
+                        That's why all our products are free from harsh chemicals, parabens, and sulfates.
+                        Tested on humans, loved by dogs.
+                    </p>
+                </div>
+            </section>
+
+            <SectionDivider type="curve" color="white" backgroundColor={colors.green} />
+
+            <CTASection onBookClick={() => setIsModalOpen(true)} />
+            <FooterSection />
+            <BookingModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+        </div>
+    );
+};
+
+export default HoundslyPage;

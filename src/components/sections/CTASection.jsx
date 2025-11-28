@@ -1,6 +1,8 @@
 import React from 'react';
 import { colors } from '../../constants/colors';
 
+import SectionDivider from '../SectionDivider';
+
 const CTASection = ({ onBookClick }) => {
     return (
         <>
@@ -64,12 +66,7 @@ const CTASection = ({ onBookClick }) => {
                 </div>
             </section>
 
-            {/* Triangle Transition: Pink -> Yellow */}
-            <div style={{ backgroundColor: colors.pink, lineHeight: 0 }}>
-                <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style={{ width: '100%', height: '60px' }}>
-                    <path d="M720 80L1440 0H0L720 80Z" fill={colors.yellow} />
-                </svg>
-            </div>
+            <SectionDivider type="wave" color={colors.yellow} backgroundColor={colors.pink} />
         </>
     );
 };

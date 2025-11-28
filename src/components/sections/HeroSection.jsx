@@ -30,7 +30,7 @@ const HeroSection = ({ isLoaded, onBookClick }) => {
                                     className="handwriting text-xl"
                                     style={{ color: colors.cyan }}
                                 >
-                                    Est. 1982 in Ashton-under-Lyne
+                                    Est. 1983 in Ashton-under-Lyne
                                 </span>
                                 <span className="animate-bounce-slow">🎉</span>
                             </div>
@@ -118,6 +118,7 @@ const HeroSection = ({ isLoaded, onBookClick }) => {
                                     caption="Bella's spa day ✨"
                                     rotation={-5}
                                     tapeColor={colors.cyan}
+                                    src="/assets/client-dog-1.png"
                                 />
                             </div>
                             <div className="absolute top-24 right-0 z-20">
@@ -125,6 +126,7 @@ const HeroSection = ({ isLoaded, onBookClick }) => {
                                     caption="Looking dapper!"
                                     rotation={4}
                                     tapeColor={colors.cyan}
+                                    src="/assets/client-dog-2.png"
                                 />
                             </div>
                             <div className="absolute bottom-0 left-1/4 z-30">
@@ -132,6 +134,7 @@ const HeroSection = ({ isLoaded, onBookClick }) => {
                                     caption="Fresh & fluffy 🛁"
                                     rotation={-2}
                                     tapeColor={colors.cyan}
+                                    src="/assets/client-dog-3.png"
                                 />
                             </div>
                         </div>
