@@ -138,9 +138,11 @@ const BookingModal = ({ isOpen, onClose }) => {
                                     className="w-full px-4 py-2 rounded-xl border-2 border-gray-100 focus:border-cyan-400 focus:outline-none transition-colors bg-white"
                                 >
                                     <option value="Full Groom">Full Groom (Bath, Cut, Nails, Ears)</option>
-                                    <option value="Bath & Tidy">Bath & Tidy (No length off)</option>
+                                    <option value="Maintenance Groom">Maintenance Groom (Bath & Tidy)</option>
+                                    <option value="De-Shedding Package">De-Shedding Package</option>
                                     <option value="Puppy Intro">Puppy Intro (Under 6 months)</option>
                                     <option value="Nail Clip">Nail Clip Only</option>
+                                    <option value="Anal Glands">Anal Gland Expression</option>
                                 </select>
                             </div>
 

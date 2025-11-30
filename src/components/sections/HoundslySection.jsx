@@ -7,7 +7,7 @@ const HoundslySection = () => {
         {
             name: 'Houndsly Shampoo',
             description: 'Our signature range of natural, vegan shampoos designed to gently cleanse and soothe. Perfect for sensitive skin.',
-            image: '/assets/shampoo.jpg', // Placeholder
+            image: '/assets/houndsly-shampoo.jpg',
             link: 'https://houndsly.co.uk/collections/shampoo'
         },
         {
@@ -49,10 +49,17 @@ const HoundslySection = () => {
                             className="bg-white p-6 rounded-2xl shadow-lg transition-transform duration-300 hover:-translate-y-2"
                         >
                             <div className="aspect-square bg-gray-100 rounded-xl mb-6 overflow-hidden relative">
-                                <div className="absolute inset-0 flex items-center justify-center text-4xl opacity-20">
-                                    🛁
-                                </div>
-                                {/* Placeholder for actual product image */}
+                                {product.image && !product.image.includes('placeholder') ? (
+                                    <img
+                                        src={product.image}
+                                        alt={product.name}
+                                        className="w-full h-full object-cover"
+                                    />
+                                ) : (
+                                    <div className="absolute inset-0 flex items-center justify-center text-4xl opacity-20">
+                                        🛁
+                                    </div>
+                                )}
                             </div>
                             <h3 className="heading-font font-bold text-xl mb-2" style={{ color: colors.teal }}>
                                 {product.name}

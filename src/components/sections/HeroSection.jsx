@@ -2,6 +2,7 @@ import React from 'react';
 import { colors } from '../../constants/colors';
 import DogSilhouette from '../DogSilhouette';
 import PolaroidImage from '../PolaroidImage';
+import BackgroundSticker from '../BackgroundSticker';
 
 const HeroSection = ({ isLoaded, onBookClick }) => {
     return (
@@ -15,6 +16,10 @@ const HeroSection = ({ isLoaded, onBookClick }) => {
                             className="w-96 h-auto rotate-12"
                         />
                     </div>
+                    {/* Background Sticker */}
+                    <BackgroundSticker
+                        className="w-64 h-64 -bottom-12 -left-12 opacity-10 rotate-12"
+                    />
                     <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center relative z-10">
                         <div className={`${isLoaded ? 'animate-fade-in-up' : 'opacity-0'}`}>
                             {/* Logo */}
@@ -22,18 +27,7 @@ const HeroSection = ({ isLoaded, onBookClick }) => {
                                 <img src="/assets/logo-text.png" alt="Smarter Dog Grooming Salon" className="h-12 w-auto object-contain" />
                             </div>
                             {/* Badge */}
-                            <div
-                                className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6"
-                                style={{ backgroundColor: 'white' }}
-                            >
-                                <span
-                                    className="handwriting text-xl"
-                                    style={{ color: colors.cyan }}
-                                >
-                                    Est. 1983 in Ashton-under-Lyne
-                                </span>
-                                <span className="animate-bounce-slow">🎉</span>
-                            </div>
+
 
                             <h2
                                 className="heading-font font-bold text-5xl md:text-6xl leading-tight mb-6"
@@ -70,16 +64,7 @@ const HeroSection = ({ isLoaded, onBookClick }) => {
                                     <span>Book Your Visit</span>
                                     <span>→</span>
                                 </button>
-                                <button
-                                    className="px-8 py-4 rounded-full font-semibold text-base transition-all duration-300 hover:scale-105 border-2"
-                                    style={{
-                                        borderColor: 'white',
-                                        color: 'white',
-                                        backgroundColor: 'transparent'
-                                    }}
-                                >
-                                    Meet the Team
-                                </button>
+
                             </div>
 
                             {/* Trust indicators */}

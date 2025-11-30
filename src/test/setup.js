@@ -28,3 +28,17 @@ Object.defineProperty(window, 'matchMedia', {
     dispatchEvent: vi.fn(),
   })),
 });
+// Mock IntersectionObserver
+const IntersectionObserverMock = vi.fn((callback) => ({
+  disconnect: vi.fn(),
+  observe: vi.fn((element) => {
+    setTimeout(() => {
+      callback([{ isIntersecting: true, target: element }]);
+    }, 0);
+  }),
+  takeRecords: vi.fn(),
+  unobserve: vi.fn(),
+}));
+
+vi.stubGlobal('IntersectionObserver', IntersectionObserverMock);
+window.IS_TEST = true;

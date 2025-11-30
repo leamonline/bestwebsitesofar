@@ -2,6 +2,7 @@ import React from 'react';
 import { colors } from '../../constants/colors';
 import DogSilhouette from '../DogSilhouette';
 import ServiceCard from '../ServiceCard';
+import FadeIn from '../FadeIn';
 
 const ServicesSection = () => {
     return (
@@ -16,109 +17,189 @@ const ServicesSection = () => {
                         />
                     </div>
                     <div className="max-w-6xl mx-auto text-center mb-16 relative z-10">
-                        <span
-                            className="inline-block px-4 py-2 rounded-full text-sm font-semibold mb-4"
-                            style={{ backgroundColor: 'white', color: colors.pink }}
-                        >
-                            Our Services
-                        </span>
-                        <h3
-                            className="heading-font font-bold text-4xl md:text-5xl"
-                            style={{ color: 'white' }}
-                        >
-                            What we do best
-                        </h3>
+                        <FadeIn>
+                            <span
+                                className="inline-block px-4 py-2 rounded-full text-sm font-semibold mb-4"
+                                style={{ backgroundColor: 'white', color: colors.pink }}
+                            >
+                                Our Services
+                            </span>
+                            <h3
+                                className="heading-font font-bold text-4xl md:text-5xl"
+                                style={{ color: 'white' }}
+                            >
+                                What we do best
+                            </h3>
+                        </FadeIn>
                     </div>
 
                     <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8 relative z-10">
-                        <ServiceCard
-                            icon="✂️"
-                            title="Full Groom"
-                            desc="The works: bath, dry, brush, trim, nail clip, and ear clean. They'll leave looking (and smelling) like a million bones."
-                            bgColor={'white'}
-                            accentColor={colors.pink}
-                        />
-                        <ServiceCard
-                            icon="🛁"
-                            title="Bath & Tidy"
-                            desc="A refresh between full grooms. Perfect for keeping your pup clean and comfortable without the full trim."
-                            bgColor={'white'}
-                            accentColor={colors.pink}
-                        />
-                        <ServiceCard
-                            icon="🐾"
-                            title="Puppy Intro"
-                            desc="First time? We take it slow. Gentle introduction to grooming for pups under 6 months. Building trust, one treat at a time."
-                            bgColor={'white'}
-                            accentColor={colors.pink}
-                        />
+                        <FadeIn delay={200} className="h-full">
+                            <ServiceCard
+                                icon="✂️"
+                                title="Full Groom"
+                                desc="The works: bath, dry, brush, trim, nail clip, and ear clean. They'll leave looking (and smelling) like a million bones."
+                                bgColor={'white'}
+                                accentColor={colors.pink}
+                            />
+                        </FadeIn>
+                        <FadeIn delay={400} className="h-full">
+                            <ServiceCard
+                                icon="🛁"
+                                title="Maintenance Groom"
+                                desc="A refresh between full grooms. Perfect for keeping your pup clean and comfortable without the full trim."
+                                bgColor={'white'}
+                                accentColor={colors.pink}
+                            />
+                        </FadeIn>
+                        <FadeIn delay={600} className="h-full">
+                            <ServiceCard
+                                icon="🐕"
+                                title="De-Shedding Package"
+                                desc="Ideal for double-coated breeds. A deep clean and thorough undercoat removal to reduce shedding around your home."
+                                bgColor={'white'}
+                                accentColor={colors.pink}
+                            />
+                        </FadeIn>
                     </div>
 
                     {/* Additional services row */}
                     <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 mt-8 relative z-10">
-                        <div
-                            className="p-8 rounded-3xl flex items-center gap-6 transition-all duration-300 hover:shadow-lg"
-                            style={{ backgroundColor: 'white' }}
-                        >
+                        <FadeIn delay={800} className="h-full">
                             <div
-                                className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0"
-                                style={{ backgroundColor: colors.pinkLight }}
+                                className="p-8 rounded-3xl flex items-center gap-6 transition-all duration-300 hover:shadow-lg h-full hover-lift"
+                                style={{ backgroundColor: 'white' }}
                             >
-                                👂
-                            </div>
-                            <div>
-                                <h4
-                                    className="heading-font font-semibold text-xl mb-2"
-                                    style={{ color: colors.pink }}
+                                <div
+                                    className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0"
+                                    style={{ backgroundColor: colors.pinkLight }}
                                 >
-                                    Ear Cleaning
-                                </h4>
-                                <p
-                                    className="body-font text-sm"
-                                    style={{ color: colors.teal }}
+                                    👂
+                                </div>
+                                <div>
+                                    <h4
+                                        className="heading-font font-semibold text-xl mb-2"
+                                        style={{ color: colors.pink }}
+                                    >
+                                        Ear Cleaning
+                                    </h4>
+                                    <p
+                                        className="body-font text-sm"
+                                        style={{ color: colors.teal }}
+                                    >
+                                        Gentle, thorough ear care to keep your pup comfortable and infection-free.
+                                    </p>
+                                </div>
+                                <span
+                                    className="ml-auto px-3 py-1 rounded-full text-xs font-bold"
+                                    style={{ backgroundColor: colors.pink, color: 'white' }}
                                 >
-                                    Gentle, thorough ear care to keep your pup comfortable and infection-free.
-                                </p>
+                                    Hygiene
+                                </span>
                             </div>
-                            <span
-                                className="ml-auto px-3 py-1 rounded-full text-xs font-bold"
-                                style={{ backgroundColor: colors.pink, color: 'white' }}
-                            >
-                                Hygiene
-                            </span>
-                        </div>
+                        </FadeIn>
 
-                        <div
-                            className="p-8 rounded-3xl flex items-center gap-6 transition-all duration-300 hover:shadow-lg"
-                            style={{ backgroundColor: 'white' }}
-                        >
+                        <FadeIn delay={1000} className="h-full">
                             <div
-                                className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0"
-                                style={{ backgroundColor: colors.pinkLight }}
+                                className="p-8 rounded-3xl flex items-center gap-6 transition-all duration-300 hover:shadow-lg h-full hover-lift"
+                                style={{ backgroundColor: 'white' }}
                             >
-                                🦷
-                            </div>
-                            <div>
-                                <h4
-                                    className="heading-font font-semibold text-xl mb-2"
-                                    style={{ color: colors.pink }}
+                                <div
+                                    className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0"
+                                    style={{ backgroundColor: colors.pinkLight }}
                                 >
-                                    Teeth Cleaning
-                                </h4>
-                                <p
-                                    className="body-font text-sm"
-                                    style={{ color: colors.teal }}
+                                    🍑
+                                </div>
+                                <div>
+                                    <h4
+                                        className="heading-font font-semibold text-xl mb-2"
+                                        style={{ color: colors.pink }}
+                                    >
+                                        Anal Gland Expression
+                                    </h4>
+                                    <p
+                                        className="body-font text-sm"
+                                        style={{ color: colors.teal }}
+                                    >
+                                        Professional expression to relieve discomfort and prevent impaction.
+                                    </p>
+                                </div>
+                                <span
+                                    className="ml-auto px-3 py-1 rounded-full text-xs font-bold"
+                                    style={{ backgroundColor: colors.pink, color: 'white' }}
                                 >
-                                    Fresh breath and healthy gums. Your dog will thank you (with kisses).
-                                </p>
+                                    Hygiene
+                                </span>
                             </div>
-                            <span
-                                className="ml-auto px-3 py-1 rounded-full text-xs font-bold"
-                                style={{ backgroundColor: colors.pink, color: 'white' }}
+                        </FadeIn>
+
+                        <FadeIn delay={1200} className="h-full">
+                            <div
+                                className="p-8 rounded-3xl flex items-center gap-6 transition-all duration-300 hover:shadow-lg h-full hover-lift"
+                                style={{ backgroundColor: 'white' }}
                             >
-                                Hygiene
-                            </span>
-                        </div>
+                                <div
+                                    className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0"
+                                    style={{ backgroundColor: colors.pinkLight }}
+                                >
+                                    💅
+                                </div>
+                                <div>
+                                    <h4
+                                        className="heading-font font-semibold text-xl mb-2"
+                                        style={{ color: colors.pink }}
+                                    >
+                                        Nail Trims
+                                    </h4>
+                                    <p
+                                        className="body-font text-sm"
+                                        style={{ color: colors.teal }}
+                                    >
+                                        Quick and stress-free nail clipping to keep paws healthy and floors scratch-free.
+                                    </p>
+                                </div>
+                                <span
+                                    className="ml-auto px-3 py-1 rounded-full text-xs font-bold"
+                                    style={{ backgroundColor: colors.pink, color: 'white' }}
+                                >
+                                    Hygiene
+                                </span>
+                            </div>
+                        </FadeIn>
+
+                        <FadeIn delay={1400} className="h-full">
+                            <div
+                                className="p-8 rounded-3xl flex items-center gap-6 transition-all duration-300 hover:shadow-lg h-full hover-lift"
+                                style={{ backgroundColor: 'white' }}
+                            >
+                                <div
+                                    className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0"
+                                    style={{ backgroundColor: colors.pinkLight }}
+                                >
+                                    🐾
+                                </div>
+                                <div>
+                                    <h4
+                                        className="heading-font font-semibold text-xl mb-2"
+                                        style={{ color: colors.pink }}
+                                    >
+                                        Puppy Intro
+                                    </h4>
+                                    <p
+                                        className="body-font text-sm"
+                                        style={{ color: colors.teal }}
+                                    >
+                                        First time? We take it slow. Gentle introduction to grooming for pups under 6 months.
+                                    </p>
+                                </div>
+                                <span
+                                    className="ml-auto px-3 py-1 rounded-full text-xs font-bold"
+                                    style={{ backgroundColor: colors.pink, color: 'white' }}
+                                >
+                                    Special
+                                </span>
+                            </div>
+                        </FadeIn>
                     </div>
                 </div>
             </section>

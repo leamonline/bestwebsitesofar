@@ -40,15 +40,17 @@ describe('ServicesSection', () => {
       render(<ServicesSection />);
 
       expect(screen.getByText('Full Groom')).toBeInTheDocument();
-      expect(screen.getByText('Bath & Tidy')).toBeInTheDocument();
-      expect(screen.getByText('Puppy Intro')).toBeInTheDocument();
+      expect(screen.getByText('Maintenance Groom')).toBeInTheDocument();
+      expect(screen.getByText('De-Shedding Package')).toBeInTheDocument();
     });
 
-    it('renders 2 additional hygiene services', () => {
+    it('renders 4 additional hygiene services', () => {
       render(<ServicesSection />);
 
       expect(screen.getByText('Ear Cleaning')).toBeInTheDocument();
-      expect(screen.getByText('Teeth Cleaning')).toBeInTheDocument();
+      expect(screen.getByText('Anal Gland Expression')).toBeInTheDocument();
+      expect(screen.getByText('Nail Trims')).toBeInTheDocument();
+      expect(screen.getByText('Puppy Intro')).toBeInTheDocument();
     });
 
     it('renders service icons', () => {
@@ -56,21 +58,22 @@ describe('ServicesSection', () => {
 
       expect(screen.getByText('✂️')).toBeInTheDocument();
       expect(screen.getByText('🛁')).toBeInTheDocument();
-      expect(screen.getByText('🐾')).toBeInTheDocument();
+      expect(screen.getByText('🐕')).toBeInTheDocument();
     });
 
     it('renders hygiene icons', () => {
       render(<ServicesSection />);
 
       expect(screen.getByText('👂')).toBeInTheDocument();
-      expect(screen.getByText('🦷')).toBeInTheDocument();
+      expect(screen.getByText('🍑')).toBeInTheDocument();
+      expect(screen.getByText('💅')).toBeInTheDocument();
     });
 
     it('renders "Hygiene" badges', () => {
       render(<ServicesSection />);
 
       const badges = screen.getAllByText('Hygiene');
-      expect(badges).toHaveLength(2);
+      expect(badges).toHaveLength(3);
     });
 
     it('renders dog silhouette background', () => {
@@ -141,10 +144,10 @@ describe('ServicesSection', () => {
       expect(screen.getByText(/A refresh between full grooms/i)).toBeInTheDocument();
     });
 
-    it('Puppy Intro has correct description', () => {
+    it('De-Shedding Package has correct description', () => {
       render(<ServicesSection />);
 
-      expect(screen.getByText(/First time\? We take it slow/i)).toBeInTheDocument();
+      expect(screen.getByText(/Ideal for double-coated breeds/i)).toBeInTheDocument();
     });
 
     it('Ear Cleaning has correct description', () => {
@@ -153,10 +156,10 @@ describe('ServicesSection', () => {
       expect(screen.getByText(/Gentle, thorough ear care/i)).toBeInTheDocument();
     });
 
-    it('Teeth Cleaning has correct description', () => {
+    it('Anal Gland Expression has correct description', () => {
       render(<ServicesSection />);
 
-      expect(screen.getByText(/Fresh breath and healthy gums/i)).toBeInTheDocument();
+      expect(screen.getByText(/Professional expression to relieve discomfort/i)).toBeInTheDocument();
     });
   });
 

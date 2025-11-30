@@ -1,5 +1,6 @@
 import React from 'react';
 import { colors } from '../../constants/colors';
+import FadeIn from '../FadeIn';
 
 const TrustSection = () => {
     return (
@@ -26,20 +27,22 @@ const TrustSection = () => {
                             { number: '4.9★', label: 'Google Rating', icon: '⭐' },
                             { number: '100%', label: 'Tail Wags', icon: '💕' }
                         ].map((stat, i) => (
-                            <div key={i} className="text-center">
-                                <div
-                                    className="heading-font font-bold text-4xl mb-1"
-                                    style={{ color: 'white' }}
-                                >
-                                    {stat.number}
+                            <FadeIn key={i} delay={i * 100}>
+                                <div className="text-center">
+                                    <div
+                                        className="heading-font font-bold text-4xl mb-1"
+                                        style={{ color: 'white' }}
+                                    >
+                                        {stat.number}
+                                    </div>
+                                    <div
+                                        className="body-font text-sm"
+                                        style={{ color: 'rgba(255,255,255,0.8)' }}
+                                    >
+                                        {stat.icon} {stat.label}
+                                    </div>
                                 </div>
-                                <div
-                                    className="body-font text-sm"
-                                    style={{ color: 'rgba(255,255,255,0.8)' }}
-                                >
-                                    {stat.icon} {stat.label}
-                                </div>
-                            </div>
+                            </FadeIn>
                         ))
                     }
                 </div>

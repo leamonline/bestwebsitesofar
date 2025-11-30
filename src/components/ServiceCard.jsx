@@ -4,7 +4,7 @@ import { colors } from '../constants/colors';
 // Service card component with color coding
 const ServiceCard = ({ icon, title, desc, bgColor, accentColor }) => (
     <div
-        className="p-8 rounded-3xl transition-all duration-300 hover:shadow-xl hover:-translate-y-2 relative overflow-hidden"
+        className="p-8 rounded-3xl transition-all duration-300 hover:shadow-xl hover:-translate-y-2 hover:scale-105 relative overflow-hidden"
         style={{ backgroundColor: bgColor }}
     >
         {/* Decorative circle */}

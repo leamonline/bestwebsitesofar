@@ -5,6 +5,7 @@ import FooterSection from '../sections/FooterSection';
 import BookingModal from '../BookingModal';
 import DogSilhouette from '../DogSilhouette';
 import SectionDivider from '../SectionDivider';
+import ProcessTimeline from '../ProcessTimeline';
 import { colors } from '../../constants/colors';
 
 const ServicesPage = () => {
@@ -152,25 +153,8 @@ const ServicesPage = () => {
                     <h2 className="heading-font text-4xl font-bold text-center mb-16 text-white">
                         What to Expect
                     </h2>
-                    <div className="space-y-12">
-                        {timeline.map((item, index) => (
-                            <div key={index} className="flex gap-6 md:gap-10 items-start">
-                                <div
-                                    className="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl bg-white shadow-lg"
-                                    style={{ color: colors.teal }}
-                                >
-                                    {item.step}
-                                </div>
-                                <div>
-                                    <h3 className="heading-font text-2xl font-bold mb-2 text-white">
-                                        {item.title}
-                                    </h3>
-                                    <p className="body-font text-lg text-white opacity-90">
-                                        {item.desc}
-                                    </p>
-                                </div>
-                            </div>
-                        ))}
+                    <div className="mt-16">
+                        <ProcessTimeline steps={timeline} />
                     </div>
                 </div>
             </section>

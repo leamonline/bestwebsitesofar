@@ -1,6 +1,7 @@
 import React from 'react';
 import { colors } from '../../constants/colors';
 import DogSilhouette from '../DogSilhouette';
+import BackgroundSticker from '../BackgroundSticker';
 
 const FooterSection = () => {
     return (
@@ -15,6 +16,10 @@ const FooterSection = () => {
                     className="w-[25rem] h-auto"
                 />
             </div>
+            {/* Background Sticker */}
+            <BackgroundSticker
+                className="w-48 h-48 top-10 right-10 opacity-5 -rotate-6"
+            />
 
             <div className="max-w-6xl mx-auto relative z-10">
                 <div className="grid md:grid-cols-4 gap-8 mb-12">

@@ -23,7 +23,7 @@ const PolaroidImage = ({ caption, rotation = 0, tapeColor = null, src = null }) 
             />
         )}
         <div
-            className="bg-white p-3 pb-14 rounded shadow-lg hover:shadow-xl transition-all duration-300 group-hover:rotate-0 group-hover:scale-105"
+            className="bg-white p-3 pb-14 rounded shadow-lg transition-all duration-500 ease-out group-hover:rotate-0 group-hover:scale-110 group-hover:shadow-2xl z-10"
             style={{
                 boxShadow: `0 4px 20px rgba(106, 54, 88, 0.12), 0 2px 8px rgba(106, 54, 88, 0.08)`
             }}
