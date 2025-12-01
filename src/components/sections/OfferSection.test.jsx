@@ -18,29 +18,34 @@ describe('OfferSection', () => {
       render(<OfferSection />);
     });
 
-    it('renders offer badge', () => {
+    it('renders newsletter badge', () => {
       render(<OfferSection />);
 
-      expect(screen.getByText('✨ NEW CUSTOMER OFFER')).toBeInTheDocument();
+      expect(screen.getByText('✨ NEWSLETTER')).toBeInTheDocument();
     });
 
-    it('renders offer title', () => {
+    it('renders newsletter title', () => {
       render(<OfferSection />);
 
-      expect(screen.getByText(/First groom\? Get 20% off!/i)).toBeInTheDocument();
+      expect(screen.getByText(/Join our pack!/i)).toBeInTheDocument();
     });
 
-    it('renders offer description', () => {
+    it('renders newsletter description', () => {
       render(<OfferSection />);
 
-      expect(screen.getByText(/Mention this offer when you book/i)).toBeInTheDocument();
-      expect(screen.getByText(/Valid for new customers only/i)).toBeInTheDocument();
+      expect(screen.getByText(/Sign up for grooming tips, special offers, and adorable dog photos/i)).toBeInTheDocument();
     });
 
-    it('renders "Claim Offer" button', () => {
+    it('renders email input', () => {
       render(<OfferSection />);
 
-      expect(screen.getByRole('button', { name: /Claim Offer/i })).toBeInTheDocument();
+      expect(screen.getByPlaceholderText(/Enter your email address/i)).toBeInTheDocument();
+    });
+
+    it('renders "Subscribe" button', () => {
+      render(<OfferSection />);
+
+      expect(screen.getByRole('button', { name: /Subscribe/i })).toBeInTheDocument();
     });
 
     it('renders decorative emojis', () => {
@@ -81,57 +86,50 @@ describe('OfferSection', () => {
       expect(section).toHaveClass('overflow-hidden');
     });
 
-    it('offer button has white background and green text', () => {
+    it('subscribe button has white background and green text', () => {
       render(<OfferSection />);
-      const button = screen.getByRole('button', { name: /Claim Offer/i });
+      const button = screen.getByRole('button', { name: /Subscribe/i });
 
       expect(button).toHaveStyle({ backgroundColor: 'rgb(255, 255, 255)', color: 'rgb(0, 217, 74)' });
     });
 
-    it('calls onBookClick when "Claim Offer" button is clicked', () => {
-      const handleBookClick = vi.fn();
-      render(<OfferSection onBookClick={handleBookClick} />);
-
-      const button = screen.getByRole('button', { name: /Claim Offer/i });
-      fireEvent.click(button);
-
-      expect(handleBookClick).toHaveBeenCalledTimes(1);
-    });
-
-    it('offer title has white color', () => {
+    it('newsletter title has white color', () => {
       render(<OfferSection />);
-      const title = screen.getByText(/First groom\? Get 20% off!/i);
+      const title = screen.getByText(/Join our pack!/i);
 
       expect(title).toHaveStyle({ color: 'rgb(255, 255, 255)' });
       expect(title).toHaveClass('heading-font');
       expect(title).toHaveClass('font-bold');
     });
 
-    it('offer description has white color with opacity', () => {
+    it('newsletter description has white color with opacity', () => {
       render(<OfferSection />);
-      const description = screen.getByText(/Mention this offer when you book/i);
+      const description = screen.getByText(/Sign up for grooming tips/i);
 
       expect(description).toHaveStyle({ color: 'rgb(255, 255, 255)', opacity: '0.9' });
     });
+  });
 
-    it('"Claim Offer" button has white background and green text', () => {
+  describe('interaction', () => {
+    it('allows typing in email input', () => {
       render(<OfferSection />);
-      const button = screen.getByRole('button', { name: /Claim Offer/i });
+      const input = screen.getByPlaceholderText(/Enter your email address/i);
 
-      expect(button.style.backgroundColor).toBe('white');
-      expect(button.style.color).toBe('rgb(0, 217, 74)');
+      fireEvent.change(input, { target: { value: 'test@example.com' } });
+      expect(input.value).toBe('test@example.com');
     });
 
-    it('"Claim Offer" button has correct classes', () => {
+    it('shows success message after submission', () => {
       render(<OfferSection />);
-      const button = screen.getByRole('button', { name: /Claim Offer/i });
+      const input = screen.getByPlaceholderText(/Enter your email address/i);
+      const button = screen.getByRole('button', { name: /Subscribe/i });
 
-      expect(button).toHaveClass('px-8');
-      expect(button).toHaveClass('py-4');
-      expect(button).toHaveClass('rounded-full');
-      expect(button).toHaveClass('font-bold');
-      expect(button).toHaveClass('hover:scale-105');
-      expect(button).toHaveClass('hover:shadow-xl');
+      fireEvent.change(input, { target: { value: 'test@example.com' } });
+      fireEvent.click(button);
+
+      expect(screen.getByText(/Thanks for subscribing!/i)).toBeInTheDocument();
+      expect(screen.getByText(/Keep an eye on your inbox/i)).toBeInTheDocument();
+      expect(screen.queryByRole('form')).not.toBeInTheDocument();
     });
   });
 
@@ -148,22 +146,6 @@ describe('OfferSection', () => {
       const offerContainer = container.querySelector('.rounded-3xl');
 
       expect(offerContainer).toBeInTheDocument();
-    });
-  });
-
-  describe('layout', () => {
-    it('content uses flex layout for responsive design', () => {
-      const { container } = render(<OfferSection />);
-      const contentFlex = container.querySelector('.flex.flex-col.md\\:flex-row');
-
-      expect(contentFlex).toBeInTheDocument();
-    });
-
-    it('container has max width', () => {
-      const { container } = render(<OfferSection />);
-      const mainContainer = container.querySelector('.max-w-6xl.mx-auto');
-
-      expect(mainContainer).toBeInTheDocument();
     });
   });
 
@@ -214,15 +196,6 @@ describe('OfferSection', () => {
       );
 
       expect(svgContainers.length).toBeGreaterThan(0);
-    });
-  });
-
-  describe('responsive layout', () => {
-    it('button has whitespace-nowrap to prevent wrapping', () => {
-      render(<OfferSection />);
-      const button = screen.getByRole('button', { name: /Claim Offer/i });
-
-      expect(button).toHaveClass('whitespace-nowrap');
     });
   });
 });

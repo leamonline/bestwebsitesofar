@@ -3,7 +3,17 @@ import { colors } from '../../constants/colors';
 import DogSilhouette from '../DogSilhouette';
 import FadeIn from '../FadeIn';
 
-const OfferSection = ({ onBookClick }) => {
+const OfferSection = () => {
+    const [email, setEmail] = React.useState('');
+    const [isSubmitted, setIsSubmitted] = React.useState(false);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // In a real app, we would send this to an API
+        console.log('Subscribing email:', email);
+        setIsSubmitted(true);
+    };
+
     return (
         <>
             <section className="py-20 relative overflow-hidden" style={{ backgroundColor: colors.green }}>
@@ -30,31 +40,54 @@ const OfferSection = ({ onBookClick }) => {
                                         className="inline-block px-3 py-1 rounded-full text-xs font-bold mb-4"
                                         style={{ backgroundColor: 'white', color: colors.green }}
                                     >
-                                        ✨ NEW CUSTOMER OFFER
+                                        ✨ NEWSLETTER
                                     </span>
                                     <h4
                                         className="heading-font font-bold text-3xl md:text-4xl mb-2"
                                         style={{ color: 'white' }}
                                     >
-                                        First groom? Get 20% off!
+                                        Join our pack!
                                     </h4>
                                     <p
                                         className="body-font"
                                         style={{ color: 'white', opacity: 0.9 }}
                                     >
-                                        Mention this offer when you book. Valid for new customers only.
+                                        Sign up for grooming tips, special offers, and adorable dog photos.
                                     </p>
                                 </div>
-                                <button
-                                    onClick={() => onBookClick('Offer Section')}
-                                    className="px-8 py-4 rounded-full font-bold text-base transition-all duration-300 hover:scale-105 hover:shadow-xl whitespace-nowrap"
-                                    style={{
-                                        backgroundColor: 'white',
-                                        color: colors.green
-                                    }}
-                                >
-                                    Claim Offer →
-                                </button>
+
+                                {isSubmitted ? (
+                                    <div className="bg-white/20 backdrop-blur-sm rounded-xl p-6 text-white text-center animate-fade-in">
+                                        <div className="text-4xl mb-2">🎉</div>
+                                        <h5 className="font-bold text-xl mb-1">Thanks for subscribing!</h5>
+                                        <p className="text-sm opacity-90">Keep an eye on your inbox.</p>
+                                    </div>
+                                ) : (
+                                    <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+                                        <input
+                                            type="email"
+                                            placeholder="Enter your email address"
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
+                                            required
+                                            className="px-6 py-4 rounded-full text-base outline-none focus:ring-2 focus:ring-white/50 transition-all w-full md:w-80"
+                                            style={{
+                                                backgroundColor: 'rgba(255,255,255,0.9)',
+                                                color: colors.text
+                                            }}
+                                        />
+                                        <button
+                                            type="submit"
+                                            className="px-8 py-4 rounded-full font-bold text-base transition-all duration-300 hover:scale-105 hover:shadow-xl whitespace-nowrap"
+                                            style={{
+                                                backgroundColor: 'white',
+                                                color: colors.green
+                                            }}
+                                        >
+                                            Subscribe
+                                        </button>
+                                    </form>
+                                )}
                             </div>
                         </div>
                     </FadeIn>

@@ -70,25 +70,33 @@ const GoogleReviews = ({ placeId, apiKey }) => {
     if (loading) return <div className="text-center p-8">Loading reviews...</div>;
 
     return (
-        <div className="w-full max-w-6xl mx-auto">
-            <div className="flex items-center justify-center gap-3 mb-10">
-                <img
-                    src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg"
-                    alt="Google"
-                    className="w-8 h-8 drop-shadow-sm"
-                />
-                <span className="heading-font font-bold text-2xl" style={{ color: colors.plum }}>
-                    Excellent
-                </span>
-                <div className="flex text-yellow-400 text-2xl drop-shadow-sm">
-                    {'★'.repeat(5)}
+        <div className="w-full max-w-7xl mx-auto px-4">
+            {/* Header Section */}
+            <div className="flex flex-col items-center justify-center gap-4 mb-16 text-center">
+                <div className="flex items-center gap-3 bg-white px-6 py-3 rounded-full shadow-sm border border-gray-100">
+                    <img
+                        src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg"
+                        alt="Google"
+                        className="w-6 h-6"
+                    />
+                    <span className="font-bold text-gray-700">
+                        Excellent
+                    </span>
+                    <div className="flex text-yellow-400 text-lg">
+                        {'★'.repeat(5)}
+                    </div>
                 </div>
-                <span className="text-gray-500 font-medium ml-2">
-                    on Google
-                </span>
+
+                <h3 className="heading-font font-bold text-4xl md:text-5xl" style={{ color: colors.plum }}>
+                    Loved by Locals
+                </h3>
+                <p className="text-gray-500 font-medium flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                    Verified Reviews from Real Dog Parents
+                </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="grid md:grid-cols-3 gap-8">
                 {reviews.slice(0, 3).map((review, index) => {
                     // Cyclic accent colors
                     const accentColor = [colors.cyan, colors.green, colors.pink][index % 3];
@@ -96,18 +104,22 @@ const GoogleReviews = ({ placeId, apiKey }) => {
                     return (
                         <div
                             key={index}
-                            className="bg-white/60 backdrop-blur-sm p-6 rounded-2xl border border-white/80 shadow-soft hover:shadow-layered transition-all duration-300 flex flex-col h-full hover-lift texture-grain animate-fade-in-up"
-                            style={{ animationDelay: `${index * 0.2}s` }}
+                            className="group relative bg-white p-8 rounded-3xl border border-gray-100 shadow-lg hover:shadow-xl transition-all duration-500 flex flex-col h-full hover:-translate-y-1"
                         >
-                            {/* Accent Line */}
-                            <div className="w-12 h-1 rounded-full mb-4" style={{ backgroundColor: accentColor }} />
+                            {/* Decorative Quote Icon */}
+                            <div
+                                className="absolute -top-4 -right-4 w-12 h-12 rounded-full flex items-center justify-center text-2xl shadow-sm transform rotate-12 group-hover:rotate-0 transition-transform duration-300"
+                                style={{ backgroundColor: accentColor, color: 'white' }}
+                            >
+                                ❝
+                            </div>
 
-                            <div className="flex items-center gap-3 mb-4">
+                            <div className="flex items-center gap-4 mb-6">
                                 {review.profile_photo_url && !review.profile_photo_url.includes('placeholder') ? (
                                     <img
                                         src={review.profile_photo_url}
                                         alt={review.author_name}
-                                        className="w-10 h-10 rounded-full border-2 border-white shadow-sm"
+                                        className="w-14 h-14 rounded-full border-4 border-white shadow-md object-cover"
                                         onError={(e) => {
                                             e.target.onerror = null;
                                             e.target.src = `https://ui-avatars.com/api/?name=${review.author_name}&background=random`;
@@ -115,39 +127,42 @@ const GoogleReviews = ({ placeId, apiKey }) => {
                                     />
                                 ) : (
                                     <div
-                                        className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-sm"
+                                        className="w-14 h-14 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-md border-4 border-white"
                                         style={{ backgroundColor: accentColor }}
                                     >
                                         {review.author_name.charAt(0)}
                                     </div>
                                 )}
                                 <div>
-                                    <div className="font-bold text-sm" style={{ color: colors.plum }}>
+                                    <div className="font-bold text-lg leading-tight" style={{ color: colors.plum }}>
                                         {review.author_name}
                                     </div>
-                                    <div className="text-xs text-gray-500 font-medium">
+                                    <div className="text-xs text-gray-400 font-medium mt-1 uppercase tracking-wider">
                                         {review.relative_time_description}
                                     </div>
                                 </div>
                             </div>
 
-                            <div className="flex text-yellow-400 text-sm mb-3">
+                            <div className="flex text-yellow-400 text-lg mb-4">
                                 {'★'.repeat(review.rating)}
                             </div>
 
-                            <p className="body-font text-sm leading-relaxed text-gray-700 flex-grow font-medium">
-                                "{review.text.length > 150 ? review.text.substring(0, 150) + '...' : review.text}"
+                            <p className="body-font text-base leading-relaxed text-gray-600 flex-grow relative z-10">
+                                "{review.text.length > 180 ? review.text.substring(0, 180) + '...' : review.text}"
                             </p>
 
-                            <a
-                                href="https://www.google.com/maps/place/Smarter+Dog+Grooming"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-xs font-bold mt-4 hover:underline flex items-center gap-1 group"
-                                style={{ color: accentColor }}
-                            >
-                                Read on Google <span className="group-hover:translate-x-1 transition-transform">→</span>
-                            </a>
+                            <div className="mt-6 pt-6 border-t border-gray-50">
+                                <a
+                                    href="https://www.google.com/maps/place/Smarter+Dog+Grooming"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-sm font-bold flex items-center gap-2 group/link"
+                                    style={{ color: accentColor }}
+                                >
+                                    Read on Google
+                                    <span className="group-hover/link:translate-x-1 transition-transform">→</span>
+                                </a>
+                            </div>
                         </div>
                     );
                 })}

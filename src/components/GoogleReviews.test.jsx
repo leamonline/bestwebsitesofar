@@ -60,4 +60,37 @@ describe('GoogleReviews', () => {
             expect(screen.getByText('Sarah Jenkins')).toBeInTheDocument();
         });
     });
+
+    it('renders header with "Loved by Locals"', () => {
+        render(<GoogleReviews />);
+        expect(screen.getByText('Loved by Locals')).toBeInTheDocument();
+    });
+
+    it('renders "Verified Reviews" badge', () => {
+        render(<GoogleReviews />);
+        expect(screen.getByText(/Verified Reviews from Real Dog Parents/i)).toBeInTheDocument();
+    });
+
+    it('renders "Excellent" rating', () => {
+        render(<GoogleReviews />);
+        expect(screen.getByText('Excellent')).toBeInTheDocument();
+    });
+
+    it('renders Google logo', () => {
+        render(<GoogleReviews />);
+        const logo = screen.getByAltText('Google');
+        expect(logo).toBeInTheDocument();
+    });
+
+    it('renders review cards', async () => {
+        render(<GoogleReviews />);
+        const cards = await screen.findAllByText(/Read on Google/i);
+        expect(cards).toHaveLength(3);
+    });
+
+    it('renders quote icons', () => {
+        render(<GoogleReviews />);
+        const quotes = screen.getAllByText('❝');
+        expect(quotes.length).toBeGreaterThan(0);
+    });
 });
