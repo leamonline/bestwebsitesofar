@@ -1,121 +1,133 @@
 import React from 'react';
 import { colors } from '../../constants/colors';
-import PolaroidImage from '../PolaroidImage';
+import FadeIn from '../FadeIn';
 
 const HoundslySection = () => {
-    const products = [
-        {
-            name: 'Houndsly Shampoo',
-            description: 'Our signature range of natural, vegan shampoos designed to gently cleanse and soothe. Perfect for sensitive skin.',
-            image: '/assets/houndsly-shampoo.jpg',
-            link: 'https://houndsly.co.uk/collections/shampoo'
-        },
-        {
-            name: 'Drynamite Speed Dry',
-            description: 'Cut drying time in half! This blast of conditioning spray repels water from the coat for a lightning-fast dry.',
-            image: '/assets/drynamite.jpg',
-            link: 'https://houndsly.co.uk/products/drynamite-speed-dry-spray'
-        }
-    ];
-
     return (
-        <section className="py-20 relative pt-32" style={{ backgroundColor: colors.teal }}>
-            {/* Asymmetrical Wave Transition */}
-            <div className="absolute top-0 left-0 w-full overflow-hidden leading-0 transform -translate-y-full">
-                <svg
-                    position="relative"
-                    display="block"
-                    width="calc(138% + 1.3px)"
-                    height="126px"
-                    viewBox="0 0 1200 120"
-                    preserveAspectRatio="none"
-                    style={{ transform: 'rotate(180deg)' }}
-                >
-                    <path
-                        d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
-                        fill={colors.teal}
-                    ></path>
-                </svg>
+        <section className="py-24 relative overflow-hidden" style={{ backgroundColor: colors.warmBeige }}>
+            {/* Texture Overlay */}
+            <div className="absolute inset-0 opacity-30 pointer-events-none mix-blend-multiply"
+                style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.5'/%3E%3C/svg%3E")` }}
+            />
+
+            {/* Background Decorative Elements */}
+            <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+                <div className="absolute top-10 left-10 text-6xl opacity-10 animate-float" style={{ animationDelay: '0s' }}>🌈</div>
+                <div className="absolute bottom-20 right-10 text-6xl opacity-10 animate-float" style={{ animationDelay: '2s' }}>🐾</div>
+                <div className="absolute top-40 right-20 text-4xl opacity-10 animate-float" style={{ animationDelay: '1s' }}>✨</div>
             </div>
-            <div className="max-w-6xl mx-auto px-6">
+
+            <div className="max-w-7xl mx-auto px-6 relative z-10">
+                {/* Header */}
                 <div className="text-center mb-16">
-                    <img
-                        src="/assets/houndsly-logo.png"
-                        alt="Houndsly"
-                        className="h-24 mx-auto mb-6"
-                        style={{ filter: 'brightness(0) invert(1) opacity(0.9)' }}
-                    />
-                    <span className="handwriting text-3xl block mb-4" style={{ color: colors.yellow }}>
-                        Handmade with love
-                    </span>
-                    <h2 className="heading-font font-bold text-4xl md:text-5xl mb-6 text-white">
-                        Houndsly by Smarter Dog
-                    </h2>
-                    <p className="body-font text-lg max-w-2xl mx-auto text-white opacity-90">
-                        We couldn't find products good enough for our pack, so we made our own.
-                        100% natural, vegan, and designed to be gentle on sensitive skin.
-                    </p>
+                    <FadeIn>
+                        <img
+                            src="/assets/houndsly-logo-rainbow.png"
+                            alt="Houndsly Pet Products"
+                            className="h-32 md:h-40 mx-auto mb-8 drop-shadow-xl hover:scale-105 transition-transform duration-500"
+                        />
+                        <div className="relative inline-block mb-6">
+                            <span className="handwriting text-3xl md:text-4xl block relative z-10" style={{ color: colors.plum }}>
+                                Handmade with love
+                            </span>
+                            <svg className="absolute -bottom-2 left-0 w-full h-3 text-yellow-400 opacity-60" viewBox="0 0 100 10" preserveAspectRatio="none">
+                                <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="3" fill="none" />
+                            </svg>
+                        </div>
+                        <h2 className="heading-font font-bold text-4xl md:text-5xl mb-6" style={{ color: colors.plum }}>
+                            Houndsly by Smarter Dog
+                        </h2>
+                        <p className="body-font text-xl max-w-2xl mx-auto opacity-90 font-medium" style={{ color: colors.teal }}>
+                            Rainbow-powered. Nature-approved. Loved by pups everywhere.
+                        </p>
+                    </FadeIn>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                    {products.map((product, index) => (
-                        <div
-                            key={index}
-                            className="bg-white p-6 rounded-2xl shadow-lg transition-transform duration-300 hover:-translate-y-2"
-                        >
-                            <div className="aspect-square bg-gray-100 rounded-xl mb-6 overflow-hidden relative">
-                                {product.image && !product.image.includes('placeholder') ? (
-                                    <img
-                                        src={product.image}
-                                        alt={product.name}
-                                        className="w-full h-full object-cover"
-                                    />
-                                ) : (
-                                    <div className="absolute inset-0 flex items-center justify-center text-4xl opacity-20">
-                                        🛁
-                                    </div>
-                                )}
+                {/* Editorial Product Layout */}
+                <div className="grid lg:grid-cols-12 gap-12 items-center mb-20">
+                    {/* Left: Hero Image (Shampoo) */}
+                    <div className="lg:col-span-7 relative group">
+                        <FadeIn delay={200} className="relative z-10">
+                            <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl transform transition-transform duration-500 group-hover:scale-[1.02] group-hover:rotate-1">
+                                <img
+                                    src="/assets/houndsly-shampoo.jpg"
+                                    alt="Houndsly Natural Shampoo"
+                                    className="w-full h-full object-cover"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                             </div>
-                            <h3 className="heading-font font-bold text-xl mb-2" style={{ color: colors.teal }}>
-                                {product.name}
+                        </FadeIn>
+
+                        {/* Overlapping Product (Drynamite) */}
+                        <FadeIn delay={400} className="absolute -bottom-12 -right-6 md:-right-12 w-2/3 md:w-1/2 z-20">
+                            <div className="bg-white p-4 rounded-2xl shadow-xl transform rotate-3 transition-transform duration-500 hover:rotate-0 hover:scale-105 border-4 border-white">
+                                <img
+                                    src="/assets/drynamite.jpg"
+                                    alt="Drynamite Speed Dry Spray"
+                                    className="w-full rounded-xl shadow-inner"
+                                />
+                                <div className="mt-2 text-center">
+                                    <span className="font-bold text-sm" style={{ color: colors.teal }}>Drynamite Speed Dry</span>
+                                </div>
+                            </div>
+                        </FadeIn>
+                    </div>
+
+                    {/* Right: Content & Badges */}
+                    <div className="lg:col-span-5 lg:pl-8 mt-12 lg:mt-0">
+                        <FadeIn delay={600}>
+                            <h3 className="heading-font font-bold text-3xl mb-6" style={{ color: colors.plum }}>
+                                Crafted for Sensitive Skin
                             </h3>
-                            <p className="body-font text-sm mb-4" style={{ color: colors.teal, opacity: 0.7 }}>
-                                {product.description}
+                            <p className="body-font text-lg mb-8 leading-relaxed" style={{ color: colors.teal }}>
+                                We couldn't find products good enough for our pack, so we made our own.
+                                100% natural, vegan, and designed to be gentle on even the most sensitive skin.
                             </p>
-                            <div className="flex items-center justify-between">
-                                <span className="font-bold text-lg" style={{ color: colors.orange }}>
-                                    {product.price}
-                                </span>
+
+                            {/* Badges Grid */}
+                            <div className="grid grid-cols-2 gap-4 mb-10">
+                                {[
+                                    { icon: '🌱', text: 'Vegan' },
+                                    { icon: '🧴', text: 'Small Batch' },
+                                    { icon: '🌈', text: 'Inclusive Brand' },
+                                    { icon: '🐶', text: 'Tested on Our Pack' }
+                                ].map((badge, idx) => (
+                                    <div key={idx} className="flex items-center gap-3 bg-white/60 p-3 rounded-xl backdrop-blur-sm border border-white/50 shadow-sm hover:shadow-md transition-all">
+                                        <span className="text-2xl">{badge.icon}</span>
+                                        <span className="font-bold text-sm" style={{ color: colors.plum }}>{badge.text}</span>
+                                    </div>
+                                ))}
+                            </div>
+
+                            <div className="flex flex-col sm:flex-row gap-4">
                                 <a
-                                    href={product.link}
+                                    href="https://houndsly.co.uk"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="px-4 py-2 rounded-full text-sm font-bold transition-colors inline-block"
+                                    className="px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg text-center relative overflow-hidden group"
                                     style={{
-                                        backgroundColor: colors.tealLight,
-                                        color: colors.teal
+                                        backgroundColor: colors.plum,
+                                        color: 'white'
                                     }}
                                 >
-                                    Buy Now
+                                    <span className="relative z-10">Shop Houndsly</span>
+                                    <div className="absolute inset-0 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                </a>
+                                <a
+                                    href="https://houndsly.co.uk/collections/all"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg border-2 text-center"
+                                    style={{
+                                        borderColor: colors.plum,
+                                        color: colors.plum
+                                    }}
+                                >
+                                    View the Range
                                 </a>
                             </div>
-                        </div>
-                    ))}
-                </div>
-
-                <div className="text-center mt-12">
-                    <a
-                        href="https://houndsly.co.uk"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="px-8 py-3 rounded-full font-bold text-base transition-all duration-300 hover:scale-105 hover:shadow-lg border-2 inline-block"
-                        style={{
-                            borderColor: 'white',
-                            color: 'white'
-                        }}
-                    >
-                        HOUNDSLY.CO.UK
-                    </a>
+                        </FadeIn>
+                    </div>
                 </div>
             </div>
 
@@ -124,8 +136,8 @@ const HoundslySection = () => {
                 <svg
                     position="relative"
                     display="block"
-                    width="calc(100% + 1.3px)"
-                    height="120px"
+                    width="calc(138% + 1.3px)"
+                    height="126px"
                     viewBox="0 0 1200 120"
                     preserveAspectRatio="none"
                 >

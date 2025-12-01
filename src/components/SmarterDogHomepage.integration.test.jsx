@@ -13,6 +13,11 @@ describe('SmarterDogHomepage Integration Tests', () => {
     vi.useRealTimers();
   });
 
+  // Mock FadeIn to render immediately
+  vi.mock('../FadeIn', () => ({
+    default: ({ children }) => <div>{children}</div>
+  }));
+
   const renderHomepage = () => {
     return render(
       <MemoryRouter>
@@ -80,7 +85,7 @@ describe('SmarterDogHomepage Integration Tests', () => {
     it('renders offer section', () => {
       renderHomepage();
 
-      expect(screen.getByText(/First groom\? Get 20% off!/i)).toBeInTheDocument();
+      expect(screen.getByText(/Join our pack!/i)).toBeInTheDocument();
     });
 
     it('renders houndsly section', () => {
@@ -153,10 +158,10 @@ describe('SmarterDogHomepage Integration Tests', () => {
       expect(screen.getByRole('button', { name: /0161 XXX XXXX/i })).toBeInTheDocument();
     });
 
-    it('renders "Claim Offer" button', () => {
+    it('renders "Subscribe" button', () => {
       renderHomepage();
 
-      expect(screen.getByRole('button', { name: /Claim Offer/i })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: /Subscribe/i })).toBeInTheDocument();
     });
   });
 

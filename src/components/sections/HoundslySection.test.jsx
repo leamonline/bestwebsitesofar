@@ -6,33 +6,38 @@ describe('HoundslySection', () => {
     it('renders without crashing', () => {
         render(<HoundslySection />);
         expect(screen.getByText(/Houndsly by Smarter Dog/i)).toBeInTheDocument();
-        expect(screen.getByAltText('Houndsly')).toBeInTheDocument();
+        expect(screen.getByAltText('Houndsly Pet Products')).toBeInTheDocument();
     });
 
-    it('renders product cards', () => {
+    it('renders new copy and tagline', () => {
         render(<HoundslySection />);
-        expect(screen.getByText('Houndsly Shampoo')).toBeInTheDocument();
-        expect(screen.queryByText('Paw Balm')).not.toBeInTheDocument();
-        expect(screen.getByText('Drynamite Speed Dry')).toBeInTheDocument();
+        expect(screen.getByText(/Rainbow-powered. Nature-approved/i)).toBeInTheDocument();
+        expect(screen.getByText(/Crafted for Sensitive Skin/i)).toBeInTheDocument();
     });
 
-    it('renders "HOUNDSLY.CO.UK" link', () => {
+    it('renders product images', () => {
         render(<HoundslySection />);
-        const link = screen.getByRole('link', { name: /HOUNDSLY.CO.UK/i });
-        expect(link).toBeInTheDocument();
-        expect(link).toHaveAttribute('href', 'https://houndsly.co.uk');
+        expect(screen.getByAltText('Houndsly Natural Shampoo')).toBeInTheDocument();
+        expect(screen.getByAltText('Drynamite Speed Dry Spray')).toBeInTheDocument();
     });
 
-    it('renders "Buy Now" links', () => {
+    it('renders badges', () => {
         render(<HoundslySection />);
-        const links = screen.getAllByRole('link', { name: /Buy Now/i });
-        expect(links.length).toBeGreaterThanOrEqual(2);
+        expect(screen.getByText('Vegan')).toBeInTheDocument();
+        expect(screen.getByText('Small Batch')).toBeInTheDocument();
+        expect(screen.getByText('Inclusive Brand')).toBeInTheDocument();
+        expect(screen.getByText('Tested on Our Pack')).toBeInTheDocument();
     });
 
-    it('does not render price for Houndsly Shampoo or Drynamite', () => {
+    it('renders CTA buttons', () => {
         render(<HoundslySection />);
-        expect(screen.queryByText('£12.00')).not.toBeInTheDocument();
-        expect(screen.queryByText('£10.00')).not.toBeInTheDocument();
-        expect(screen.queryByText('£8.50')).not.toBeInTheDocument();
+        const shopLink = screen.getByRole('link', { name: /Shop Houndsly/i });
+        const viewRangeLink = screen.getByRole('link', { name: /View the Range/i });
+
+        expect(shopLink).toBeInTheDocument();
+        expect(shopLink).toHaveAttribute('href', 'https://houndsly.co.uk');
+
+        expect(viewRangeLink).toBeInTheDocument();
+        expect(viewRangeLink).toHaveAttribute('href', 'https://houndsly.co.uk/collections/all');
     });
 });

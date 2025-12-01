@@ -101,7 +101,7 @@ describe('colors constants', () => {
 
   describe('color palette structure', () => {
     it('exports exactly 13 colors', () => {
-      expect(Object.keys(colors)).toHaveLength(13);
+      expect(Object.keys(colors)).toHaveLength(14);
     });
 
     it('has 2 anchor colors (teal, offWhite)', () => {
