@@ -3,7 +3,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import GoogleReviews from './GoogleReviews';
 
 // Mock fetch
-global.fetch = vi.fn();
+globalThis.fetch = vi.fn();
 
 describe('GoogleReviews', () => {
     beforeEach(() => {

@@ -105,7 +105,7 @@ npm run preview
 
 ## 📁 Project Structure
 
-```
+```bash
 src/
 ├── components/
 │   ├── sections/          # Section components (Hero, Services, Gallery, etc.)
