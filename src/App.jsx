@@ -3,6 +3,7 @@ import SmarterDogHomepage from './components/SmarterDogHomepage';
 import ServicesPage from './components/pages/ServicesPage'
 import HoundslyPage from './components/pages/HoundslyPage'
 import GalleryPage from './components/pages/GalleryPage'
+import CookieConsent from './components/CookieConsent';
 
 function App() {
   return (
@@ -13,6 +14,8 @@ function App() {
         <Route path="/houndsly" element={<HoundslyPage />} />
         <Route path="/gallery" element={<GalleryPage />} />
       </Routes>
+      <CookieConsent />
+      <div className="noise-overlay" />
     </Router>
   )
 }

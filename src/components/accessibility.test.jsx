@@ -1,13 +1,12 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { render, waitFor, act } from '@testing-library/react';
-import { axe, toHaveNoViolations } from 'jest-axe';
+import { axe } from 'jest-axe';
 import { MemoryRouter } from 'react-router-dom';
 
 import SmarterDogHomepage from './SmarterDogHomepage';
 import ServiceCard from './ServiceCard';
 import PolaroidImage from './PolaroidImage';
 import DogSilhouette from './DogSilhouette';
-import AnnouncementBar from './sections/AnnouncementBar';
 import Navigation from './sections/Navigation';
 import TrustSection from './sections/TrustSection';
 import FooterSection from './sections/FooterSection';
@@ -73,13 +72,6 @@ describe('Accessibility Tests', () => {
   });
 
   describe('Section Components', () => {
-    it('AnnouncementBar should not have any accessibility violations', async () => {
-      const { container } = render(<AnnouncementBar />);
-      const results = await axe(container);
-
-      expect(results).toHaveNoViolations();
-    }, 10000);
-
     it('Navigation should not have any accessibility violations', async () => {
       let container;
       let results;

@@ -1,95 +1,78 @@
 import React from 'react';
 import { colors } from '../constants/colors';
 
-// Polaroid-style image component with optional washi tape
-const PolaroidImage = ({ caption, rotation = 0, tapeColor = null, src = null }) => (
-    <div
-        className="group cursor-pointer relative"
-        style={{
-            transform: `rotate(${rotation}deg)`,
-            transition: 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
-        }}
-    >
-        {/* Washi tape decoration */}
-        {tapeColor && (
-            <div
-                className="absolute -top-2 left-1/4 w-16 h-5 z-10"
-                style={{
-                    backgroundColor: tapeColor,
-                    transform: 'rotate(-5deg)',
-                    opacity: 0.85,
-                    borderRadius: '2px',
-                }}
-            />
-        )}
+const PolaroidImage = ({ src, caption, rotation = 0, tapeColor = colors.cyan, className = "" }) => {
+    // Randomize tape rotation slightly for realism
+    const [tapeRotation] = React.useState(() => Math.random() * 10 - 5);
+
+    return (
         <div
-            className="bg-white p-3 pb-14 rounded shadow-lg transition-all duration-500 ease-out group-hover:rotate-0 group-hover:scale-110 group-hover:shadow-2xl z-10"
+            className={`relative bg-white p-4 pb-12 shadow-layered transform transition-all duration-500 hover:z-50 hover-lift hover-tilt texture-grain ${className}`}
             style={{
-                boxShadow: `0 4px 20px rgba(106, 54, 88, 0.12), 0 2px 8px rgba(106, 54, 88, 0.08)`
+                transform: `rotate(${rotation}deg)`,
+                width: '280px',
             }}
         >
+            {/* Tape */}
             <div
-                className="w-48 h-48 rounded-sm overflow-hidden flex items-center justify-center relative"
+                className="absolute -top-3 left-1/2 transform -translate-x-1/2 w-32 h-8 opacity-80 z-20"
                 style={{
-                    background: `linear-gradient(135deg, ${colors.cyanLight} 0%, ${colors.greenLight} 100%)`,
+                    backgroundColor: tapeColor + '90', // Transparent version
+                    transform: `translateX(-50%) rotate(${tapeRotation}deg)`,
+                    boxShadow: '0 1px 2px rgba(0,0,0,0.1)',
+                    clipPath: 'polygon(2% 0%, 98% 0%, 100% 100%, 0% 100%)' // Rough edges
                 }}
-            >
-                {/* Gloss Overlay */}
-                <div
-                    className="absolute inset-0 z-20 pointer-events-none opacity-30"
-                    style={{
-                        background: 'linear-gradient(120deg, rgba(255,255,255,0) 30%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0) 70%)',
-                        mixBlendMode: 'overlay'
-                    }}
-                />
+            />
 
-                {/* Cooling Overlay */}
-                <div
-                    className="absolute inset-0 z-20 pointer-events-none opacity-20"
-                    style={{
-                        backgroundColor: '#0066ff',
-                        mixBlendMode: 'soft-light'
-                    }}
-                />
-
-                {/* Lens Flare Overlay (Cool Daylight) */}
-                <div
-                    className="absolute inset-0 z-20 pointer-events-none opacity-50"
-                    style={{
-                        background: 'radial-gradient(circle at 0% 0%, rgba(220,245,255,0.8) 0%, rgba(255,255,255,0) 60%)',
-                        mixBlendMode: 'screen'
-                    }}
-                />
-
+            {/* Image Container */}
+            <div className="relative aspect-square overflow-hidden mb-4 bg-gray-100 filter sepia-[0.1] contrast-[1.05]">
                 {src ? (
                     <img
                         src={src}
                         alt={caption}
                         className="w-full h-full object-cover"
-                        style={{
-                            filter: 'saturate(1.6) contrast(1.1) brightness(1.1)'
-                        }}
+                        loading="lazy"
                     />
                 ) : (
-                    /* Placeholder paw icon */
-                    <svg className="w-16 h-16 opacity-30" style={{ color: colors.teal }} fill="currentColor" viewBox="0 0 512 512">
-                        <path d="M226.5 92.9c14.3 42.9-.3 86.2-32.6 96.8s-70.1-15.6-84.4-58.5s.3-86.2 32.6-96.8s70.1 15.6 84.4 58.5zM100.4 198.6c18.9 32.4 14.3 70.1-10.2 84.1s-59.7-.9-78.5-33.3S-2.7 179.3 21.8 165.3s59.7 .9 78.5 33.3zM69.2 401.2C121.6 259.9 214.7 224 256 224s134.4 35.9 186.8 177.2c3.6 9.7 5.2 20.1 5.2 30.5v1.6c0 25.8-20.9 46.7-46.7 46.7c-11.5 0-22.9-1.4-34-4.2l-88-22c-15.3-3.8-31.3-3.8-46.6 0l-88 22c-11.1 2.8-22.5 4.2-34 4.2C84.9 480 64 459.1 64 433.3v-1.6c0-10.4 1.6-20.8 5.2-30.5zM421.8 282.7c-24.5-14-29.1-51.7-10.2-84.1s54-47.3 78.5-33.3s29.1 51.7 10.2 84.1s-54 47.3-78.5 33.3zM310.1 189.7c-32.3-10.6-46.9-53.9-32.6-96.8s52.1-69.1 84.4-58.5s46.9 53.9 32.6 96.8s-52.1 69.1-84.4 58.5z" />
-                    </svg>
+                    <div className="w-full h-full flex items-center justify-center bg-gray-50">
+                        <span className="text-4xl opacity-20">🐾</span>
+                    </div>
                 )}
+
+                {/* Inner Shadow / Vignette */}
+                <div className="absolute inset-0 shadow-[inset_0_0_20px_rgba(0,0,0,0.1)] pointer-events-none" />
+
+                {/* Lens Flare / Light Leak */}
+                <div
+                    className="absolute top-0 right-0 w-full h-full opacity-20 pointer-events-none"
+                    style={{
+                        background: 'linear-gradient(45deg, rgba(255,255,255,0) 40%, rgba(255,200,150,0.3) 100%)'
+                    }}
+                />
             </div>
-            <p
-                className="mt-4 text-center"
-                style={{
-                    fontFamily: "'Caveat', cursive",
-                    color: colors.teal,
-                    fontSize: '20px',
-                    fontWeight: 500,
-                }}
-            >
-                {caption}
-            </p>
+
+            {/* Caption */}
+            {caption && (
+                <div className="text-center relative">
+                    <p
+                        className="handwriting text-2xl text-gray-800 transform -rotate-1"
+                        style={{ color: colors.plum }}
+                    >
+                        {caption}
+                    </p>
+                    {/* Hand-drawn underline */}
+                    <svg className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-3/4 h-2 opacity-60" viewBox="0 0 100 5">
+                        <path d="M0 2 Q 50 5, 100 2" stroke={tapeColor} strokeWidth="2" fill="none" strokeLinecap="round" />
+                    </svg>
+                </div>
+            )}
+
+            {/* Thumb Smudge (Subtle Imperfection) */}
+            <div
+                className="absolute bottom-4 right-4 w-12 h-12 bg-black opacity-[0.03] rounded-full blur-md pointer-events-none"
+            />
         </div>
-    </div>
-);
+    );
+};
 
 export default PolaroidImage;

@@ -33,10 +33,10 @@ const ServicesSection = () => {
                         </FadeIn>
                     </div>
 
-                    <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8 relative z-10">
+                    <div className="max-w-7xl mx-auto grid md:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
                         <FadeIn delay={200} className="h-full">
                             <ServiceCard
-                                icon="✂️"
+                                icon={<img src="/assets/icons/full-groom.jpg" alt="Full Groom" className="w-16 h-16 rounded-full object-cover shadow-sm" />}
                                 title="Full Groom"
                                 desc="The works: bath, dry, brush, trim, nail clip, and ear clean. They'll leave looking (and smelling) like a million bones."
                                 bgColor={'white'}
@@ -45,7 +45,7 @@ const ServicesSection = () => {
                         </FadeIn>
                         <FadeIn delay={400} className="h-full">
                             <ServiceCard
-                                icon="🛁"
+                                icon={<img src="/assets/icons/maintenance-groom.jpg" alt="Maintenance Groom" className="w-16 h-16 rounded-full object-cover shadow-sm" />}
                                 title="Maintenance Groom"
                                 desc="A refresh between full grooms. Perfect for keeping your pup clean and comfortable without the full trim."
                                 bgColor={'white'}
@@ -54,9 +54,18 @@ const ServicesSection = () => {
                         </FadeIn>
                         <FadeIn delay={600} className="h-full">
                             <ServiceCard
-                                icon="🐕"
+                                icon={<img src="/assets/icons/deshedding.jpg" alt="De-Shedding" className="w-16 h-16 rounded-full object-cover shadow-sm" />}
                                 title="De-Shedding Package"
                                 desc="Ideal for double-coated breeds. A deep clean and thorough undercoat removal to reduce shedding around your home."
+                                bgColor={'white'}
+                                accentColor={colors.pink}
+                            />
+                        </FadeIn>
+                        <FadeIn delay={800} className="h-full">
+                            <ServiceCard
+                                icon={<img src="/assets/icons/puppy-intro.jpg" alt="Puppy Intro" className="w-16 h-16 rounded-full object-cover shadow-sm" />}
+                                title="Puppy Intro"
+                                desc="First time? We take it slow. Gentle introduction to grooming for pups under 6 months."
                                 bgColor={'white'}
                                 accentColor={colors.pink}
                             />
@@ -64,17 +73,16 @@ const ServicesSection = () => {
                     </div>
 
                     {/* Additional services row */}
-                    <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 mt-8 relative z-10">
-                        <FadeIn delay={800} className="h-full">
+                    <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-8 mt-16 relative z-10">
+                        <FadeIn delay={1000} className="h-full">
                             <div
                                 className="p-8 rounded-3xl flex items-center gap-6 transition-all duration-300 hover:shadow-lg h-full hover-lift"
                                 style={{ backgroundColor: 'white' }}
                             >
                                 <div
-                                    className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0"
-                                    style={{ backgroundColor: colors.pinkLight }}
+                                    className="w-20 h-20 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden shadow-sm"
                                 >
-                                    👂
+                                    <img src="/assets/icons/ear-cleaning.jpg" alt="Ear Cleaning" className="w-full h-full object-cover" />
                                 </div>
                                 <div>
                                     <h4
@@ -99,16 +107,15 @@ const ServicesSection = () => {
                             </div>
                         </FadeIn>
 
-                        <FadeIn delay={1000} className="h-full">
+                        <FadeIn delay={1200} className="h-full">
                             <div
                                 className="p-8 rounded-3xl flex items-center gap-6 transition-all duration-300 hover:shadow-lg h-full hover-lift"
                                 style={{ backgroundColor: 'white' }}
                             >
                                 <div
-                                    className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0"
-                                    style={{ backgroundColor: colors.pinkLight }}
+                                    className="w-20 h-20 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden shadow-sm"
                                 >
-                                    🍑
+                                    <img src="/assets/icons/anal-gland.jpg" alt="Anal Gland Expression" className="w-full h-full object-cover" />
                                 </div>
                                 <div>
                                     <h4
@@ -133,16 +140,15 @@ const ServicesSection = () => {
                             </div>
                         </FadeIn>
 
-                        <FadeIn delay={1200} className="h-full">
+                        <FadeIn delay={1400} className="h-full">
                             <div
                                 className="p-8 rounded-3xl flex items-center gap-6 transition-all duration-300 hover:shadow-lg h-full hover-lift"
                                 style={{ backgroundColor: 'white' }}
                             >
                                 <div
-                                    className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0"
-                                    style={{ backgroundColor: colors.pinkLight }}
+                                    className="w-20 h-20 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden shadow-sm"
                                 >
-                                    💅
+                                    <img src="/assets/icons/nail-trim.jpg" alt="Nail Trims" className="w-full h-full object-cover" />
                                 </div>
                                 <div>
                                     <h4
@@ -163,40 +169,6 @@ const ServicesSection = () => {
                                     style={{ backgroundColor: colors.pink, color: 'white' }}
                                 >
                                     Hygiene
-                                </span>
-                            </div>
-                        </FadeIn>
-
-                        <FadeIn delay={1400} className="h-full">
-                            <div
-                                className="p-8 rounded-3xl flex items-center gap-6 transition-all duration-300 hover:shadow-lg h-full hover-lift"
-                                style={{ backgroundColor: 'white' }}
-                            >
-                                <div
-                                    className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0"
-                                    style={{ backgroundColor: colors.pinkLight }}
-                                >
-                                    🐾
-                                </div>
-                                <div>
-                                    <h4
-                                        className="heading-font font-semibold text-xl mb-2"
-                                        style={{ color: colors.pink }}
-                                    >
-                                        Puppy Intro
-                                    </h4>
-                                    <p
-                                        className="body-font text-sm"
-                                        style={{ color: colors.teal }}
-                                    >
-                                        First time? We take it slow. Gentle introduction to grooming for pups under 6 months.
-                                    </p>
-                                </div>
-                                <span
-                                    className="ml-auto px-3 py-1 rounded-full text-xs font-bold"
-                                    style={{ backgroundColor: colors.pink, color: 'white' }}
-                                >
-                                    Special
                                 </span>
                             </div>
                         </FadeIn>

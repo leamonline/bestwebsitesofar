@@ -46,7 +46,7 @@ const OfferSection = ({ onBookClick }) => {
                                     </p>
                                 </div>
                                 <button
-                                    onClick={onBookClick}
+                                    onClick={() => onBookClick('Offer Section')}
                                     className="px-8 py-4 rounded-full font-bold text-base transition-all duration-300 hover:scale-105 hover:shadow-xl whitespace-nowrap"
                                     style={{
                                         backgroundColor: 'white',

@@ -53,7 +53,7 @@ describe('SmarterDogHomepage', () => {
     it('renders all section components', () => {
       render(<SmarterDogHomepage />);
 
-      expect(screen.getByTestId('announcement-bar')).toBeInTheDocument();
+
       expect(screen.getByTestId('navigation')).toBeInTheDocument();
       expect(screen.getByTestId('hero-section')).toBeInTheDocument();
       expect(screen.getByTestId('trust-section')).toBeInTheDocument();
@@ -71,7 +71,7 @@ describe('SmarterDogHomepage', () => {
       const sectionOrder = sections.map(el => el.getAttribute('data-testid'));
 
       expect(sectionOrder).toEqual([
-        'announcement-bar',
+
         'navigation',
         'hero-section',
         'trust-section',
@@ -188,7 +188,7 @@ describe('SmarterDogHomepage', () => {
       const mainDiv = container.firstChild;
       const sections = mainDiv.querySelectorAll('[data-testid]');
 
-      expect(sections).toHaveLength(10);
+      expect(sections).toHaveLength(9);
     });
   });
 });

@@ -46,12 +46,7 @@ const GallerySection = () => {
                 </div>
             </section>
 
-            {/* ZigZag Transition: Yellow -> Cyan */}
-            <div style={{ backgroundColor: colors.yellow, lineHeight: 0 }}>
-                <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style={{ width: '100%', height: '40px' }}>
-                    <path d="M0 60L1440 60L1440 0L1380 40L1320 0L1260 40L1200 0L1140 40L1080 0L1020 40L960 0L900 40L840 0L780 40L720 0L660 40L600 0L540 40L480 0L420 40L360 0L300 40L240 0L180 40L120 0L60 40L0 0L0 60Z" fill={colors.cyan} />
-                </svg>
-            </div>
+
         </>
     );
 };

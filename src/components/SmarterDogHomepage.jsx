@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { colors } from '../constants/colors';
-import AnnouncementBar from './sections/AnnouncementBar';
+
 import Navigation from './sections/Navigation';
 import HeroSection from './sections/HeroSection';
 import TrustSection from './sections/TrustSection';
@@ -18,6 +18,8 @@ import BookingModal from './BookingModal';
 // Design Concept: Bold, playful, neighbourhood favourite
 // Actual Brand Palette: Plum, Teal, Cyan, Green, Pink, Yellow, Orange
 
+import { trackEvent } from '../utils/analytics';
+
 const SmarterDogHomepage = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
@@ -27,7 +29,10 @@ const SmarterDogHomepage = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  const handleBookClick = () => setIsBookingModalOpen(true);
+  const handleBookClick = (source = 'General') => {
+    trackEvent('Engagement', 'Click Request Appointment', source);
+    setIsBookingModalOpen(true);
+  };
   const handleCloseModal = () => setIsBookingModalOpen(false);
 
   return (
@@ -40,7 +45,7 @@ const SmarterDogHomepage = () => {
     >
       {/* Styles moved to index.css */}
 
-      <AnnouncementBar />
+
       <Navigation isLoaded={isLoaded} onBookClick={handleBookClick} />
       <HeroSection isLoaded={isLoaded} onBookClick={handleBookClick} />
       <TrustSection />

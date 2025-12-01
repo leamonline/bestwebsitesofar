@@ -1,6 +1,7 @@
 // Brand Colors
 export const colors = {
     // Anchors
+    plum: '#2D004B',
     teal: '#2A6F6B', // Darker teal for better contrast on yellow
     offWhite: '#FAF9F6',
     // Brights - More Vibrant/Saturated

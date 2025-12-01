@@ -1,7 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import GallerySection from './GallerySection';
-import { colors } from '../../constants/colors';
 
 // Mock PolaroidImage component
 vi.mock('../PolaroidImage', () => ({
@@ -47,14 +46,6 @@ describe('GallerySection', () => {
       const pawPrints = screen.getAllByText('🐾');
       expect(pawPrints).toHaveLength(2);
     });
-
-    it('renders SVG transition', () => {
-      const { container } = render(<GallerySection />);
-      const svg = container.querySelector('svg');
-
-      expect(svg).toBeInTheDocument();
-      expect(svg).toHaveAttribute('viewBox', '0 0 1440 60');
-    });
   });
 
   describe('styling', () => {
@@ -88,15 +79,6 @@ describe('GallerySection', () => {
       expect(title).toHaveStyle({ color: 'rgb(42, 111, 107)' });
       expect(title).toHaveClass('heading-font');
       expect(title).toHaveClass('font-bold');
-    });
-
-    it('SVG container has yellow background', () => {
-      const { container } = render(<GallerySection />);
-      const svgContainers = Array.from(container.querySelectorAll('div')).filter(
-        div => div.style.backgroundColor === 'rgb(255, 204, 0)' && div.querySelector('svg')
-      );
-
-      expect(svgContainers.length).toBeGreaterThan(0);
     });
   });
 });

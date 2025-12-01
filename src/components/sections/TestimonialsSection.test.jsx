@@ -12,15 +12,16 @@ describe('TestimonialsSection', () => {
     it('renders section title', () => {
       render(<TestimonialsSection />);
 
-      expect(screen.getByText('Testimonials')).toBeInTheDocument();
-      expect(screen.getByText('What Our Pack Says')).toBeInTheDocument();
+      expect(screen.getByText('Client Reviews')).toBeInTheDocument();
+      expect(screen.getByText('The Word on the Street')).toBeInTheDocument();
     });
 
-    it('renders 2 testimonials', () => {
+    it('renders 3 testimonials', () => {
       render(<TestimonialsSection />);
 
       expect(screen.getByText(/Been bringing my dogs here for 15 years/i)).toBeInTheDocument();
       expect(screen.getByText(/My nervous rescue was terrified of groomers/i)).toBeInTheDocument();
+      expect(screen.getByText(/The best cut my doodle has ever had/i)).toBeInTheDocument();
     });
 
     it('renders testimonial authors', () => {
@@ -28,27 +29,29 @@ describe('TestimonialsSection', () => {
 
       expect(screen.getByText('Sarah M.')).toBeInTheDocument();
       expect(screen.getByText('James T.')).toBeInTheDocument();
+      expect(screen.getByText('Emily R.')).toBeInTheDocument();
     });
 
     it('renders pet information', () => {
       render(<TestimonialsSection />);
 
-      expect(screen.getByText('Mum to Biscuit & Crumble')).toBeInTheDocument();
-      expect(screen.getByText('Dad to Ronnie')).toBeInTheDocument();
+      expect(screen.getByText('Parent of Biscuit & Crumble')).toBeInTheDocument();
+      expect(screen.getByText('Parent of Ronnie')).toBeInTheDocument();
+      expect(screen.getByText('Parent of Barnaby')).toBeInTheDocument();
     });
 
     it('renders quote marks', () => {
       render(<TestimonialsSection />);
 
       const quoteMarks = screen.getAllByText('"');
-      expect(quoteMarks).toHaveLength(2);
+      expect(quoteMarks).toHaveLength(3);
     });
 
-    it('renders heart emojis', () => {
+    it('renders paw emojis', () => {
       render(<TestimonialsSection />);
 
-      const hearts = screen.getAllByText('💕');
-      expect(hearts).toHaveLength(2);
+      const paws = screen.getAllByText('🐾');
+      expect(paws).toHaveLength(3);
     });
 
     it('renders SVG transition', () => {
@@ -60,53 +63,37 @@ describe('TestimonialsSection', () => {
   });
 
   describe('styling', () => {
-    it('applies cyan background color to section', () => {
-      const { container } = render(<TestimonialsSection />);
-      const section = container.querySelector('section');
-
-      expect(section.style.backgroundColor).toBe('rgb(0, 194, 255)');
-    });
-
     it('has proper padding classes', () => {
       const { container } = render(<TestimonialsSection />);
       const section = container.querySelector('section');
 
-      expect(section).toHaveClass('py-20');
+      expect(section).toHaveClass('py-24');
     });
 
-    it('section badge has white background and cyan text', () => {
+    it('section badge has yellow background and plum text', () => {
       render(<TestimonialsSection />);
-      const badge = screen.getByText('Testimonials');
+      const badge = screen.getByText('Client Reviews');
 
-      expect(badge).toHaveStyle({ backgroundColor: 'rgb(255, 255, 255)', color: 'rgb(0, 194, 255)' });
+      expect(badge).toHaveStyle({ backgroundColor: 'rgb(255, 255, 255)', color: 'rgb(45, 0, 75)' });
     });
 
     it('section title has white color', () => {
       render(<TestimonialsSection />);
-      const title = screen.getByText('What Our Pack Says');
+      const title = screen.getByText('The Word on the Street');
 
       expect(title).toHaveStyle({ color: 'rgb(255, 255, 255)' });
       expect(title).toHaveClass('heading-font');
-      expect(title).toHaveClass('font-bold');
-    });
-
-    it('testimonial cards have white background', () => {
-      const { container } = render(<TestimonialsSection />);
-      const testimonialCards = container.querySelectorAll('.p-8.rounded-3xl');
-
-      expect(testimonialCards.length).toBeGreaterThanOrEqual(2);
-      testimonialCards.forEach(card => {
-        expect(card).toHaveStyle({ backgroundColor: 'rgb(255, 255, 255)' });
-      });
+      expect(title).toHaveClass('font-black');
     });
 
     it('quote marks have testimonial accent color', () => {
       const { container } = render(<TestimonialsSection />);
-      const quoteMarks = container.querySelectorAll('.text-5xl.mb-4');
+      const quoteMarks = container.querySelectorAll('.text-4xl.absolute.top-4.right-4');
 
-      expect(quoteMarks.length).toBe(2);
+      expect(quoteMarks.length).toBe(3);
       expect(quoteMarks[0]).toHaveStyle({ color: 'rgb(255, 46, 99)' });
       expect(quoteMarks[1]).toHaveStyle({ color: 'rgb(0, 217, 74)' });
+      expect(quoteMarks[2]).toHaveStyle({ color: 'rgb(255, 107, 0)' });
     });
   });
 
@@ -125,20 +112,20 @@ describe('TestimonialsSection', () => {
       expect(screen.getByText(/gets excited for his appointments/i)).toBeInTheDocument();
     });
 
-    it('testimonials have teal text color', () => {
+    it('testimonials have plum text color', () => {
       const { container } = render(<TestimonialsSection />);
       const quotes = container.querySelectorAll('.body-font.text-lg.leading-relaxed');
 
       quotes.forEach(quote => {
-        expect(quote).toHaveStyle({ color: 'rgb(42, 111, 107)' });
+        expect(quote).toHaveStyle({ color: 'rgb(45, 0, 75)' });
       });
     });
   });
 
   describe('layout', () => {
-    it('uses 2-column grid for testimonials', () => {
+    it('uses 3-column grid for testimonials on large screens', () => {
       const { container } = render(<TestimonialsSection />);
-      const grid = container.querySelector('.grid.md\\:grid-cols-2');
+      const grid = container.querySelector('.grid.md\\:grid-cols-2.lg\\:grid-cols-3');
 
       expect(grid).toBeInTheDocument();
     });
@@ -152,7 +139,7 @@ describe('TestimonialsSection', () => {
 
     it('title section is centered', () => {
       const { container } = render(<TestimonialsSection />);
-      const titleSection = container.querySelector('.text-center.mb-16');
+      const titleSection = container.querySelector('.text-center.mb-20');
 
       expect(titleSection).toBeInTheDocument();
     });
@@ -161,18 +148,16 @@ describe('TestimonialsSection', () => {
   describe('accent colors', () => {
     it('first testimonial has pink accent', () => {
       const { container } = render(<TestimonialsSection />);
-      const testimonials = container.querySelectorAll('.p-8.rounded-3xl');
-      const firstQuoteMark = testimonials[0].querySelector('.text-5xl');
-
-      expect(firstQuoteMark).toHaveStyle({ color: colors.pink });
+      // We need to find the element that has the accent color style
+      // In the new code, the quote mark has the accent color
+      const quoteMarks = container.querySelectorAll('.text-4xl.absolute.top-4.right-4');
+      expect(quoteMarks[0]).toHaveStyle({ color: colors.pink });
     });
 
     it('second testimonial has green accent', () => {
       const { container } = render(<TestimonialsSection />);
-      const testimonials = container.querySelectorAll('.p-8.rounded-3xl');
-      const secondQuoteMark = testimonials[1].querySelector('.text-5xl');
-
-      expect(secondQuoteMark).toHaveStyle({ color: colors.green });
+      const quoteMarks = container.querySelectorAll('.text-4xl.absolute.top-4.right-4');
+      expect(quoteMarks[1]).toHaveStyle({ color: colors.green });
     });
   });
 
@@ -183,15 +168,15 @@ describe('TestimonialsSection', () => {
       const jamesName = screen.getByText('James T.');
 
       expect(sarahName).toHaveClass('heading-font');
-      expect(sarahName).toHaveClass('font-semibold');
+      expect(sarahName).toHaveClass('font-bold');
       expect(jamesName).toHaveClass('heading-font');
-      expect(jamesName).toHaveClass('font-semibold');
+      expect(jamesName).toHaveClass('font-bold');
     });
 
     it('pet information uses body-font', () => {
       render(<TestimonialsSection />);
-      const sarahPets = screen.getByText('Mum to Biscuit & Crumble');
-      const jamesPets = screen.getByText('Dad to Ronnie');
+      const sarahPets = screen.getByText('Parent of Biscuit & Crumble');
+      const jamesPets = screen.getByText('Parent of Ronnie');
 
       expect(sarahPets).toHaveClass('body-font');
       expect(sarahPets).toHaveClass('text-sm');
@@ -201,7 +186,7 @@ describe('TestimonialsSection', () => {
 
     it('pet information has teal color', () => {
       render(<TestimonialsSection />);
-      const sarahPets = screen.getByText('Mum to Biscuit & Crumble');
+      const sarahPets = screen.getByText('Parent of Biscuit & Crumble');
 
       expect(sarahPets).toHaveStyle({ color: colors.teal });
     });
@@ -213,15 +198,6 @@ describe('TestimonialsSection', () => {
       const path = container.querySelector('path');
 
       expect(path).toHaveAttribute('fill', colors.green);
-    });
-
-    it('SVG container has cyan background', () => {
-      const { container } = render(<TestimonialsSection />);
-      const svgContainers = Array.from(container.querySelectorAll('div')).filter(
-        div => div.style.backgroundColor === 'rgb(0, 194, 255)' && div.querySelector('svg')
-      );
-
-      expect(svgContainers.length).toBeGreaterThan(0);
     });
   });
 });

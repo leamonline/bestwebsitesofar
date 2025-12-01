@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import Navigation from './Navigation';
@@ -74,11 +74,11 @@ describe('Navigation', () => {
     it('has proper padding and layout classes', () => {
       const { container } = renderNavigation({ isLoaded: true });
       const nav = container.querySelector('nav');
+      const innerContainer = nav.firstChild;
 
-      expect(nav).toHaveClass('px-6');
-      expect(nav).toHaveClass('py-5');
-      expect(nav).toHaveClass('max-w-6xl');
-      expect(nav).toHaveClass('mx-auto');
+      expect(innerContainer).toHaveClass('px-6');
+      expect(innerContainer).toHaveClass('max-w-6xl');
+      expect(innerContainer).toHaveClass('mx-auto');
     });
   });
 

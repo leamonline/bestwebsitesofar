@@ -44,7 +44,7 @@ const CTASection = ({ onBookClick }) => {
                         </p>
                         <div className="flex flex-wrap justify-center gap-4">
                             <button
-                                onClick={onBookClick}
+                                onClick={() => onBookClick('CTA Section')}
                                 className="px-10 py-4 rounded-full font-bold text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl"
                                 style={{
                                     backgroundColor: 'white',

@@ -36,37 +36,57 @@ describe('ServicesSection', () => {
       expect(screen.getByText('What we do best')).toBeInTheDocument();
     });
 
-    it('renders 3 main service cards', () => {
+    it('renders 4 main service cards', () => {
       render(<ServicesSection />);
 
       expect(screen.getByText('Full Groom')).toBeInTheDocument();
       expect(screen.getByText('Maintenance Groom')).toBeInTheDocument();
       expect(screen.getByText('De-Shedding Package')).toBeInTheDocument();
+      expect(screen.getByText('Puppy Intro')).toBeInTheDocument();
     });
 
-    it('renders 4 additional hygiene services', () => {
+    it('renders 3 additional hygiene services', () => {
       render(<ServicesSection />);
 
       expect(screen.getByText('Ear Cleaning')).toBeInTheDocument();
       expect(screen.getByText('Anal Gland Expression')).toBeInTheDocument();
       expect(screen.getByText('Nail Trims')).toBeInTheDocument();
-      expect(screen.getByText('Puppy Intro')).toBeInTheDocument();
     });
 
     it('renders service icons', () => {
       render(<ServicesSection />);
 
-      expect(screen.getByText('✂️')).toBeInTheDocument();
-      expect(screen.getByText('🛁')).toBeInTheDocument();
-      expect(screen.getByText('🐕')).toBeInTheDocument();
+      const fullGroomImg = screen.getByAltText('Full Groom');
+      expect(fullGroomImg).toBeInTheDocument();
+      expect(fullGroomImg).toHaveAttribute('src', '/assets/icons/full-groom.jpg');
+
+      const maintenanceImg = screen.getByAltText('Maintenance Groom');
+      expect(maintenanceImg).toBeInTheDocument();
+      expect(maintenanceImg).toHaveAttribute('src', '/assets/icons/maintenance-groom.jpg');
+
+      const desheddingImg = screen.getByAltText('De-Shedding');
+      expect(desheddingImg).toBeInTheDocument();
+      expect(desheddingImg).toHaveAttribute('src', '/assets/icons/deshedding.jpg');
+
+      const puppyImg = screen.getByAltText('Puppy Intro');
+      expect(puppyImg).toBeInTheDocument();
+      expect(puppyImg).toHaveAttribute('src', '/assets/icons/puppy-intro.jpg');
     });
 
     it('renders hygiene icons', () => {
       render(<ServicesSection />);
 
-      expect(screen.getByText('👂')).toBeInTheDocument();
-      expect(screen.getByText('🍑')).toBeInTheDocument();
-      expect(screen.getByText('💅')).toBeInTheDocument();
+      const earImg = screen.getByAltText('Ear Cleaning');
+      expect(earImg).toBeInTheDocument();
+      expect(earImg).toHaveAttribute('src', '/assets/icons/ear-cleaning.jpg');
+
+      const glandImg = screen.getByAltText('Anal Gland Expression');
+      expect(glandImg).toBeInTheDocument();
+      expect(glandImg).toHaveAttribute('src', '/assets/icons/anal-gland.jpg');
+
+      const nailImg = screen.getByAltText('Nail Trims');
+      expect(nailImg).toBeInTheDocument();
+      expect(nailImg).toHaveAttribute('src', '/assets/icons/nail-trim.jpg');
     });
 
     it('renders "Hygiene" badges', () => {
@@ -150,6 +170,12 @@ describe('ServicesSection', () => {
       expect(screen.getByText(/Ideal for double-coated breeds/i)).toBeInTheDocument();
     });
 
+    it('Puppy Intro has correct description', () => {
+      render(<ServicesSection />);
+
+      expect(screen.getByText(/First time\? We take it slow/i)).toBeInTheDocument();
+    });
+
     it('Ear Cleaning has correct description', () => {
       render(<ServicesSection />);
 
@@ -164,16 +190,16 @@ describe('ServicesSection', () => {
   });
 
   describe('layout', () => {
-    it('main services use 3-column grid', () => {
+    it('main services use 4-column grid', () => {
       const { container } = render(<ServicesSection />);
-      const mainGrid = container.querySelector('.grid.md\\:grid-cols-3');
+      const mainGrid = container.querySelector('.grid.md\\:grid-cols-2.lg\\:grid-cols-4');
 
       expect(mainGrid).toBeInTheDocument();
     });
 
-    it('additional services use 2-column grid', () => {
+    it('additional services use 3-column grid', () => {
       const { container } = render(<ServicesSection />);
-      const additionalGrid = container.querySelector('.grid.md\\:grid-cols-2');
+      const additionalGrid = container.querySelector('.grid.md\\:grid-cols-3');
 
       expect(additionalGrid).toBeInTheDocument();
     });

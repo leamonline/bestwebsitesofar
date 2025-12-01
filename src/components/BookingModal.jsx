@@ -1,8 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import emailjs from '@emailjs/browser';
 import { colors } from '../constants/colors';
+import { trackEvent } from '../utils/analytics';
 
 const BookingModal = ({ isOpen, onClose }) => {
     const [step, setStep] = useState('form'); // 'form' or 'success'
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [error, setError] = useState(null);
+    const form = useRef();
+
     const [formData, setFormData] = useState({
         ownerName: '',
         phone: '',
@@ -11,16 +17,64 @@ const BookingModal = ({ isOpen, onClose }) => {
         breed: '',
         service: 'Full Groom',
         preferredTime: '',
-        notes: ''
+        notes: '',
+        // Honeypot field - should remain empty
+        website: ''
     });
 
     if (!isOpen) return null;
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // In a real app, this would send data to a backend
-        console.log('Booking requested:', formData);
-        setStep('success');
+
+        // Spam Check (Honeypot)
+        if (formData.website) {
+            console.log("Bot detected");
+            return;
+        }
+
+        setIsSubmitting(true);
+        setError(null);
+
+        try {
+            // Replace these with your actual EmailJS Service ID, Template ID, and Public Key
+            // You can find these in your EmailJS dashboard: https://dashboard.emailjs.com/
+            const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID';
+            const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID';
+            const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'YOUR_PUBLIC_KEY';
+
+            if (serviceId === 'YOUR_SERVICE_ID') {
+                console.warn('EmailJS not configured. Simulating success.');
+                // Simulate delay
+                await new Promise(resolve => setTimeout(resolve, 1000));
+            } else {
+                await emailjs.send(
+                    serviceId,
+                    templateId,
+                    {
+                        to_name: "Smarter Dog Grooming",
+                        from_name: formData.ownerName,
+                        from_email: formData.email,
+                        phone: formData.phone,
+                        dog_name: formData.dogName,
+                        breed: formData.breed,
+                        service: formData.service,
+                        preferred_time: formData.preferredTime,
+                        notes: formData.notes,
+                        message: `New booking request for ${formData.dogName} (${formData.breed}). Service: ${formData.service}. Preferred time: ${formData.preferredTime}. Notes: ${formData.notes}`
+                    },
+                    publicKey
+                );
+            }
+
+            trackEvent('Conversion', 'Submit Booking Request', formData.service);
+            setStep('success');
+        } catch (err) {
+            console.error('Failed to send email:', err);
+            setError('Something went wrong. Please try again or call us directly.');
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     const handleChange = (e) => {
@@ -75,7 +129,27 @@ const BookingModal = ({ isOpen, onClose }) => {
                             </p>
                         </div>
 
-                        <form onSubmit={handleSubmit} className="space-y-4">
+                        {error && (
+                            <div className="mb-4 p-3 bg-red-50 text-red-600 rounded-lg text-sm text-center">
+                                {error}
+                            </div>
+                        )}
+
+                        <form ref={form} onSubmit={handleSubmit} className="space-y-4">
+                            {/* Honeypot Field - Hidden from users */}
+                            <div className="hidden" aria-hidden="true">
+                                <label htmlFor="website">Website</label>
+                                <input
+                                    type="text"
+                                    id="website"
+                                    name="website"
+                                    value={formData.website}
+                                    onChange={handleChange}
+                                    tabIndex="-1"
+                                    autoComplete="off"
+                                />
+                            </div>
+
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
                                     <label className="block text-sm font-bold mb-1" style={{ color: colors.teal }}>Your Name</label>
@@ -101,6 +175,18 @@ const BookingModal = ({ isOpen, onClose }) => {
                                         placeholder="07123..."
                                     />
                                 </div>
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-bold mb-1" style={{ color: colors.teal }}>Email (Optional)</label>
+                                <input
+                                    type="email"
+                                    name="email"
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                    className="w-full px-4 py-2 rounded-xl border-2 border-gray-100 focus:border-cyan-400 focus:outline-none transition-colors"
+                                    placeholder="jane@example.com"
+                                />
                             </div>
 
                             <div className="grid grid-cols-2 gap-4">
@@ -172,10 +258,11 @@ const BookingModal = ({ isOpen, onClose }) => {
 
                             <button
                                 type="submit"
-                                className="w-full py-4 rounded-xl font-bold text-lg text-white transition-all hover:scale-[1.02] hover:shadow-lg mt-4"
+                                disabled={isSubmitting}
+                                className="w-full py-4 rounded-xl font-bold text-lg text-white transition-all hover:scale-[1.02] hover:shadow-lg mt-4 disabled:opacity-70 disabled:cursor-not-allowed"
                                 style={{ backgroundColor: colors.green }}
                             >
-                                Send Request
+                                {isSubmitting ? 'Sending...' : 'Send Request'}
                             </button>
                         </form>
                     </div>

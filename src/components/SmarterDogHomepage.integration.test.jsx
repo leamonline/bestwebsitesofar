@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
-import { render, screen, fireEvent, waitFor, act } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import SmarterDogHomepage from './SmarterDogHomepage';
 
@@ -30,16 +30,10 @@ describe('SmarterDogHomepage Integration Tests', () => {
       const { container } = renderHomepage();
 
       // Check that all sections exist in the DOM
-      expect(container.querySelector('[class*="py-2"]')).toBeInTheDocument(); // AnnouncementBar
       expect(container.querySelector('nav')).toBeInTheDocument(); // Navigation
       expect(container.querySelector('footer')).toBeInTheDocument(); // Footer
     });
 
-    it('renders announcement bar at the top', () => {
-      renderHomepage();
-
-      expect(screen.getByText(/Last-minute slots available/i)).toBeInTheDocument();
-    });
 
     it('renders navigation with logo', () => {
       renderHomepage();
@@ -67,7 +61,7 @@ describe('SmarterDogHomepage Integration Tests', () => {
 
       expect(screen.getByText('What we do best')).toBeInTheDocument();
       expect(screen.getByText('Full Groom')).toBeInTheDocument();
-      expect(screen.getByText('Bath & Tidy')).toBeInTheDocument();
+      expect(screen.getByText('Maintenance Groom')).toBeInTheDocument();
     });
 
     it('renders gallery section with polaroid images', () => {
@@ -79,7 +73,7 @@ describe('SmarterDogHomepage Integration Tests', () => {
     it('renders testimonials section', () => {
       renderHomepage();
 
-      expect(screen.getByText('What Our Pack Says')).toBeInTheDocument();
+      expect(screen.getByText('The Word on the Street')).toBeInTheDocument();
       expect(screen.getByText('Sarah M.')).toBeInTheDocument();
     });
 
@@ -175,11 +169,7 @@ describe('SmarterDogHomepage Integration Tests', () => {
       expect(screen.getByRole('link', { name: 'Houndsly' })).toBeInTheDocument();
     });
 
-    it('renders "Book now" link in announcement bar', () => {
-      renderHomepage();
 
-      expect(screen.getByRole('link', { name: /Book now →/i })).toBeInTheDocument();
-    });
   });
 
   describe('content hierarchy', () => {
@@ -244,11 +234,11 @@ describe('SmarterDogHomepage Integration Tests', () => {
       const dogEmojis = screen.getAllByText(/🐕/);
       expect(dogEmojis.length).toBeGreaterThan(0);
 
-      const scissorEmojis = screen.getAllByText(/✂️/);
-      expect(scissorEmojis.length).toBeGreaterThan(0);
+      const fullGroomImg = screen.getByAltText('Full Groom');
+      expect(fullGroomImg).toBeInTheDocument();
 
-      const bathEmojis = screen.getAllByText(/🛁/);
-      expect(bathEmojis.length).toBeGreaterThan(0);
+      const maintenanceImg = screen.getByAltText('Maintenance Groom');
+      expect(maintenanceImg).toBeInTheDocument();
     });
   });
 

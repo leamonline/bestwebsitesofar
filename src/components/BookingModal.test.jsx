@@ -1,6 +1,17 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import BookingModal from './BookingModal';
+
+// Mock dependencies
+vi.mock('../utils/analytics', () => ({
+    trackEvent: vi.fn(),
+}));
+
+vi.mock('@emailjs/browser', () => ({
+    default: {
+        send: vi.fn().mockResolvedValue({ status: 200, text: 'OK' }),
+    },
+}));
 
 describe('BookingModal', () => {
     it('does not render when isOpen is false', () => {
@@ -35,7 +46,7 @@ describe('BookingModal', () => {
         expect(handleClose).toHaveBeenCalledTimes(1);
     });
 
-    it('submits form and shows success message', () => {
+    it('submits form and shows success message', async () => {
         render(<BookingModal isOpen={true} onClose={() => { }} />);
 
         // Fill out form
@@ -48,7 +59,9 @@ describe('BookingModal', () => {
         fireEvent.click(submitButton);
 
         // Check for success message
-        expect(screen.getByText('Request Received!')).toBeInTheDocument();
+        await waitFor(() => {
+            expect(screen.getByText('Request Received!')).toBeInTheDocument();
+        }, { timeout: 3000 });
         expect(screen.getByText(/Thanks John Smith!/)).toBeInTheDocument();
     });
 });

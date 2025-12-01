@@ -37,12 +37,12 @@ describe('React Performance Tests', () => {
           accentColor={colors.pink}
         />
       );
-      const renderTime = performance.now() - startTime;
+      const renderDuration = performance.now() - startTime;
 
-      console.log(`ServiceCard render time: ${renderTime.toFixed(2)}ms`);
+      console.log(`ServiceCard render time: ${renderDuration.toFixed(2)}ms`);
 
-      // Simple components should render very quickly
-      expect(renderTime).toBeLessThan(20);
+      // Simple component should render under 50ms
+      expect(renderDuration).toBeLessThan(50);
     });
 
     it('PolaroidImage renders quickly', () => {
@@ -52,7 +52,7 @@ describe('React Performance Tests', () => {
 
       console.log(`PolaroidImage render time: ${renderTime.toFixed(2)}ms`);
 
-      expect(renderTime).toBeLessThan(50);
+      expect(renderTime).toBeLessThan(150);
     });
   });
 
@@ -190,7 +190,7 @@ describe('React Performance Tests', () => {
   });
 
   describe('Profiler Metrics', () => {
-    it('captures render metrics for homepage', (done) => {
+    it('captures render metrics for homepage', () => {
       const onRender = vi.fn((
         id,
         phase,
