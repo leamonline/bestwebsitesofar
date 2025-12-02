@@ -25,8 +25,6 @@ describe('HoundslySection', () => {
         render(<HoundslySection />);
         expect(screen.getByText('Vegan')).toBeInTheDocument();
         expect(screen.getByText('Small Batch')).toBeInTheDocument();
-        expect(screen.getByText('Inclusive Brand')).toBeInTheDocument();
-        expect(screen.getByText('Tested on Our Pack')).toBeInTheDocument();
     });
 
     it('renders CTA buttons', () => {

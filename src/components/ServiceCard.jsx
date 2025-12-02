@@ -13,7 +13,7 @@ const ServiceCard = ({ icon, title, desc, bgColor, accentColor }) => (
             style={{ backgroundColor: accentColor }}
         />
         <div
-            className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mb-6 relative z-10"
+            className="w-24 h-24 rounded-2xl flex items-center justify-center text-3xl mb-6 relative z-10"
             style={{ backgroundColor: 'white' }}
         >
             {icon}
