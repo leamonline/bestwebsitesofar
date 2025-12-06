@@ -9,17 +9,7 @@ const GallerySection = () => {
                 className="py-20 relative overflow-hidden"
                 style={{ backgroundColor: colors.yellow }}
             >
-                {/* Decorative elements */}
-                <div
-                    className="absolute top-10 left-10 text-6xl opacity-20"
-                >
-                    🐾
-                </div>
-                <div
-                    className="absolute bottom-10 right-10 text-6xl opacity-20"
-                >
-                    🐾
-                </div>
+                {/* Decorative elements removed — paw prints get one job only */}
 
                 <div className="max-w-6xl mx-auto px-6">
                     <div className="text-center mb-16">
@@ -33,7 +23,7 @@ const GallerySection = () => {
                             className="heading-font font-bold text-4xl md:text-5xl"
                             style={{ color: colors.teal }}
                         >
-                            Fresh from the Salon
+                            Fresh out the salon
                         </h3>
                     </div>
 

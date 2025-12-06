@@ -1,17 +1,32 @@
-// Brand Colors
+// Brand Colors — Smarter Dog Colour System
+// Rule: Colour communicates emotion. Emotion must follow intention.
+
 export const colors = {
-    // Anchors
+    // === ANCHORS (Typography & Foundations) ===
     plum: '#2D004B',
-    teal: '#2A6F6B', // Darker teal for better contrast on yellow
+    teal: '#2A6F6B',        // Primary text on light backgrounds
     offWhite: '#FAF9F6',
     warmBeige: '#FDFBF7',
-    // Brights - More Vibrant/Saturated
-    cyan: '#00C2FF',
-    green: '#00D94A',
-    pink: '#FF2E63',
-    yellow: '#FFCC00',
-    orange: '#FF6B00',
-    // Tints (kept for cards/elements, but not section backgrounds)
+
+    // === CALM (Trust, Safety, Reviews) ===
+    // Use for: Hero, Stats, Reviews, Footer
+    cyan: '#00C2FF',        // Primary calm colour
+
+    // === ACTION (CTAs Only — never decorative) ===
+    // If it's this colour, it must do something
+    green: '#00D94A',       // Primary action button
+    yellow: '#FFCC00',      // Secondary action / accents
+
+    // === JOY (Personality, Warmth) ===
+    // Never stacked back-to-back. Joy must be brief to feel special.
+    pink: '#E8506A',        // Services, CTA sections (softened ~15% for warmth over urgency)
+    orange: '#FF6B00',      // Highlight accents only
+
+    // === CARE (Natural, Gentle — Houndsly) ===
+    // Never used in urgent CTAs. Signals care, not urgency.
+    mutedGreen: '#7AB8A8',  // Houndsly, sustainability
+
+    // === TINTS (Cards & elements only) ===
     cyanLight: '#E0F7FF',
     greenLight: '#E3FCE8',
     tealLight: '#E8F5F5',

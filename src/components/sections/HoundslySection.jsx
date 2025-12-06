@@ -5,18 +5,13 @@ import PolaroidImage from '../PolaroidImage';
 
 const HoundslySection = () => {
     return (
-        <section className="py-24 relative overflow-hidden" style={{ backgroundColor: colors.warmBeige }}>
-            {/* Texture Overlay */}
-            <div className="absolute inset-0 opacity-30 pointer-events-none mix-blend-multiply"
+        <section className="py-24 relative overflow-hidden" style={{ backgroundColor: colors.mutedGreen }}>
+            {/* Subtle texture overlay */}
+            <div className="absolute inset-0 opacity-10 pointer-events-none mix-blend-multiply"
                 style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.5'/%3E%3C/svg%3E")` }}
             />
 
-            {/* Background Decorative Elements */}
-            <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-                <div className="absolute top-10 left-10 text-6xl opacity-10 animate-float" style={{ animationDelay: '0s' }}>🌈</div>
-                <div className="absolute bottom-20 right-10 text-6xl opacity-10 animate-float" style={{ animationDelay: '2s' }}>🐾</div>
-                <div className="absolute top-40 right-20 text-4xl opacity-10 animate-float" style={{ animationDelay: '1s' }}>✨</div>
-            </div>
+            {/* Decorative paw removed — paw prints get one job only */}
 
             <div className="max-w-7xl mx-auto px-6 relative z-10">
 
@@ -78,20 +73,19 @@ const HoundslySection = () => {
                                 </div>
 
                                 <h3 className="heading-font font-bold text-4xl mb-6" style={{ color: colors.plum }}>
-                                    Crafted for Sensitive Skin
+                                    Made for Sensitive Skin
                                 </h3>
                                 <p className="body-font text-xl mb-6 leading-relaxed" style={{ color: colors.teal }}>
-                                    We couldn't find products good enough for our pack, so we made our own.
-                                    100% natural, vegan, and designed to be gentle on even the most sensitive skin.
+                                    We couldn't find products we actually wanted to use on our dogs, so we made our own.
+                                    100% natural, vegan, and properly gentle — even on the fussiest skin.
                                 </p>
 
                                 <p className="body-font text-xl mb-8 leading-relaxed" style={{ color: colors.teal }}>
-                                    Each product is handmade in small batches with love and care, using only the finest natural ingredients.
-                                    Our Houndsly line was born from years of grooming experience and a passion for keeping our furry friends safe and healthy.
+                                    Handmade in small batches, because your dog deserves better than whatever's on offer at the supermarket.
                                 </p>
 
                                 {/* Badges Grid */}
-                                <div className="grid grid-cols-2 gap-4 mb-10 max-w-md">
+                                <div className="grid grid-cols-2 gap-4 mb-8 max-w-md">
                                     {[
                                         { icon: '🌱', text: 'Vegan' },
                                         { icon: '🧴', text: 'Small Batch' }
@@ -103,40 +97,31 @@ const HoundslySection = () => {
                                     ))}
                                 </div>
 
-                                <div className="flex flex-col sm:flex-row gap-4">
-                                    <a
-                                        href="https://houndsly.co.uk"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg text-center relative overflow-hidden group"
-                                        style={{
-                                            backgroundColor: colors.plum,
-                                            color: 'white'
-                                        }}
-                                    >
-                                        <span className="relative z-10">Shop Houndsly</span>
-                                        <div className="absolute inset-0 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                                    </a>
-                                    <a
-                                        href="https://houndsly.co.uk/collections/all"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg border-2 text-center"
-                                        style={{
-                                            borderColor: colors.plum,
-                                            color: colors.plum
-                                        }}
-                                    >
-                                        View the Range
-                                    </a>
-                                </div>
+                                {/* Salon link - the key differentiator */}
+                                <p className="body-font text-base mb-8 italic" style={{ color: colors.teal, opacity: 0.9 }}>
+                                    These are the products we actually use in the salon every day.
+                                </p>
+
+                                {/* Single CTA */}
+                                <a
+                                    href="https://houndsly.co.uk"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex px-10 py-4 rounded-full font-bold text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg text-center"
+                                    style={{
+                                        backgroundColor: colors.plum,
+                                        color: 'white'
+                                    }}
+                                >
+                                    Shop Houndsly →
+                                </a>
                             </FadeIn>
                         </div>
                     </div>
                 </div>
             </div>
 
-            {/* Asymmetrical Wave Transition (Bottom) */}
+            {/* Wave Transition to Reviews (white) */}
             <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-0 transform translate-y-px">
                 <svg
                     position="relative"
@@ -148,7 +133,7 @@ const HoundslySection = () => {
                 >
                     <path
                         d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V75.85C1132.19,98.94,1055.71,91.33,985.66,92.83Z"
-                        fill={colors.cyan}
+                        fill={colors.offWhite}
                     ></path>
                 </svg>
             </div>

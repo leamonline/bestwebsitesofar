@@ -46,13 +46,13 @@ const OfferSection = () => {
                                         className="heading-font font-bold text-3xl md:text-4xl mb-2"
                                         style={{ color: 'white' }}
                                     >
-                                        Join our pack!
+                                        Join our pack
                                     </h4>
                                     <p
                                         className="body-font"
                                         style={{ color: 'white', opacity: 0.9 }}
                                     >
-                                        Sign up for grooming tips, special offers, and adorable dog photos.
+                                        Want grooming tips, the odd offer, and cute dog photos? Thought so.
                                     </p>
                                 </div>
 

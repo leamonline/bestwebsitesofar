@@ -42,27 +42,22 @@ const ServicesSection = () => {
                     </div>
                     <div className="max-w-6xl mx-auto text-center mb-16 relative z-10">
                         <FadeIn>
-                            <span
-                                className="inline-block px-4 py-2 rounded-full text-sm font-semibold mb-4"
-                                style={{ backgroundColor: 'white', color: colors.pink }}
-                            >
-                                Our Services
-                            </span>
                             <h3
                                 className="heading-font font-bold text-4xl md:text-5xl"
                                 style={{ color: 'white' }}
                             >
-                                What we do best
+                                How we care for your dog
                             </h3>
                         </FadeIn>
                     </div>
 
-                    <div className="max-w-7xl mx-auto grid md:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
+                    <div className="max-w-7xl mx-auto grid md:grid-cols-2 lg:grid-cols-4 gap-10 relative z-10">
                         <FadeIn delay={200} className="h-full">
                             <ServiceCard
                                 icon={<img src="/assets/icons/full-groom.jpg" alt="Full Groom" className="w-24 h-24 rounded-full object-cover shadow-sm" />}
                                 title="Full Groom"
-                                desc="The works: bath, dry, brush, trim, nail clip, and ear clean. They'll leave looking (and smelling) like a million bones."
+                                desc="The full works — bath, dry, brush, trim, nails, ears, the lot. They'll leave looking like a million quid and smelling even better."
+                                bestFor="first visits or long-overdue tidy-ups"
                                 bgColor={'white'}
                                 accentColor={colors.pink}
                             />
@@ -71,7 +66,8 @@ const ServicesSection = () => {
                             <ServiceCard
                                 icon={<img src="/assets/icons/maintenance-groom.jpg" alt="Maintenance Groom" className="w-24 h-24 rounded-full object-cover shadow-sm" />}
                                 title="Maintenance Groom"
-                                desc="A refresh between full grooms. Perfect for keeping your pup clean and comfortable without the full trim."
+                                desc="Not due a full groom but looking a bit scruffy? This keeps them fresh and tidy in between."
+                                bestFor="regulars between full grooms"
                                 bgColor={'white'}
                                 accentColor={colors.pink}
                             />
@@ -80,7 +76,8 @@ const ServicesSection = () => {
                             <ServiceCard
                                 icon={<img src="/assets/icons/deshedding.jpg" alt="De-Shedding" className="w-24 h-24 rounded-full object-cover shadow-sm" />}
                                 title="De-Shedding Package"
-                                desc="Ideal for double-coated breeds. A deep clean and thorough undercoat removal to reduce shedding around your home."
+                                desc="For the fluffier breeds who like to redecorate your house with fur. A proper deep clean and undercoat blowout."
+                                bestFor="double coats and heavy shedders"
                                 bgColor={'white'}
                                 accentColor={colors.pink}
                             />
@@ -89,7 +86,8 @@ const ServicesSection = () => {
                             <ServiceCard
                                 icon={<img src="/assets/icons/puppy-intro.jpg" alt="Puppy Intro" className="w-24 h-24 rounded-full object-cover shadow-sm" />}
                                 title="Puppy Intro"
-                                desc="First time? We take it slow. Gentle introduction to grooming for pups under 6 months."
+                                desc="First salon visit? We take it nice and slow — no rushing, no drama. Just gentle introductions for pups under 6 months."
+                                bestFor="puppies under 6 months or nervous first-timers"
                                 bgColor={'white'}
                                 accentColor={colors.pink}
                             />
@@ -119,15 +117,9 @@ const ServicesSection = () => {
                                         className="body-font text-sm"
                                         style={{ color: colors.teal }}
                                     >
-                                        Gentle, thorough ear care to keep your pup comfortable and infection-free.
+                                        We give their ears a good clean and check for any issues. Keeps them clean, comfy, and stops nasties building up.
                                     </p>
                                 </div>
-                                <span
-                                    className="ml-auto px-3 py-1 rounded-full text-xs font-bold"
-                                    style={{ backgroundColor: colors.pink, color: 'white' }}
-                                >
-                                    Hygiene
-                                </span>
                             </div>
                         </FadeIn>
 
@@ -152,15 +144,9 @@ const ServicesSection = () => {
                                         className="body-font text-sm"
                                         style={{ color: colors.teal }}
                                     >
-                                        Professional expression to relieve discomfort and prevent impaction.
+                                        Nobody's favourite topic, but sometimes it needs doing — relieves discomfort and prevents impaction. We handle it so you don't have to.
                                     </p>
                                 </div>
-                                <span
-                                    className="ml-auto px-3 py-1 rounded-full text-xs font-bold"
-                                    style={{ backgroundColor: colors.pink, color: 'white' }}
-                                >
-                                    Hygiene
-                                </span>
                             </div>
                         </FadeIn>
 
@@ -185,15 +171,9 @@ const ServicesSection = () => {
                                         className="body-font text-sm"
                                         style={{ color: colors.teal }}
                                     >
-                                        Quick and stress-free nail clipping to keep paws healthy and floors scratch-free.
+                                        Quick, stress-free nail clips. Healthier paws, fewer scratches on your floors. Everyone wins.
                                     </p>
                                 </div>
-                                <span
-                                    className="ml-auto px-3 py-1 rounded-full text-xs font-bold"
-                                    style={{ backgroundColor: colors.pink, color: 'white' }}
-                                >
-                                    Hygiene
-                                </span>
                             </div>
                         </FadeIn>
                     </div>

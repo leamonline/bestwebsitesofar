@@ -2,11 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { colors } from '../../constants/colors';
 
-const PawSeparator = () => (
-    <span className="text-xs opacity-30 mx-2 select-none" style={{ color: colors.teal }}>
-        🐾
-    </span>
-);
+
 
 const Navigation = ({ isLoaded, onBookClick }) => {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -45,29 +41,25 @@ const Navigation = ({ isLoaded, onBookClick }) => {
                 <div className="hidden md:flex items-center gap-2">
                     <Link
                         to="/services"
-                        className="font-medium text-sm transition-colors relative group px-2 py-1 hover-wiggle"
+                        className="font-medium text-sm transition-colors relative group px-3 py-1 hover-wiggle"
                         style={{ color: colors.teal }}
                     >
                         Services
                         <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-current transition-all duration-300 group-hover:w-full" />
                     </Link>
 
-                    <PawSeparator />
-
                     <Link
                         to="/gallery"
-                        className="font-medium text-sm transition-colors relative group px-2 py-1 hover-wiggle"
+                        className="font-medium text-sm transition-colors relative group px-3 py-1 hover-wiggle"
                         style={{ color: colors.teal }}
                     >
                         Gallery
                         <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-current transition-all duration-300 group-hover:w-full" />
                     </Link>
 
-                    <PawSeparator />
-
                     <Link
                         to="/houndsly"
-                        className="font-medium text-sm transition-colors relative group px-2 py-1 hover-wiggle"
+                        className="font-medium text-sm transition-colors relative group px-3 py-1 hover-wiggle"
                         style={{ color: colors.teal }}
                     >
                         Houndsly
@@ -83,7 +75,7 @@ const Navigation = ({ isLoaded, onBookClick }) => {
                                 color: 'white'
                             }}
                         >
-                            Request Appointment
+                            Book your visit
                         </button>
                     </div>
                 </div>

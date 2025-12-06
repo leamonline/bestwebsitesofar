@@ -54,7 +54,7 @@ const SmarterDogHomepage = () => {
       <GallerySection />
       <HoundslySection />
       <TestimonialsSection />
-      <OfferSection onBookClick={handleBookClick} />
+      {/* OfferSection removed - breaks calm→joy→calm rhythm */}
       <CTASection onBookClick={handleBookClick} />
       <FooterSection />
 

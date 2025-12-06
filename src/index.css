@@ -21,8 +21,9 @@
 
 .body-font {
   font-family: 'Montserrat', sans-serif;
-  line-height: 1.7;
-  /* Increased line-height for body text */
+  font-size: 18px;
+  line-height: 1.6;
+  /* 18px baseline for elderly readability */
 }
 
 .handwriting {
@@ -202,6 +203,7 @@
 
 /* Respect user preference for reduced motion */
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
@@ -223,5 +225,24 @@
   .hover-scale:hover,
   .hover-tilt:hover {
     transform: none !important;
+  }
+}
+
+/* Visible focus states for keyboard navigation */
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible {
+  outline: 3px solid #00C2FF;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Minimum touch targets for mobile (44px) */
+@media (max-width: 768px) {
+
+  button,
+  a[role="button"],
+  .rounded-full {
+    min-height: 44px;
   }
 }

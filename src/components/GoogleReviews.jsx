@@ -1,170 +1,123 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React from 'react';
 import { colors } from '../constants/colors';
 
-const GoogleReviews = ({ placeId, apiKey }) => {
-    const [reviews, setReviews] = useState([]);
-    const [loading, setLoading] = useState(true);
+// Curated reviews that tell a story
+// Featured: trust, longevity, complex needs
+// Supporting: joy, medical/vulnerable, switchers, loyalty
 
-    // Mock data for immediate display - memoized to fix dependency warning
-    const mockReviews = useMemo(() => [
-        {
-            author_name: "Sarah Jenkins",
-            rating: 5,
-            relative_time_description: "a week ago",
-            text: "Absolutely amazing service! My nervous cockapoo came out looking beautiful and so happy. The team really cares.",
-            profile_photo_url: "https://lh3.googleusercontent.com/a-/ALV-UjWb_J..." // Placeholder logic below
-        },
-        {
-            author_name: "Mike Stevens",
-            rating: 5,
-            relative_time_description: "2 weeks ago",
-            text: "Best groomers in town. They listened exactly to what I wanted for my Schnauzer. Highly recommend!",
-            profile_photo_url: null
-        },
-        {
-            author_name: "Emma Thompson",
-            rating: 5,
-            relative_time_description: "a month ago",
-            text: "Such a lovely atmosphere. You can tell they love dogs. The blueberry facial is a must!",
-            profile_photo_url: null
-        }
-    ], []);
+const featuredReview = {
+    name: "Sandra W.",
+    tagline: "30+ years with us",
+    text: "Been going to Smarter Dogs for over 30 years, they are brilliant. Sam & Liam are the best – so caring and they genuinely love the dogs they groom. Cassie is 17 now, blind and deaf, but she still loves to go and see them and always comes out looking beautiful."
+};
 
-    useEffect(() => {
-        const fetchReviews = async () => {
-            if (!apiKey || !placeId) {
-                // Fallback to mock data if no key provided
-                setReviews(mockReviews);
-                setLoading(false);
-                return;
-            }
+const supportingReviews = [
+    {
+        name: "Wallis",
+        tagline: "Excited every time",
+        text: "Incredible groomers. Our puppy gets excited when we're near the shop, which is always a good sign! They looked after our old dog and their advice and care really improved his skin and coat. Their cuts are excellent and reasonably priced – definitely recommended."
+    },
+    {
+        name: "Lindsay C.",
+        tagline: "Back after a big operation",
+        text: "Thank you so much for grooming Barney today. After his big operation this year I didn't think he would cope – but he did. He smells divine and you've done a great job with him. I wouldn't go anywhere else now."
+    },
+    {
+        name: "K.G.",
+        tagline: "Took a chance changing groomers",
+        text: "Took a chance changing groomers and took my little Yorkie here for the first time. What a fantastic place! Definitely caring doggy lovers!!"
+    },
+    {
+        name: "Kate M.",
+        tagline: "Wouldn't go anywhere else",
+        text: "I wouldn't go anywhere else, other than Smarter Dogs. The staff are fantastic. I can hand on heart say not only do they do an exceptional job with the dog grooming, they genuinely care."
+    }
+];
 
-            try {
-                // Note: Direct calls to Google Places API from client-side often blocked by CORS.
-                // In production, this should go through a proxy server.
-                // For now, we'll try, but fallback to mock if it fails.
-                const response = await fetch(
-                    `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=reviews&key=${apiKey}`
-                );
+// Simple star display
+const Stars = () => (
+    <span className="text-yellow-400 text-sm tracking-wide">★★★★★</span>
+);
 
-                if (!response.ok) throw new Error('Failed to fetch reviews');
+// Review card component
+const ReviewCard = ({ name, tagline, text, featured = false }) => (
+    <div
+        className={`rounded-2xl shadow-sm ${featured
+            ? 'p-10 border-l-4'
+            : 'p-6 border border-gray-100 bg-white'
+            }`}
+        style={featured ? {
+            borderLeftColor: colors.cyan,
+            borderLeftWidth: '5px',
+            backgroundColor: '#FDFCFA',
+            borderTop: '1px solid #f0ede8',
+            borderRight: '1px solid #f0ede8',
+            borderBottom: '1px solid #f0ede8'
+        } : {}}
+    >
+        <div className={featured ? 'mb-5' : 'mb-4'}>
+            <p
+                className={`font-semibold ${featured ? 'text-xl' : 'text-lg'}`}
+                style={{ color: colors.plum }}
+            >
+                {name}
+            </p>
+            <span
+                className="text-base"
+                style={{ color: colors.teal, opacity: 0.85 }}
+            >
+                {tagline}
+            </span>
+        </div>
+        <p
+            className={`body-font leading-relaxed ${featured ? 'text-lg' : ''}`}
+            style={{ color: colors.teal }}
+        >
+            "{text}"
+        </p>
+    </div>
+);
 
-                const data = await response.json();
-                if (data.result && data.result.reviews) {
-                    setReviews(data.result.reviews);
-                } else {
-                    setReviews(mockReviews);
-                }
-            } catch (err) {
-                console.warn("Using mock reviews due to fetch error:", err);
-                setReviews(mockReviews);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchReviews();
-    }, [placeId, apiKey, mockReviews]);
-
-    if (loading) return <div className="text-center p-8">Loading reviews...</div>;
-
+const GoogleReviews = () => {
     return (
-        <div className="w-full max-w-7xl mx-auto px-4">
-            {/* Header Section */}
-            <div className="flex flex-col items-center justify-center gap-4 mb-16 text-center">
-                <div className="flex items-center gap-3 bg-white px-6 py-3 rounded-full shadow-sm border border-gray-100">
-                    <img
-                        src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg"
-                        alt="Google"
-                        className="w-6 h-6"
-                    />
-                    <span className="font-bold text-gray-700">
-                        Excellent
-                    </span>
-                    <div className="flex text-yellow-400 text-lg" role="img" aria-label="5 out of 5 stars">
-                        <span aria-hidden="true">{'★'.repeat(5)}</span>
-                    </div>
-                </div>
-
-                <h3 className="heading-font font-bold text-4xl md:text-5xl" style={{ color: colors.plum }}>
-                    Loved by Locals
-                </h3>
-                <p className="text-gray-500 font-medium flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-                    Verified Reviews from Real Dog Parents
-                </p>
+        <div className="w-full">
+            {/* Rating summary */}
+            <div className="flex items-center justify-center gap-2 mb-10">
+                <Stars />
+                <span className="text-sm" style={{ color: colors.teal }}>
+                    4.9 on Google
+                </span>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8">
-                {reviews.slice(0, 3).map((review, index) => {
-                    // Cyclic accent colors
-                    const accentColor = [colors.cyan, colors.green, colors.pink][index % 3];
+            {/* Featured review - full width */}
+            <div className="mb-6">
+                <ReviewCard {...featuredReview} featured={true} />
+            </div>
 
-                    return (
-                        <div
-                            key={index}
-                            className="group relative bg-white p-8 rounded-3xl border border-gray-100 shadow-lg hover:shadow-xl transition-all duration-500 flex flex-col h-full hover:-translate-y-1"
-                        >
-                            {/* Decorative Quote Icon */}
-                            <div
-                                className="absolute -top-4 -right-4 w-12 h-12 rounded-full flex items-center justify-center text-2xl shadow-sm transform rotate-12 group-hover:rotate-0 transition-transform duration-300"
-                                style={{ backgroundColor: accentColor, color: 'white' }}
-                            >
-                                ❝
-                            </div>
+            {/* Supporting reviews - 2x2 grid */}
+            <div className="grid md:grid-cols-2 gap-5">
+                {supportingReviews.map((review, index) => (
+                    <ReviewCard key={index} {...review} />
+                ))}
+            </div>
 
-                            <div className="flex items-center gap-4 mb-6">
-                                {review.profile_photo_url && !review.profile_photo_url.includes('placeholder') ? (
-                                    <img
-                                        src={review.profile_photo_url}
-                                        alt={review.author_name}
-                                        className="w-14 h-14 rounded-full border-4 border-white shadow-md object-cover"
-                                        onError={(e) => {
-                                            e.target.onerror = null;
-                                            e.target.src = `https://ui-avatars.com/api/?name=${review.author_name}&background=random`;
-                                        }}
-                                    />
-                                ) : (
-                                    <div
-                                        className="w-14 h-14 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-md border-4 border-white"
-                                        style={{ backgroundColor: accentColor }}
-                                    >
-                                        {review.author_name.charAt(0)}
-                                    </div>
-                                )}
-                                <div>
-                                    <div className="font-bold text-lg leading-tight" style={{ color: colors.plum }}>
-                                        {review.author_name}
-                                    </div>
-                                    <div className="text-xs text-gray-400 font-medium mt-1 uppercase tracking-wider">
-                                        {review.relative_time_description}
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="flex text-yellow-400 text-lg mb-4" role="img" aria-label={`${review.rating} out of 5 stars`}>
-                                <span aria-hidden="true">{'★'.repeat(review.rating)}</span>
-                            </div>
-
-                            <p className="body-font text-base leading-relaxed text-gray-600 flex-grow relative z-10">
-                                "{review.text.length > 180 ? review.text.substring(0, 180) + '...' : review.text}"
-                            </p>
-
-                            <div className="mt-6 pt-6 border-t border-gray-50">
-                                <a
-                                    href="https://www.google.com/maps/place/Smarter+Dog+Grooming"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="text-sm font-bold flex items-center gap-2 group/link"
-                                    style={{ color: accentColor }}
-                                >
-                                    Read on Google
-                                    <span className="group-hover/link:translate-x-1 transition-transform">→</span>
-                                </a>
-                            </div>
-                        </div>
-                    );
-                })}
+            {/* Google link */}
+            <div className="flex items-center justify-center mt-8 pt-6 border-t border-gray-100">
+                <a
+                    href="https://g.page/r/CQJp3bxjrSfmEAE/review"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-sm font-medium transition-opacity hover:opacity-70"
+                    style={{ color: colors.teal }}
+                >
+                    <svg className="w-4 h-4" viewBox="0 0 24 24">
+                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                    </svg>
+                    See all reviews on Google →
+                </a>
             </div>
         </div>
     );

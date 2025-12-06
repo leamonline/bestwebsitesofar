@@ -33,19 +33,15 @@ const FooterSection = () => {
     return (
         <footer
             className="px-6 py-16 relative overflow-hidden"
-            style={{ backgroundColor: colors.yellow }}
+            style={{ backgroundColor: colors.cyan }}
         >
-            {/* Background Dog */}
-            <div className="absolute bottom-0 left-10 z-0 opacity-10 pointer-events-none">
+            {/* Background Dog - subtle */}
+            <div className="absolute bottom-0 left-10 z-0 opacity-5 pointer-events-none">
                 <DogSilhouette
-                    color={colors.teal}
+                    color="white"
                     className="w-[25rem] h-auto"
                 />
             </div>
-            {/* Background Sticker */}
-            <BackgroundSticker
-                className="w-48 h-48 top-10 right-10 opacity-5 -rotate-6"
-            />
 
             <div className="max-w-6xl mx-auto relative z-10">
                 <div className="grid md:grid-cols-4 gap-8 mb-12">
@@ -54,10 +50,10 @@ const FooterSection = () => {
                             <img src="/assets/logo-text.png" alt="Smarter Dog Grooming Salon" className="h-16 w-auto object-contain mb-4" />
                         </div>
                         <p
-                            className="body-font text-sm leading-relaxed"
-                            style={{ color: colors.teal }}
+                            className="body-font leading-relaxed"
+                            style={{ color: 'white' }}
                         >
-                            Family-run since 1983. Where every dog gets treated like the VIP they truly are.
+                            Over 40 years of happy dogs in Ashton-under-Lyne. We're not going anywhere.
                         </p>
                         {/* Social icons */}
                         <div className="flex gap-3 mt-4">
@@ -69,7 +65,7 @@ const FooterSection = () => {
                                     rel="noopener noreferrer"
                                     aria-label={social.label}
                                     className="w-10 h-10 rounded-full flex items-center justify-center transition-transform hover:scale-110"
-                                    style={{ backgroundColor: 'white', color: colors.teal }}
+                                    style={{ backgroundColor: 'rgba(255,255,255,0.2)', color: 'white' }}
                                 >
                                     {social.icon}
                                 </a>
@@ -80,29 +76,24 @@ const FooterSection = () => {
                     <div>
                         <h4
                             className="heading-font font-semibold mb-4"
-                            style={{ color: colors.teal }}
+                            style={{ color: 'white' }}
                         >
                             Opening Hours
                         </h4>
                         <div
-                            className="body-font text-sm space-y-2"
-                            style={{ color: colors.teal }}
+                            className="body-font space-y-2"
+                            style={{ color: 'rgba(255,255,255,0.9)' }}
                         >
                             <p className="flex justify-between">
-                                <span>Mon & Tue</span>
-                                <span style={{ color: colors.teal }}>8:30am – 3:30pm</span>
+                                <span>Mon–Wed</span>
+                                <span style={{ color: 'white', fontWeight: '600' }}>8:30am – 3:00pm</span>
                             </p>
                             <p className="flex justify-between">
-                                <span>Wednesday</span>
-                                <span style={{ color: colors.pink }}>Closed</span>
+                                <span>Thu–Sun</span>
+                                <span style={{ color: colors.yellow, fontWeight: '600' }}>Closed</span>
                             </p>
-                            <p className="flex justify-between">
-                                <span>Thursday</span>
-                                <span style={{ color: colors.teal }}>8:30am – 3:30pm</span>
-                            </p>
-                            <p className="flex justify-between">
-                                <span>Fri–Sun</span>
-                                <span style={{ color: colors.pink }}>Closed</span>
+                            <p className="text-base mt-3" style={{ opacity: 0.85 }}>
+                                * We close on Bank Holidays but open the Thursday after instead.
                             </p>
                         </div>
                     </div>
@@ -110,13 +101,13 @@ const FooterSection = () => {
                     <div>
                         <h4
                             className="heading-font font-semibold mb-4"
-                            style={{ color: colors.teal }}
+                            style={{ color: 'white' }}
                         >
                             Find Us
                         </h4>
                         <div
-                            className="body-font text-sm space-y-2"
-                            style={{ color: colors.teal }}
+                            className="body-font space-y-2"
+                            style={{ color: 'rgba(255,255,255,0.9)' }}
                         >
                             <p>183 Kings Road</p>
                             <p>Ashton-under-Lyne</p>
@@ -127,18 +118,18 @@ const FooterSection = () => {
                     <div>
                         <h4
                             className="heading-font font-semibold mb-4"
-                            style={{ color: colors.teal }}
+                            style={{ color: 'white' }}
                         >
                             Get in Touch
                         </h4>
                         <div
-                            className="body-font text-sm space-y-2"
-                            style={{ color: colors.teal }}
+                            className="body-font space-y-2"
+                            style={{ color: 'rgba(255,255,255,0.9)' }}
                         >
                             <p>leam@smarterdog.co.uk</p>
-                            <p>07507 731487</p>
+                            <p className="text-lg font-bold" style={{ color: 'white' }}>07507 731487</p>
                             <p
-                                className="inline-flex items-center gap-2 mt-3 px-3 py-1 rounded-full text-xs"
+                                className="inline-flex items-center gap-2 mt-3 px-3 py-1 rounded-full text-base"
                                 style={{ backgroundColor: colors.green, color: 'white' }}
                             >
                                 💬 WhatsApp Available
@@ -149,21 +140,21 @@ const FooterSection = () => {
 
                 <div
                     className="pt-8 border-t flex flex-col md:flex-row justify-between items-center gap-4 body-font text-sm"
-                    style={{ borderColor: colors.tealLight, color: colors.teal }}
+                    style={{ borderColor: 'rgba(255,255,255,0.2)', color: 'rgba(255,255,255,0.8)' }}
                 >
                     <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4">
                         <p>© 2025 Smarter Dog Grooming Salon. All rights reserved.</p>
                         <Link
                             to="/privacy"
                             className="underline hover:opacity-70 transition-opacity"
-                            style={{ color: colors.teal }}
+                            style={{ color: 'rgba(255,255,255,0.8)' }}
                         >
                             Privacy Policy
                         </Link>
                     </div>
                     <p
                         className="handwriting text-lg"
-                        style={{ color: colors.teal }}
+                        style={{ color: 'rgba(255,255,255,0.9)' }}
                     >
                         Made with 🐾 in Ashton-under-Lyne
                     </p>

@@ -2,7 +2,7 @@ import React from 'react';
 import { colors } from '../constants/colors';
 
 // Service card component with color coding
-const ServiceCard = ({ icon, title, desc, bgColor, accentColor }) => (
+const ServiceCard = ({ icon, title, desc, bestFor, bgColor, accentColor }) => (
     <div
         className="p-8 rounded-3xl transition-all duration-300 hover:shadow-xl hover:-translate-y-2 hover:scale-105 relative overflow-hidden h-full flex flex-col"
         style={{ backgroundColor: bgColor }}
@@ -25,11 +25,19 @@ const ServiceCard = ({ icon, title, desc, bgColor, accentColor }) => (
             {title}
         </h4>
         <p
-            className="body-font leading-relaxed relative z-10"
+            className="body-font leading-relaxed relative z-10 flex-grow"
             style={{ color: colors.teal }}
         >
             {desc}
         </p>
+        {bestFor && (
+            <p
+                className="body-font mt-4 pt-4 border-t border-gray-100 relative z-10 italic"
+                style={{ color: colors.teal }}
+            >
+                Best for: {bestFor}
+            </p>
+        )}
     </div>
 );
 

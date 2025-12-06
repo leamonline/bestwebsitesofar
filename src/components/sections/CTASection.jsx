@@ -33,14 +33,13 @@ const CTASection = ({ onBookClick }) => {
                             className="heading-font font-bold text-4xl md:text-5xl mt-4 mb-6"
                             style={{ color: 'white' }}
                         >
-                            Book your dog's VIP experience today
+                            Book your visit
                         </h3>
                         <p
                             className="body-font text-lg mb-8"
                             style={{ color: 'rgba(255,255,255,0.9)' }}
                         >
-                            Open Monday–Wednesday, 8:30am–3:00pm.
-                            Limited slots available—your pup deserves the best!
+                            We're open Monday to Wednesday, 8:30am–3pm. Slots go fast — get yours booked in.
                         </p>
                         <div className="flex flex-wrap justify-center gap-4">
                             <button
@@ -51,9 +50,10 @@ const CTASection = ({ onBookClick }) => {
                                     color: colors.pink
                                 }}
                             >
-                                Request Appointment
+                                Book your visit
                             </button>
-                            <button
+                            <a
+                                href="tel:07507731487"
                                 className="px-10 py-4 rounded-full font-bold text-lg transition-all duration-300 hover:scale-105 border-2 flex items-center gap-2"
                                 style={{
                                     borderColor: 'white',
@@ -62,8 +62,8 @@ const CTASection = ({ onBookClick }) => {
                                 }}
                             >
                                 <span>📞</span>
-                                <span>0161 XXX XXXX</span>
-                            </button>
+                                <span>07507 731487</span>
+                            </a>
                         </div>
                     </div>
                 </FadeIn>
