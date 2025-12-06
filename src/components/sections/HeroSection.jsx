@@ -82,21 +82,21 @@ const HeroSection = ({ isLoaded, onBookClick }) => {
                                 <PolaroidImage
                                     rotation={-5}
                                     tapeColor={colors.cyan}
-                                    src="/assets/client-dog-1.png"
+                                    src="/assets/client-dog-1.jpg"
                                 />
                             </div>
                             <div className="absolute top-12 md:top-24 right-0 z-20 hover:z-40 transition-all duration-300 scale-[0.6] md:scale-100 origin-top-right">
                                 <PolaroidImage
                                     rotation={4}
                                     tapeColor={colors.cyan}
-                                    src="/assets/client-dog-2.png"
+                                    src="/assets/client-dog-2.jpg"
                                 />
                             </div>
                             <div className="absolute bottom-0 left-1/4 z-30 hover:z-40 transition-all duration-300 scale-[0.6] md:scale-100 origin-bottom-left">
                                 <PolaroidImage
                                     rotation={-2}
                                     tapeColor={colors.cyan}
-                                    src="/assets/client-dog-3.png"
+                                    src="/assets/client-dog-3.jpg"
                                 />
                             </div>
                         </div>

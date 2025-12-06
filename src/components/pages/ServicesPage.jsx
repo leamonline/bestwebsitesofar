@@ -7,6 +7,7 @@ import DogSilhouette from '../DogSilhouette';
 import SectionDivider from '../SectionDivider';
 import ProcessTimeline from '../ProcessTimeline';
 import { colors } from '../../constants/colors';
+import { services, timeline, additionalServices } from '../../constants/servicesData';
 
 const ServicesPage = () => {
     const [isLoaded, setIsLoaded] = useState(false);
@@ -17,41 +18,6 @@ const ServicesPage = () => {
         return () => clearTimeout(timer);
     }, []);
 
-    const services = [
-        {
-            title: "Full Groom",
-            price: "From £42",
-            description: "The complete makeover. Includes a double bath and blow dry, full body styling to your preference, hygiene clip, paw pad trim, nail trim, and ear cleaning.",
-            bestFor: "First visits or dogs needing a full reset",
-            color: colors.teal,
-            bgColor: 'white'
-        },
-        {
-            title: "Maintenance Groom",
-            price: "From £32",
-            description: "Perfect between full grooms to keep your dog tidy. Includes bath, dry, and trimming of face, feet, and hygiene areas, plus nail trim.",
-            bestFor: "Regulars between full grooms",
-            color: colors.orange,
-            bgColor: 'white'
-        },
-        {
-            title: "De-shedding Groom",
-            price: "From £35",
-            description: "Ideal for double-coated breeds. A deep cleaning bath, thorough undercoat removal with high-velocity drying, full brush out, and nail trim.",
-            bestFor: "Double coats and heavy shedders",
-            color: colors.yellow,
-            bgColor: 'white'
-        }
-    ];
-
-    const timeline = [
-        { step: 1, title: "Arrival", desc: "We welcome you and your dog, discussing their needs and your styling preferences." },
-        { step: 2, title: "The Prep", desc: "A thorough brush out to remove tangles and prepare the coat for bathing." },
-        { step: 3, title: "The Bath", desc: "Using our Houndsly natural shampoos, we double wash to ensure a deep clean." },
-        { step: 4, title: "The Dry", desc: "Gentle drying with high-velocity dryers to remove dead hair and fluff the coat." },
-        { step: 5, title: "The Style", desc: "Clipping and scissoring to create the perfect look for your dog." },
-        { step: 6, title: "The Finish", desc: "Nail trimming, ear cleaning, and a final spritz of cologne before the reunion!" }
-    ];
 
     return (
         <div className="min-h-screen bg-white">
@@ -112,32 +78,32 @@ const ServicesPage = () => {
                     <div className="grid md:grid-cols-2 gap-8">
                         <div className="bg-white rounded-3xl p-8 shadow-lg">
                             <h3 className="heading-font text-2xl font-bold mb-4" style={{ color: colors.teal }}>
-                                Puppy Intro
+                                {additionalServices.puppyIntro.title}
                             </h3>
                             <p className="body-font text-lg text-gray-600 mb-4 leading-relaxed">
-                                A gentle first experience for puppies under 6 months. We focus on positive association with grooming sounds and sensations. Includes a gentle bath, slow dry, and lots of reassurance.
+                                {additionalServices.puppyIntro.description}
                             </p>
                             <p className="body-font text-base italic mb-4" style={{ color: colors.teal }}>
-                                No rushing. Plenty of cuddles.
+                                {additionalServices.puppyIntro.tagline}
                             </p>
-                            <p className="font-bold text-lg" style={{ color: colors.orange }}>£35</p>
+                            <p className="font-bold text-lg" style={{ color: colors.orange }}>{additionalServices.puppyIntro.price}</p>
                         </div>
                         <div className="bg-white rounded-3xl p-8 shadow-lg">
                             <h3 className="heading-font text-2xl font-bold mb-4" style={{ color: colors.teal }}>
-                                Walk-in Services
+                                {additionalServices.walkIn.title}
                             </h3>
                             <p className="body-font text-lg text-gray-600 mb-4 leading-relaxed">
-                                Quick, calm services — no full appointment needed.
+                                {additionalServices.walkIn.description}
                                 <br />
-                                <strong>Available:</strong> Mon, Tue, Wed before 1pm.
+                                <strong>Available:</strong> {additionalServices.walkIn.availability}
                             </p>
                             <ul className="space-y-2 text-lg text-gray-700">
-                                <li>Nail Clipping — £10</li>
-                                <li>Ear Cleaning — £10</li>
-                                <li>Anal Gland Expression — £10</li>
+                                {additionalServices.walkIn.items.map((item, idx) => (
+                                    <li key={idx}>{item.name} — {item.price}</li>
+                                ))}
                             </ul>
                             <p className="body-font text-base italic mt-4" style={{ color: colors.teal }}>
-                                Quick, calm, and over before they realise.
+                                {additionalServices.walkIn.tagline}
                             </p>
                         </div>
                     </div>

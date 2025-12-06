@@ -26,6 +26,10 @@ export const colors = {
     // Never used in urgent CTAs. Signals care, not urgency.
     mutedGreen: '#7AB8A8',  // Houndsly, sustainability
 
+    // === UTILITY (Backgrounds & Text) ===
+    blueSlate: '#4A6FA5',   // Timeline section background
+    darkGray: '#4A4A4A',    // Price text
+
     // === TINTS (Cards & elements only) ===
     cyanLight: '#E0F7FF',
     greenLight: '#E3FCE8',

@@ -1,30 +1,34 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 const ParallaxSection = ({ children, speed = 0.5, className, style }) => {
-    const ref = useRef(null);
-    const [offset, setOffset] = useState(0);
+    const elementRef = useRef(null);
 
     useEffect(() => {
+        let ticking = false;
+
         const handleScroll = () => {
-            if (!ref.current) return;
-            const scrollY = window.scrollY;
-            // Calculate offset based on scroll position relative to viewport
-            // Simple parallax: move element based on scroll
-            setOffset(scrollY * speed);
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    if (elementRef.current) {
+                        const scrollY = window.scrollY;
+                        elementRef.current.style.transform = `translateY(${scrollY * speed}px)`;
+                    }
+                    ticking = false;
+                });
+                ticking = true;
+            }
         };
 
-        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
     }, [speed]);
 
     return (
         <div
-            ref={ref}
+            ref={elementRef}
             className={className}
             style={{
                 ...style,
-                transform: `translateY(${offset}px)`,
-                transition: 'transform 0.1s ease-out',
                 willChange: 'transform'
             }}
         >

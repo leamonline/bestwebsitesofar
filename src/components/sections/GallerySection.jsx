@@ -6,13 +6,13 @@ import DogSilhouette from '../DogSilhouette';
 const GallerySection = () => {
     // Photos with unique tape positions and colors
     const photos = [
-        { src: '/assets/client-dog-1.png', rotation: -4, tape: colors.cyan, tapePos: 'top' },
+        { src: '/assets/client-dog-1.jpg', rotation: -4, tape: colors.cyan, tapePos: 'top' },
         { src: '/assets/client-dog-9.jpg', rotation: 5, tape: colors.pink, tapePos: 'top-left' },
-        { src: '/assets/client-dog-3.png', rotation: -2, tape: colors.orange, tapePos: 'top-right' },
-        { src: '/assets/client-dog-4.png', rotation: 6, tape: colors.green, tapePos: 'left' },
+        { src: '/assets/client-dog-3.jpg', rotation: -2, tape: colors.orange, tapePos: 'top-right' },
+        { src: '/assets/client-dog-4.jpg', rotation: 6, tape: colors.green, tapePos: 'left' },
         { src: '/assets/client-dog-10.jpg', rotation: -5, tape: colors.yellow, tapePos: 'right' },
-        { src: '/assets/client-dog-2.png', rotation: 3, tape: '#E8506A', tapePos: 'top-left' },
-        { src: '/assets/client-dog-5.png', rotation: -3, tape: colors.teal, tapePos: 'top-right' },
+        { src: '/assets/client-dog-2.jpg', rotation: 3, tape: '#E8506A', tapePos: 'top-left' },
+        { src: '/assets/client-dog-5.jpg', rotation: -3, tape: colors.teal, tapePos: 'top-right' },
     ];
 
     return (
