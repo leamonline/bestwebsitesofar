@@ -199,3 +199,29 @@
 .hover-scale:hover {
   transform: scale(1.05);
 }
+
+/* Respect user preference for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-fade-in-up,
+  .animate-fade-in,
+  .animate-bounce-slow {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .hover-lift:hover,
+  .hover-scale:hover,
+  .hover-tilt:hover {
+    transform: none !important;
+  }
+}

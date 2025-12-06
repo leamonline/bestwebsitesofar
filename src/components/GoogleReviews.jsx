@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { colors } from '../constants/colors';
 
 const GoogleReviews = ({ placeId, apiKey }) => {
     const [reviews, setReviews] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    // Mock data for immediate display
-    const mockReviews = [
+    // Mock data for immediate display - memoized to fix dependency warning
+    const mockReviews = useMemo(() => [
         {
             author_name: "Sarah Jenkins",
             rating: 5,
@@ -28,7 +28,7 @@ const GoogleReviews = ({ placeId, apiKey }) => {
             text: "Such a lovely atmosphere. You can tell they love dogs. The blueberry facial is a must!",
             profile_photo_url: null
         }
-    ];
+    ], []);
 
     useEffect(() => {
         const fetchReviews = async () => {
@@ -64,8 +64,7 @@ const GoogleReviews = ({ placeId, apiKey }) => {
         };
 
         fetchReviews();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [placeId, apiKey]);
+    }, [placeId, apiKey, mockReviews]);
 
     if (loading) return <div className="text-center p-8">Loading reviews...</div>;
 
@@ -82,8 +81,8 @@ const GoogleReviews = ({ placeId, apiKey }) => {
                     <span className="font-bold text-gray-700">
                         Excellent
                     </span>
-                    <div className="flex text-yellow-400 text-lg">
-                        {'★'.repeat(5)}
+                    <div className="flex text-yellow-400 text-lg" role="img" aria-label="5 out of 5 stars">
+                        <span aria-hidden="true">{'★'.repeat(5)}</span>
                     </div>
                 </div>
 
@@ -143,8 +142,8 @@ const GoogleReviews = ({ placeId, apiKey }) => {
                                 </div>
                             </div>
 
-                            <div className="flex text-yellow-400 text-lg mb-4">
-                                {'★'.repeat(review.rating)}
+                            <div className="flex text-yellow-400 text-lg mb-4" role="img" aria-label={`${review.rating} out of 5 stars`}>
+                                <span aria-hidden="true">{'★'.repeat(review.rating)}</span>
                             </div>
 
                             <p className="body-font text-base leading-relaxed text-gray-600 flex-grow relative z-10">

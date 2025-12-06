@@ -124,8 +124,11 @@ const BookingModal = ({ isOpen, onClose }) => {
                             >
                                 Let's get you booked in!
                             </h2>
-                            <p className="body-font text-sm text-gray-600">
+                            <p className="body-font text-sm text-gray-600 mb-2">
                                 We'll check our diary and get back to you ASAP.
+                            </p>
+                            <p className="body-font text-xs font-semibold px-3 py-1 rounded-full inline-block" style={{ backgroundColor: colors.greenLight, color: colors.teal }}>
+                                ⏱️ Usually respond within 2 hours
                             </p>
                         </div>
 
@@ -159,7 +162,7 @@ const BookingModal = ({ isOpen, onClose }) => {
                                         name="ownerName"
                                         value={formData.ownerName}
                                         onChange={handleChange}
-                                        className="w-full px-4 py-2 rounded-xl border-2 border-gray-100 focus:border-cyan-400 focus:outline-none transition-colors"
+                                        className="w-full px-4 py-3 min-h-[48px] rounded-xl border-2 border-gray-100 focus:border-cyan-400 focus:outline-none transition-colors text-base"
                                         placeholder="Jane Doe"
                                     />
                                 </div>
@@ -171,7 +174,7 @@ const BookingModal = ({ isOpen, onClose }) => {
                                         name="phone"
                                         value={formData.phone}
                                         onChange={handleChange}
-                                        className="w-full px-4 py-2 rounded-xl border-2 border-gray-100 focus:border-cyan-400 focus:outline-none transition-colors"
+                                        className="w-full px-4 py-3 min-h-[48px] rounded-xl border-2 border-gray-100 focus:border-cyan-400 focus:outline-none transition-colors text-base"
                                         placeholder="07123..."
                                     />
                                 </div>
@@ -184,7 +187,7 @@ const BookingModal = ({ isOpen, onClose }) => {
                                     name="email"
                                     value={formData.email}
                                     onChange={handleChange}
-                                    className="w-full px-4 py-2 rounded-xl border-2 border-gray-100 focus:border-cyan-400 focus:outline-none transition-colors"
+                                    className="w-full px-4 py-3 min-h-[48px] rounded-xl border-2 border-gray-100 focus:border-cyan-400 focus:outline-none transition-colors text-base"
                                     placeholder="jane@example.com"
                                 />
                             </div>
@@ -198,7 +201,7 @@ const BookingModal = ({ isOpen, onClose }) => {
                                         name="dogName"
                                         value={formData.dogName}
                                         onChange={handleChange}
-                                        className="w-full px-4 py-2 rounded-xl border-2 border-gray-100 focus:border-cyan-400 focus:outline-none transition-colors"
+                                        className="w-full px-4 py-3 min-h-[48px] rounded-xl border-2 border-gray-100 focus:border-cyan-400 focus:outline-none transition-colors text-base"
                                         placeholder="Barnaby"
                                     />
                                 </div>
@@ -209,7 +212,7 @@ const BookingModal = ({ isOpen, onClose }) => {
                                         name="breed"
                                         value={formData.breed}
                                         onChange={handleChange}
-                                        className="w-full px-4 py-2 rounded-xl border-2 border-gray-100 focus:border-cyan-400 focus:outline-none transition-colors"
+                                        className="w-full px-4 py-3 min-h-[48px] rounded-xl border-2 border-gray-100 focus:border-cyan-400 focus:outline-none transition-colors text-base"
                                         placeholder="Cockapoo"
                                     />
                                 </div>
@@ -221,7 +224,7 @@ const BookingModal = ({ isOpen, onClose }) => {
                                     name="service"
                                     value={formData.service}
                                     onChange={handleChange}
-                                    className="w-full px-4 py-2 rounded-xl border-2 border-gray-100 focus:border-cyan-400 focus:outline-none transition-colors bg-white"
+                                    className="w-full px-4 py-3 min-h-[48px] rounded-xl border-2 border-gray-100 focus:border-cyan-400 focus:outline-none transition-colors bg-white text-base"
                                 >
                                     <option value="Full Groom">Full Groom (Bath, Cut, Nails, Ears)</option>
                                     <option value="Maintenance Groom">Maintenance Groom (Bath & Tidy)</option>
@@ -239,7 +242,7 @@ const BookingModal = ({ isOpen, onClose }) => {
                                     name="preferredTime"
                                     value={formData.preferredTime}
                                     onChange={handleChange}
-                                    className="w-full px-4 py-2 rounded-xl border-2 border-gray-100 focus:border-cyan-400 focus:outline-none transition-colors"
+                                    className="w-full px-4 py-3 min-h-[48px] rounded-xl border-2 border-gray-100 focus:border-cyan-400 focus:outline-none transition-colors text-base"
                                     placeholder="e.g. Monday mornings, or any Friday"
                                 />
                             </div>
@@ -251,7 +254,7 @@ const BookingModal = ({ isOpen, onClose }) => {
                                     value={formData.notes}
                                     onChange={handleChange}
                                     rows="2"
-                                    className="w-full px-4 py-2 rounded-xl border-2 border-gray-100 focus:border-cyan-400 focus:outline-none transition-colors resize-none"
+                                    className="w-full px-4 py-3 min-h-[48px] rounded-xl border-2 border-gray-100 focus:border-cyan-400 focus:outline-none transition-colors resize-none text-base"
                                     placeholder="Nervous dog? Medical issues? Let us know."
                                 />
                             </div>
@@ -259,7 +262,7 @@ const BookingModal = ({ isOpen, onClose }) => {
                             <button
                                 type="submit"
                                 disabled={isSubmitting}
-                                className="w-full py-4 rounded-xl font-bold text-lg text-white transition-all hover:scale-[1.02] hover:shadow-lg mt-4 disabled:opacity-70 disabled:cursor-not-allowed"
+                                className="w-full py-4 min-h-[56px] rounded-xl font-bold text-lg text-white transition-all hover:scale-[1.02] hover:shadow-lg mt-4 disabled:opacity-70 disabled:cursor-not-allowed"
                                 style={{ backgroundColor: colors.green }}
                             >
                                 {isSubmitting ? 'Sending...' : 'Send Request'}

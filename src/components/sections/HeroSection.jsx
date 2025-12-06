@@ -46,7 +46,7 @@ const HeroSection = ({ isLoaded, onBookClick }) => {
                             {/* Badge */}
 
 
-                            <h2
+                            <h1
                                 className="heading-font font-bold text-5xl md:text-6xl leading-tight mb-6 drop-shadow-sm"
                                 style={{ color: 'white' }}
                             >
@@ -60,7 +60,7 @@ const HeroSection = ({ isLoaded, onBookClick }) => {
                                         <path d="M2 8 Q 50 2, 100 8 T 198 8" stroke={colors.yellow} strokeWidth="4" strokeLinecap="round" fill="none" />
                                     </svg>
                                 </span>
-                            </h2>
+                            </h1>
                             <p
                                 className="body-font text-lg leading-relaxed mb-8 font-medium"
                                 style={{ color: 'white', opacity: 0.95, textShadow: '0 1px 2px rgba(0,0,0,0.1)' }}
@@ -99,9 +99,9 @@ const HeroSection = ({ isLoaded, onBookClick }) => {
                                     ))}
                                 </div>
                                 <div>
-                                    <div className="flex items-center gap-1 animate-pulse" style={{ animationDuration: '3s' }}>
+                                    <div className="flex items-center gap-1 animate-pulse" style={{ animationDuration: '3s' }} role="img" aria-label="5 out of 5 stars">
                                         {[...Array(5)].map((_, i) => (
-                                            <span key={i} style={{ color: colors.yellow }} className="drop-shadow-sm">★</span>
+                                            <span key={i} style={{ color: colors.yellow }} className="drop-shadow-sm" aria-hidden="true">★</span>
                                         ))}
                                     </div>
                                     <p
@@ -114,9 +114,9 @@ const HeroSection = ({ isLoaded, onBookClick }) => {
                             </div>
                         </div>
 
-                        {/* Hero Polaroid Cluster */}
-                        <div className={`relative h-[500px] ${isLoaded ? 'animate-fade-in' : 'opacity-0'} `} style={{ animationDelay: '0.3s' }}>
-                            <div className="absolute top-0 left-4 z-10 hover:z-40 transition-all duration-300">
+                        {/* Hero Polaroid Cluster - Responsive */}
+                        <div className={`relative h-[350px] md:h-[500px] ${isLoaded ? 'animate-fade-in' : 'opacity-0'} `} style={{ animationDelay: '0.3s' }}>
+                            <div className="absolute top-0 left-0 md:left-4 z-10 hover:z-40 transition-all duration-300 scale-[0.6] md:scale-100 origin-top-left">
                                 <PolaroidImage
                                     caption="Bella's spa day ✨"
                                     rotation={-5}
@@ -124,7 +124,7 @@ const HeroSection = ({ isLoaded, onBookClick }) => {
                                     src="/assets/client-dog-1.png"
                                 />
                             </div>
-                            <div className="absolute top-24 right-0 z-20 hover:z-40 transition-all duration-300">
+                            <div className="absolute top-12 md:top-24 right-0 z-20 hover:z-40 transition-all duration-300 scale-[0.6] md:scale-100 origin-top-right">
                                 <PolaroidImage
                                     caption="Looking dapper!"
                                     rotation={4}
@@ -132,7 +132,7 @@ const HeroSection = ({ isLoaded, onBookClick }) => {
                                     src="/assets/client-dog-2.png"
                                 />
                             </div>
-                            <div className="absolute bottom-0 left-1/4 z-30 hover:z-40 transition-all duration-300">
+                            <div className="absolute bottom-0 left-1/4 z-30 hover:z-40 transition-all duration-300 scale-[0.6] md:scale-100 origin-bottom-left">
                                 <PolaroidImage
                                     caption="Fresh & fluffy 🛁"
                                     rotation={-2}

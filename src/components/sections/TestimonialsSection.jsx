@@ -86,9 +86,9 @@ const TestimonialsSection = () => {
                                     {/* Content */}
                                     <div className="relative z-10 flex flex-col h-full">
                                         <div className="mb-6">
-                                            <div className="flex gap-1 mb-4">
+                                            <div className="flex gap-1 mb-4" role="img" aria-label={`${5} out of 5 stars`}>
                                                 {[...Array(5)].map((_, starIndex) => (
-                                                    <span key={starIndex} className="text-xl animate-pulse" style={{ color: colors.yellow, animationDelay: `${starIndex * 0.1}s` }}>★</span>
+                                                    <span key={starIndex} className="text-xl animate-pulse" style={{ color: colors.yellow, animationDelay: `${starIndex * 0.1}s` }} aria-hidden="true">★</span>
                                                 ))}
                                             </div>
                                             <div

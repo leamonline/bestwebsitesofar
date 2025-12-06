@@ -13,6 +13,7 @@ import FooterSection from './sections/FooterSection';
 import HoundslySection from './sections/HoundslySection';
 
 import BookingModal from './BookingModal';
+import ScrollToTop from './ScrollToTop';
 
 // Smarter Dog Grooming Salon - Homepage Mockup V2
 // Design Concept: Bold, playful, neighbourhood favourite
@@ -61,6 +62,7 @@ const SmarterDogHomepage = () => {
         isOpen={isBookingModalOpen}
         onClose={handleCloseModal}
       />
+      <ScrollToTop />
     </div>
   );
 };
