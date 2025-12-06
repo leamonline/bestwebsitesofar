@@ -7,24 +7,31 @@ import OurApproachPage from './components/pages/OurApproachPage'
 import FAQPage from './components/pages/FAQPage'
 import TermsPage from './components/pages/TermsPage'
 import MattedCoatPolicyPage from './components/pages/MattedCoatPolicyPage'
+import NotFoundPage from './components/pages/NotFoundPage'
 import CookieConsent from './components/CookieConsent';
+import ErrorBoundary from './components/ErrorBoundary';
+import ScrollRestoration from './components/ScrollRestoration';
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<SmarterDogHomepage />} />
-        <Route path="/services" element={<ServicesPage />} />
-        <Route path="/houndsly" element={<HoundslyPage />} />
-        <Route path="/privacy" element={<PrivacyPolicyPage />} />
-        <Route path="/approach" element={<OurApproachPage />} />
-        <Route path="/faq" element={<FAQPage />} />
-        <Route path="/terms" element={<TermsPage />} />
-        <Route path="/matted-coat-policy" element={<MattedCoatPolicyPage />} />
-      </Routes>
-      <CookieConsent />
-      <div className="noise-overlay" />
-    </Router>
+    <ErrorBoundary>
+      <Router>
+        <ScrollRestoration />
+        <Routes>
+          <Route path="/" element={<SmarterDogHomepage />} />
+          <Route path="/services" element={<ServicesPage />} />
+          <Route path="/houndsly" element={<HoundslyPage />} />
+          <Route path="/privacy" element={<PrivacyPolicyPage />} />
+          <Route path="/approach" element={<OurApproachPage />} />
+          <Route path="/faq" element={<FAQPage />} />
+          <Route path="/terms" element={<TermsPage />} />
+          <Route path="/matted-coat-policy" element={<MattedCoatPolicyPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+        <CookieConsent />
+        <div className="noise-overlay" />
+      </Router>
+    </ErrorBoundary>
   )
 }
 

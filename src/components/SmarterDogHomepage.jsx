@@ -49,15 +49,17 @@ const SmarterDogHomepage = () => {
 
 
       <Navigation isLoaded={isLoaded} onBookClick={handleBookClick} />
-      <HeroSection isLoaded={isLoaded} onBookClick={handleBookClick} />
-      <TrustSection />
-      <ServicesSection />
-      <GallerySection />
-      <SectionDivider type="grass" color={colors.mutedGreen} backgroundColor={colors.yellow} height="100px" />
-      <HoundslySection />
-      <TestimonialsSection />
-      {/* OfferSection removed - breaks calm→joy→calm rhythm */}
-      <CTASection onBookClick={handleBookClick} />
+      <main id="main-content">
+        <HeroSection isLoaded={isLoaded} onBookClick={handleBookClick} />
+        <TrustSection />
+        <ServicesSection />
+        <GallerySection />
+        <SectionDivider type="grass" color={colors.mutedGreen} backgroundColor={colors.yellow} height="100px" />
+        <HoundslySection />
+        <TestimonialsSection />
+        {/* OfferSection removed - breaks calm→joy→calm rhythm */}
+        <CTASection onBookClick={handleBookClick} />
+      </main>
       <FooterSection />
 
       <BookingModal

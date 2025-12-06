@@ -3,10 +3,24 @@ import emailjs from '@emailjs/browser';
 import { colors } from '../constants/colors';
 import { trackEvent } from '../utils/analytics';
 
+// Validation helpers
+const validatePhone = (phone) => {
+    // UK phone number validation (accepts various formats)
+    const phoneRegex = /^(?:(?:\+44)|(?:0))?\s*[1-9]\d{2,4}[\s-]?\d{3,4}[\s-]?\d{3,4}$/;
+    return phoneRegex.test(phone.replace(/\s/g, ''));
+};
+
+const validateEmail = (email) => {
+    if (!email) return true; // Email is optional
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+};
+
 const BookingModal = ({ isOpen, onClose }) => {
     const [step, setStep] = useState('form'); // 'form', 'success', or 'walkin'
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [error, setError] = useState(null);
+    const [fieldErrors, setFieldErrors] = useState({});
     const form = useRef();
 
     const [formData, setFormData] = useState({
@@ -24,12 +38,32 @@ const BookingModal = ({ isOpen, onClose }) => {
 
     if (!isOpen) return null;
 
+    const validateForm = () => {
+        const errors = {};
+
+        if (!validatePhone(formData.phone)) {
+            errors.phone = 'Please enter a valid UK phone number';
+        }
+
+        if (!validateEmail(formData.email)) {
+            errors.email = 'Please enter a valid email address';
+        }
+
+        setFieldErrors(errors);
+        return Object.keys(errors).length === 0;
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         // Spam Check (Honeypot)
         if (formData.website) {
             console.log("Bot detected");
+            return;
+        }
+
+        // Validate form
+        if (!validateForm()) {
             return;
         }
 
@@ -189,9 +223,12 @@ const BookingModal = ({ isOpen, onClose }) => {
                                         name="phone"
                                         value={formData.phone}
                                         onChange={handleChange}
-                                        className="w-full px-4 py-3 min-h-[48px] rounded-xl border-2 border-gray-100 focus:border-cyan-400 focus:outline-none transition-colors text-base"
+                                        className={`w-full px-4 py-3 min-h-[48px] rounded-xl border-2 focus:outline-none transition-colors text-base ${fieldErrors.phone ? 'border-red-400 bg-red-50' : 'border-gray-100 focus:border-cyan-400'}`}
                                         placeholder="07123..."
                                     />
+                                    {fieldErrors.phone && (
+                                        <p className="text-red-500 text-sm mt-1">{fieldErrors.phone}</p>
+                                    )}
                                 </div>
                             </div>
 
@@ -202,9 +239,12 @@ const BookingModal = ({ isOpen, onClose }) => {
                                     name="email"
                                     value={formData.email}
                                     onChange={handleChange}
-                                    className="w-full px-4 py-3 min-h-[48px] rounded-xl border-2 border-gray-100 focus:border-cyan-400 focus:outline-none transition-colors text-base"
+                                    className={`w-full px-4 py-3 min-h-[48px] rounded-xl border-2 focus:outline-none transition-colors text-base ${fieldErrors.email ? 'border-red-400 bg-red-50' : 'border-gray-100 focus:border-cyan-400'}`}
                                     placeholder="jane@example.com"
                                 />
+                                {fieldErrors.email && (
+                                    <p className="text-red-500 text-sm mt-1">{fieldErrors.email}</p>
+                                )}
                             </div>
 
                             <div className="grid grid-cols-2 gap-4">
@@ -354,9 +394,10 @@ const BookingModal = ({ isOpen, onClose }) => {
                             Close
                         </button>
                     </div>
-                )}
-            </div>
-        </div>
+                )
+                }
+            </div >
+        </div >
     );
 };
 

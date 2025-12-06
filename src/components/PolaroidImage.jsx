@@ -162,6 +162,13 @@ const PolaroidImage = ({
                 className="relative aspect-square overflow-hidden mb-4"
                 style={{ backgroundColor: '#2a1810' }} // Dark sepia background
             >
+                {/* Loading Skeleton - shows during early development stages */}
+                {developStage < 2 && (
+                    <div className="absolute inset-0 z-10 flex items-center justify-center">
+                        <div className="w-12 h-12 rounded-full border-4 border-white/20 border-t-white/60 animate-spin" />
+                    </div>
+                )}
+
                 {src ? (
                     <img
                         src={src}
