@@ -25,24 +25,11 @@ const HoundslyPage = () => {
             tag: 'Best Seller'
         },
         {
-            name: 'Paw Balm',
-            description: 'Soothing protection for cracked paws. Made with shea butter and vitamin E.',
-            price: '£8.50',
-            image: '/assets/balm.jpg',
-            tag: 'Essential'
-        },
-        {
             name: 'Detangling Spray',
             description: 'For a silky, knot-free coat. Reduces brushing time and static.',
             price: '£10.00',
             image: '/assets/spray.jpg',
             tag: 'New'
-        },
-        {
-            name: 'Nose Butter',
-            description: 'Moisturizing relief for dry, crusty noses. 100% natural ingredients.',
-            price: '£7.00',
-            image: '/assets/nose-butter.jpg'
         },
         {
             name: 'Ear Cleaner',
@@ -53,8 +40,47 @@ const HoundslyPage = () => {
     ];
 
     return (
-        <div className="min-h-screen bg-white">
+        <div className="min-h-screen bg-white relative">
             <Navigation isLoaded={isLoaded} onBookClick={() => setIsModalOpen(true)} />
+
+            {/* Coming Soon Overlay */}
+            <div className="fixed inset-0 z-50 flex items-center justify-center" style={{ backgroundColor: 'rgba(0,0,0,0.85)' }}>
+                {/* Construction Stripes Top */}
+                <div
+                    className="absolute top-0 left-0 right-0 h-8"
+                    style={{
+                        background: 'repeating-linear-gradient(45deg, #f59e0b, #f59e0b 20px, #000 20px, #000 40px)'
+                    }}
+                />
+
+                <div className="text-center px-6">
+                    <div className="text-6xl mb-6">🚧</div>
+                    <h1
+                        className="heading-font font-bold text-5xl md:text-7xl mb-4"
+                        style={{ color: '#f59e0b' }}
+                    >
+                        Coming Soon
+                    </h1>
+                    <p className="body-font text-xl text-white/80 mb-8 max-w-md mx-auto">
+                        Our Houndsly shop is getting a makeover. Check back soon for natural, handmade grooming products!
+                    </p>
+                    <a
+                        href="/"
+                        className="inline-block px-8 py-4 rounded-full font-bold text-lg transition-all hover:scale-105"
+                        style={{ backgroundColor: '#f59e0b', color: '#000' }}
+                    >
+                        Back to Homepage
+                    </a>
+                </div>
+
+                {/* Construction Stripes Bottom */}
+                <div
+                    className="absolute bottom-0 left-0 right-0 h-8"
+                    style={{
+                        background: 'repeating-linear-gradient(45deg, #f59e0b, #f59e0b 20px, #000 20px, #000 40px)'
+                    }}
+                />
+            </div>
 
             {/* Hero */}
             <div className="pt-32 pb-16 px-6 text-center relative overflow-hidden" style={{ backgroundColor: colors.offWhite }}>

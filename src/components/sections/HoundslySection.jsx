@@ -67,9 +67,6 @@ const HoundslySection = () => {
                                             <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="3" fill="none" />
                                         </svg>
                                     </div>
-                                    <h2 className="heading-font font-bold text-4xl md:text-5xl mb-6" style={{ color: colors.plum }}>
-                                        Houndsly by Smarter Dog
-                                    </h2>
                                 </div>
 
                                 <h3 className="heading-font font-bold text-4xl mb-6" style={{ color: colors.plum }}>

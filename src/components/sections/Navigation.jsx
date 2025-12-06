@@ -49,20 +49,29 @@ const Navigation = ({ isLoaded, onBookClick }) => {
                     </Link>
 
                     <Link
-                        to="/gallery"
-                        className="font-medium text-sm transition-colors relative group px-3 py-1 hover-wiggle"
-                        style={{ color: colors.teal }}
-                    >
-                        Gallery
-                        <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-current transition-all duration-300 group-hover:w-full" />
-                    </Link>
-
-                    <Link
                         to="/houndsly"
                         className="font-medium text-sm transition-colors relative group px-3 py-1 hover-wiggle"
                         style={{ color: colors.teal }}
                     >
                         Houndsly
+                        <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-current transition-all duration-300 group-hover:w-full" />
+                    </Link>
+
+                    <Link
+                        to="/approach"
+                        className="font-medium text-sm transition-colors relative group px-3 py-1 hover-wiggle"
+                        style={{ color: colors.teal }}
+                    >
+                        Our Approach
+                        <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-current transition-all duration-300 group-hover:w-full" />
+                    </Link>
+
+                    <Link
+                        to="/faq"
+                        className="font-medium text-sm transition-colors relative group px-3 py-1 hover-wiggle"
+                        style={{ color: colors.teal }}
+                    >
+                        FAQ
                         <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-current transition-all duration-300 group-hover:w-full" />
                     </Link>
 
@@ -103,20 +112,28 @@ const Navigation = ({ isLoaded, onBookClick }) => {
                         Services
                     </Link>
                     <Link
-                        to="/gallery"
-                        className="text-lg font-medium py-2 border-b border-gray-50"
-                        style={{ color: colors.teal }}
-                        onClick={() => setIsMenuOpen(false)}
-                    >
-                        Gallery
-                    </Link>
-                    <Link
                         to="/houndsly"
                         className="text-lg font-medium py-2 border-b border-gray-50"
                         style={{ color: colors.teal }}
                         onClick={() => setIsMenuOpen(false)}
                     >
                         Houndsly
+                    </Link>
+                    <Link
+                        to="/approach"
+                        className="text-lg font-medium py-2 border-b border-gray-50"
+                        style={{ color: colors.teal }}
+                        onClick={() => setIsMenuOpen(false)}
+                    >
+                        Our Approach
+                    </Link>
+                    <Link
+                        to="/faq"
+                        className="text-lg font-medium py-2 border-b border-gray-50"
+                        style={{ color: colors.teal }}
+                        onClick={() => setIsMenuOpen(false)}
+                    >
+                        FAQ
                     </Link>
                     <button
                         onClick={() => {
@@ -126,7 +143,7 @@ const Navigation = ({ isLoaded, onBookClick }) => {
                         className="w-full py-3 rounded-full font-bold text-white mt-2 active-squish"
                         style={{ backgroundColor: colors.green }}
                     >
-                        Request Appointment
+                        Book your visit
                     </button>
                 </div>
             )}

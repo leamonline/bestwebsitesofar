@@ -13,7 +13,7 @@ const TrustSection = () => {
                 <div className="max-w-6xl mx-auto px-6 flex flex-wrap justify-center items-center gap-8 md:gap-16 relative z-10">
                     {
                         [
-                            { number: '40+', label: 'Years Experience' },
+                            { number: 'Since 1982', label: 'Serving Ashton' },
                             { number: '10,000+', label: 'Happy Pups' },
                             { number: '4.9★', label: 'Google Rating' },
                             { number: '100%', label: 'Tail Wags' }

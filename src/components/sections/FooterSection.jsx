@@ -81,7 +81,7 @@ const FooterSection = () => {
                             Opening Hours
                         </h4>
                         <div
-                            className="body-font space-y-2"
+                            className="body-font text-lg space-y-2"
                             style={{ color: 'rgba(255,255,255,0.9)' }}
                         >
                             <p className="flex justify-between">
@@ -106,7 +106,7 @@ const FooterSection = () => {
                             Find Us
                         </h4>
                         <div
-                            className="body-font space-y-2"
+                            className="body-font text-lg space-y-2"
                             style={{ color: 'rgba(255,255,255,0.9)' }}
                         >
                             <p>183 Kings Road</p>
@@ -123,11 +123,15 @@ const FooterSection = () => {
                             Get in Touch
                         </h4>
                         <div
-                            className="body-font space-y-2"
+                            className="body-font text-lg space-y-2"
                             style={{ color: 'rgba(255,255,255,0.9)' }}
                         >
-                            <p>leam@smarterdog.co.uk</p>
-                            <p className="text-lg font-bold" style={{ color: 'white' }}>07507 731487</p>
+                            <p>
+                                <a href="mailto:leam@smarterdog.co.uk" className="hover:underline">leam@smarterdog.co.uk</a>
+                            </p>
+                            <p>
+                                <a href="tel:07507731487" className="text-xl font-bold hover:underline" style={{ color: 'white' }}>07507 731487</a>
+                            </p>
                             <p
                                 className="inline-flex items-center gap-2 mt-3 px-3 py-1 rounded-full text-base"
                                 style={{ backgroundColor: colors.green, color: 'white' }}
@@ -139,11 +143,25 @@ const FooterSection = () => {
                 </div>
 
                 <div
-                    className="pt-8 border-t flex flex-col md:flex-row justify-between items-center gap-4 body-font text-sm"
+                    className="pt-8 border-t flex flex-col md:flex-row justify-between items-center gap-4 body-font text-base"
                     style={{ borderColor: 'rgba(255,255,255,0.2)', color: 'rgba(255,255,255,0.8)' }}
                 >
                     <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4">
                         <p>© 2025 Smarter Dog Grooming Salon. All rights reserved.</p>
+                        <Link
+                            to="/terms"
+                            className="underline hover:opacity-70 transition-opacity"
+                            style={{ color: 'rgba(255,255,255,0.8)' }}
+                        >
+                            Terms & Conditions
+                        </Link>
+                        <Link
+                            to="/matted-coat-policy"
+                            className="underline hover:opacity-70 transition-opacity"
+                            style={{ color: 'rgba(255,255,255,0.8)' }}
+                        >
+                            Matted Coat Policy
+                        </Link>
                         <Link
                             to="/privacy"
                             className="underline hover:opacity-70 transition-opacity"

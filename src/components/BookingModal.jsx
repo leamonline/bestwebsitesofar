@@ -4,7 +4,7 @@ import { colors } from '../constants/colors';
 import { trackEvent } from '../utils/analytics';
 
 const BookingModal = ({ isOpen, onClose }) => {
-    const [step, setStep] = useState('form'); // 'form' or 'success'
+    const [step, setStep] = useState('form'); // 'form', 'success', or 'walkin'
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [error, setError] = useState(null);
     const form = useRef();
@@ -16,7 +16,7 @@ const BookingModal = ({ isOpen, onClose }) => {
         dogName: '',
         breed: '',
         service: 'Full Groom',
-        preferredTime: '',
+        preferredTimes: [],
         notes: '',
         // Honeypot field - should remain empty
         website: ''
@@ -59,9 +59,9 @@ const BookingModal = ({ isOpen, onClose }) => {
                         dog_name: formData.dogName,
                         breed: formData.breed,
                         service: formData.service,
-                        preferred_time: formData.preferredTime,
+                        preferred_time: formData.preferredTimes.join(', '),
                         notes: formData.notes,
-                        message: `New booking request for ${formData.dogName} (${formData.breed}). Service: ${formData.service}. Preferred time: ${formData.preferredTime}. Notes: ${formData.notes}`
+                        message: `New booking request for ${formData.dogName} (${formData.breed}). Service: ${formData.service}. Preferred times: ${formData.preferredTimes.join(', ')}. Notes: ${formData.notes}`
                     },
                     publicKey
                 );
@@ -82,6 +82,24 @@ const BookingModal = ({ isOpen, onClose }) => {
             ...formData,
             [e.target.name]: e.target.value
         });
+    };
+
+    const handleCheckboxChange = (timeSlot) => {
+        setFormData(prev => ({
+            ...prev,
+            preferredTimes: prev.preferredTimes.includes(timeSlot)
+                ? prev.preferredTimes.filter(t => t !== timeSlot)
+                : [...prev.preferredTimes, timeSlot]
+        }));
+    };
+
+    const handleServiceChange = (e) => {
+        const service = e.target.value;
+        if (service === 'Nail Clip' || service === 'Anal Glands') {
+            setStep('walkin');
+        } else {
+            handleChange(e);
+        }
     };
 
     return (
@@ -112,7 +130,7 @@ const BookingModal = ({ isOpen, onClose }) => {
                     <div className="p-8">
                         <div className="text-center mb-8">
                             <span
-                                className="inline-block px-3 py-1 rounded-full text-xs font-bold mb-3"
+                                className="inline-block px-4 py-2 rounded-full text-lg font-bold mb-4"
                                 style={{ backgroundColor: colors.cyan + '20', color: colors.teal }}
                             >
                                 📅 Request Appointment
@@ -124,11 +142,8 @@ const BookingModal = ({ isOpen, onClose }) => {
                             >
                                 Let's get you booked in!
                             </h2>
-                            <p className="body-font text-sm text-gray-600 mb-2">
+                            <p className="body-font text-sm text-gray-600">
                                 We'll check our diary and get back to you ASAP.
-                            </p>
-                            <p className="body-font text-xs font-semibold px-3 py-1 rounded-full inline-block" style={{ backgroundColor: colors.greenLight, color: colors.teal }}>
-                                ⏱️ Usually respond within 2 hours
                             </p>
                         </div>
 
@@ -223,7 +238,7 @@ const BookingModal = ({ isOpen, onClose }) => {
                                 <select
                                     name="service"
                                     value={formData.service}
-                                    onChange={handleChange}
+                                    onChange={handleServiceChange}
                                     className="w-full px-4 py-3 min-h-[48px] rounded-xl border-2 border-gray-100 focus:border-cyan-400 focus:outline-none transition-colors bg-white text-base"
                                 >
                                     <option value="Full Groom">Full Groom (Bath, Cut, Nails, Ears)</option>
@@ -236,15 +251,33 @@ const BookingModal = ({ isOpen, onClose }) => {
                             </div>
 
                             <div>
-                                <label className="block text-sm font-bold mb-1" style={{ color: colors.teal }}>Preferred Days/Times</label>
-                                <input
-                                    type="text"
-                                    name="preferredTime"
-                                    value={formData.preferredTime}
-                                    onChange={handleChange}
-                                    className="w-full px-4 py-3 min-h-[48px] rounded-xl border-2 border-gray-100 focus:border-cyan-400 focus:outline-none transition-colors text-base"
-                                    placeholder="e.g. Monday mornings, or any Friday"
-                                />
+                                <label className="block text-sm font-bold mb-2" style={{ color: colors.teal }}>Preferred Days/Times</label>
+                                <div className="grid grid-cols-2 gap-2">
+                                    {[
+                                        { id: 'mon-am', label: 'Monday Morning' },
+                                        { id: 'mon-pm', label: 'Monday Afternoon' },
+                                        { id: 'tue-am', label: 'Tuesday Morning' },
+                                        { id: 'tue-pm', label: 'Tuesday Afternoon' },
+                                        { id: 'wed-am', label: 'Wednesday Morning' },
+                                        { id: 'wed-pm', label: 'Wednesday Afternoon' }
+                                    ].map(slot => (
+                                        <label
+                                            key={slot.id}
+                                            className={`flex items-center gap-2 p-3 rounded-xl border-2 cursor-pointer transition-all ${formData.preferredTimes.includes(slot.id)
+                                                ? 'border-cyan-400 bg-cyan-50'
+                                                : 'border-gray-100 hover:border-gray-200'
+                                                }`}
+                                        >
+                                            <input
+                                                type="checkbox"
+                                                checked={formData.preferredTimes.includes(slot.id)}
+                                                onChange={() => handleCheckboxChange(slot.id)}
+                                                className="w-4 h-4 accent-cyan-500"
+                                            />
+                                            <span className="text-sm" style={{ color: colors.teal }}>{slot.label}</span>
+                                        </label>
+                                    ))}
+                                </div>
                             </div>
 
                             <div>
@@ -268,6 +301,38 @@ const BookingModal = ({ isOpen, onClose }) => {
                                 {isSubmitting ? 'Sending...' : 'Send Request'}
                             </button>
                         </form>
+                    </div>
+                ) : step === 'walkin' ? (
+                    <div className="p-12 text-center">
+                        <div className="text-6xl mb-6">🐾</div>
+                        <h2
+                            className="heading-font font-bold text-3xl mb-4"
+                            style={{ color: colors.teal }}
+                        >
+                            No booking needed!
+                        </h2>
+                        <p className="body-font text-lg text-gray-600 mb-8">
+                            Just pop in before 1pm on a day we're open. We'll sort you out!
+                        </p>
+                        <p className="body-font text-sm text-gray-500 mb-8">
+                            (That's Monday, Tuesday or Wednesday)
+                        </p>
+                        <div className="flex flex-col gap-3">
+                            <button
+                                onClick={() => setStep('form')}
+                                className="px-8 py-3 rounded-full font-bold transition-all hover:scale-105"
+                                style={{ backgroundColor: colors.cyan, color: 'white' }}
+                            >
+                                Back to booking form
+                            </button>
+                            <button
+                                onClick={onClose}
+                                className="px-8 py-3 rounded-full font-bold transition-all hover:scale-105 border-2"
+                                style={{ borderColor: colors.teal, color: colors.teal }}
+                            >
+                                Got it, thanks!
+                            </button>
+                        </div>
                     </div>
                 ) : (
                     <div className="p-12 text-center">

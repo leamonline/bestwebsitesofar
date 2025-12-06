@@ -1,163 +1,272 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { colors } from '../../constants/colors';
 import Navigation from '../sections/Navigation';
 import FooterSection from '../sections/FooterSection';
 
-const PrivacyPolicyPage = () => {
+const PrivacyPolicyPage = ({ onBookClick }) => {
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    useEffect(() => {
+        const timer = setTimeout(() => setIsLoaded(true), 100);
+        return () => clearTimeout(timer);
+    }, []);
+
     return (
-        <div
-            className="min-h-screen"
-            style={{
-                backgroundColor: colors.offWhite,
-                fontFamily: "'Montserrat', sans-serif"
-            }}
-        >
-            <Navigation isLoaded={true} onBookClick={() => { }} />
+        <div className="min-h-screen" style={{ backgroundColor: colors.offWhite }}>
+            <Navigation isLoaded={isLoaded} onBookClick={onBookClick} />
 
-            <main className="pt-32 pb-24 px-6">
+            <main className="pt-24 pb-16 px-6">
                 <div className="max-w-3xl mx-auto">
-                    <h1
-                        className="heading-font font-bold text-4xl md:text-5xl mb-8"
-                        style={{ color: colors.plum }}
-                    >
-                        Privacy Policy
-                    </h1>
+                    {/* Breadcrumb */}
+                    <p className="body-font text-base mb-4" style={{ color: colors.teal, opacity: 0.7 }}>
+                        Policies & Terms
+                    </p>
 
-                    <div
-                        className="body-font prose prose-lg"
-                        style={{ color: colors.teal }}
-                    >
-                        <p className="text-sm mb-6" style={{ color: colors.teal }}>
+                    {/* Header */}
+                    <div className="mb-12">
+                        <h1
+                            className="heading-font font-bold text-4xl md:text-5xl mb-6"
+                            style={{ color: colors.plum }}
+                        >
+                            Privacy Policy
+                        </h1>
+                        <p className="body-font text-lg leading-relaxed" style={{ color: colors.teal }}>
+                            This policy explains how we collect and use personal data at Smarter Dog Grooming Salon. We're committed to protecting your privacy and being transparent about how we handle your information.
+                        </p>
+                        <p className="body-font text-base mt-4" style={{ color: colors.teal, opacity: 0.7 }}>
                             <strong>Last updated:</strong> December 2024
                         </p>
+                    </div>
 
-                        <section className="mb-8">
-                            <h2
-                                className="heading-font font-bold text-2xl mb-4"
-                                style={{ color: colors.plum }}
-                            >
+                    {/* Sections */}
+                    <div className="space-y-6">
+
+                        {/* Who We Are */}
+                        <div className="bg-white rounded-2xl p-8 shadow-sm border-l-4" style={{ borderLeftColor: colors.cyan }}>
+                            <h2 className="heading-font font-bold text-2xl mb-4" style={{ color: colors.plum }}>
                                 Who We Are
                             </h2>
-                            <p className="mb-4 leading-relaxed">
-                                Smarter Dog Grooming Salon ("we", "us", or "our") operates at
-                                183 Kings Road, Ashton-under-Lyne, OL6 8HD. We are committed to
-                                protecting your personal information and your right to privacy.
+                            <p className="body-font text-lg leading-relaxed" style={{ color: colors.teal }}>
+                                Smarter Dog Grooming Salon ("we", "us", or "our") operates at 183 Kings Road, Ashton-under-Lyne, OL6 8HD. We are the data controller for the personal information we collect about you and your dog.
                             </p>
-                        </section>
+                        </div>
 
-                        <section className="mb-8">
-                            <h2
-                                className="heading-font font-bold text-2xl mb-4"
-                                style={{ color: colors.plum }}
-                            >
-                                Information We Collect
+                        {/* What Data We Collect */}
+                        <div className="bg-white rounded-2xl p-8 shadow-sm border-l-4" style={{ borderLeftColor: colors.cyan }}>
+                            <h2 className="heading-font font-bold text-2xl mb-4" style={{ color: colors.plum }}>
+                                What Data We Collect
                             </h2>
-                            <p className="mb-4 leading-relaxed">
-                                When you request an appointment through our website, we collect:
+                            <p className="body-font text-lg leading-relaxed mb-4" style={{ color: colors.teal }}>
+                                When you book an appointment or contact us, we collect:
                             </p>
-                            <ul className="list-disc list-inside mb-4 space-y-2">
-                                <li>Your name and contact details (phone number, email)</li>
-                                <li>Your dog's name and breed</li>
-                                <li>Preferred appointment times</li>
-                                <li>Any notes about your dog's needs or health conditions</li>
+                            <ul className="space-y-3 mb-6">
+                                <li className="body-font text-lg leading-relaxed flex gap-3" style={{ color: colors.teal }}>
+                                    <span style={{ color: colors.cyan }}>•</span>
+                                    <span><strong>Your details:</strong> Name, phone number, email address, and home address</span>
+                                </li>
+                                <li className="body-font text-lg leading-relaxed flex gap-3" style={{ color: colors.teal }}>
+                                    <span style={{ color: colors.cyan }}>•</span>
+                                    <span><strong>Your dog's details:</strong> Name, breed, age, weight, and coat type</span>
+                                </li>
+                                <li className="body-font text-lg leading-relaxed flex gap-3" style={{ color: colors.teal }}>
+                                    <span style={{ color: colors.cyan }}>•</span>
+                                    <span><strong>Health & behaviour notes:</strong> Any medical conditions, allergies, behaviour concerns, or special requirements</span>
+                                </li>
+                                <li className="body-font text-lg leading-relaxed flex gap-3" style={{ color: colors.teal }}>
+                                    <span style={{ color: colors.cyan }}>•</span>
+                                    <span><strong>Appointment history:</strong> Dates, services provided, grooming notes, and any issues encountered</span>
+                                </li>
+                                <li className="body-font text-lg leading-relaxed flex gap-3" style={{ color: colors.teal }}>
+                                    <span style={{ color: colors.cyan }}>•</span>
+                                    <span><strong>Payment information:</strong> Transaction records processed securely through Square</span>
+                                </li>
                             </ul>
-                        </section>
+                        </div>
 
-                        <section className="mb-8">
-                            <h2
-                                className="heading-font font-bold text-2xl mb-4"
-                                style={{ color: colors.plum }}
-                            >
-                                How We Use Your Information
+                        {/* Why We Collect It */}
+                        <div className="bg-white rounded-2xl p-8 shadow-sm border-l-4" style={{ borderLeftColor: colors.cyan }}>
+                            <h2 className="heading-font font-bold text-2xl mb-4" style={{ color: colors.plum }}>
+                                Why We Collect It
                             </h2>
-                            <p className="mb-4 leading-relaxed">We use your information to:</p>
-                            <ul className="list-disc list-inside mb-4 space-y-2">
-                                <li>Process and confirm your appointment requests</li>
-                                <li>Contact you regarding your bookings</li>
-                                <li>Provide the best possible grooming service for your dog</li>
-                                <li>Send appointment reminders (with your consent)</li>
+                            <p className="body-font text-lg leading-relaxed mb-4" style={{ color: colors.teal }}>
+                                We only collect data that's necessary to provide a safe and professional grooming service:
+                            </p>
+                            <ul className="space-y-3">
+                                <li className="body-font text-lg leading-relaxed flex gap-3" style={{ color: colors.teal }}>
+                                    <span style={{ color: colors.cyan }}>•</span>
+                                    <span><strong>Booking appointments:</strong> To schedule, confirm, and remind you about upcoming visits</span>
+                                </li>
+                                <li className="body-font text-lg leading-relaxed flex gap-3" style={{ color: colors.teal }}>
+                                    <span style={{ color: colors.cyan }}>•</span>
+                                    <span><strong>Providing safe care:</strong> Health notes help us groom your dog safely and avoid triggers</span>
+                                </li>
+                                <li className="body-font text-lg leading-relaxed flex gap-3" style={{ color: colors.teal }}>
+                                    <span style={{ color: colors.cyan }}>•</span>
+                                    <span><strong>Continuity of service:</strong> Appointment history helps us remember your dog's preferences and needs</span>
+                                </li>
+                                <li className="body-font text-lg leading-relaxed flex gap-3" style={{ color: colors.teal }}>
+                                    <span style={{ color: colors.cyan }}>•</span>
+                                    <span><strong>Contacting you:</strong> To discuss bookings, share updates, or reach you in an emergency</span>
+                                </li>
                             </ul>
-                        </section>
+                        </div>
 
-                        <section className="mb-8">
-                            <h2
-                                className="heading-font font-bold text-2xl mb-4"
-                                style={{ color: colors.plum }}
-                            >
+                        {/* Data Retention */}
+                        <div className="bg-white rounded-2xl p-8 shadow-sm border-l-4" style={{ borderLeftColor: colors.cyan }}>
+                            <h2 className="heading-font font-bold text-2xl mb-4" style={{ color: colors.plum }}>
+                                How Long We Keep Your Data
+                            </h2>
+                            <ul className="space-y-3">
+                                <li className="body-font text-lg leading-relaxed flex gap-3" style={{ color: colors.teal }}>
+                                    <span style={{ color: colors.cyan }}>•</span>
+                                    <span><strong>Active client records:</strong> Kept while you're a regular customer and for 3 years after your last appointment</span>
+                                </li>
+                                <li className="body-font text-lg leading-relaxed flex gap-3" style={{ color: colors.teal }}>
+                                    <span style={{ color: colors.cyan }}>•</span>
+                                    <span><strong>Financial records:</strong> Kept for 6 years as required by UK tax law</span>
+                                </li>
+                                <li className="body-font text-lg leading-relaxed flex gap-3" style={{ color: colors.teal }}>
+                                    <span style={{ color: colors.cyan }}>•</span>
+                                    <span><strong>Health/incident notes:</strong> Kept for 3 years for safety and liability purposes</span>
+                                </li>
+                            </ul>
+                            <p className="body-font text-lg leading-relaxed mt-4" style={{ color: colors.teal }}>
+                                You can request deletion of your data at any time (see Your Rights below).
+                            </p>
+                        </div>
+
+                        {/* Data Sharing */}
+                        <div className="bg-white rounded-2xl p-8 shadow-sm border-l-4" style={{ borderLeftColor: colors.cyan }}>
+                            <h2 className="heading-font font-bold text-2xl mb-4" style={{ color: colors.plum }}>
+                                Who We Share Data With
+                            </h2>
+                            <p className="body-font text-lg leading-relaxed mb-4" style={{ color: colors.teal }}>
+                                <strong>We never sell your data.</strong> We only share information when necessary:
+                            </p>
+                            <ul className="space-y-3">
+                                <li className="body-font text-lg leading-relaxed flex gap-3" style={{ color: colors.teal }}>
+                                    <span style={{ color: colors.cyan }}>•</span>
+                                    <span><strong>Payment processor (Square):</strong> To process card payments securely</span>
+                                </li>
+                                <li className="body-font text-lg leading-relaxed flex gap-3" style={{ color: colors.teal }}>
+                                    <span style={{ color: colors.cyan }}>•</span>
+                                    <span><strong>Emergency vets:</strong> If your dog becomes unwell and needs veterinary attention during their visit</span>
+                                </li>
+                                <li className="body-font text-lg leading-relaxed flex gap-3" style={{ color: colors.teal }}>
+                                    <span style={{ color: colors.cyan }}>•</span>
+                                    <span><strong>Legal requirements:</strong> Only if required by law or court order</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        {/* Data Security */}
+                        <div className="bg-white rounded-2xl p-8 shadow-sm border-l-4" style={{ borderLeftColor: colors.cyan }}>
+                            <h2 className="heading-font font-bold text-2xl mb-4" style={{ color: colors.plum }}>
                                 Data Security
                             </h2>
-                            <p className="mb-4 leading-relaxed">
-                                We implement appropriate security measures to protect your personal
-                                information. Your data is stored securely and only accessed by
-                                authorised personnel.
+                            <p className="body-font text-lg leading-relaxed" style={{ color: colors.teal }}>
+                                We implement appropriate security measures to protect your personal information. Your data is stored securely and only accessed by authorised personnel. Digital records are password-protected, and paper records are kept in a locked location.
                             </p>
-                        </section>
+                        </div>
 
-                        <section className="mb-8">
-                            <h2
-                                className="heading-font font-bold text-2xl mb-4"
-                                style={{ color: colors.plum }}
-                            >
+                        {/* Your Rights */}
+                        <div className="bg-white rounded-2xl p-8 shadow-sm border-l-4" style={{ borderLeftColor: colors.cyan }}>
+                            <h2 className="heading-font font-bold text-2xl mb-4" style={{ color: colors.plum }}>
                                 Your Rights
                             </h2>
-                            <p className="mb-4 leading-relaxed">
+                            <p className="body-font text-lg leading-relaxed mb-4" style={{ color: colors.teal }}>
                                 Under UK data protection law (UK GDPR), you have the right to:
                             </p>
-                            <ul className="list-disc list-inside mb-4 space-y-2">
-                                <li>Access the personal data we hold about you</li>
-                                <li>Request correction of inaccurate data</li>
-                                <li>Request deletion of your data</li>
-                                <li>Object to or restrict processing of your data</li>
+                            <ul className="space-y-3">
+                                <li className="body-font text-lg leading-relaxed flex gap-3" style={{ color: colors.teal }}>
+                                    <span style={{ color: colors.cyan }}>•</span>
+                                    <span><strong>Access:</strong> Request a copy of the personal data we hold about you</span>
+                                </li>
+                                <li className="body-font text-lg leading-relaxed flex gap-3" style={{ color: colors.teal }}>
+                                    <span style={{ color: colors.cyan }}>•</span>
+                                    <span><strong>Correction:</strong> Ask us to correct inaccurate or incomplete data</span>
+                                </li>
+                                <li className="body-font text-lg leading-relaxed flex gap-3" style={{ color: colors.teal }}>
+                                    <span style={{ color: colors.cyan }}>•</span>
+                                    <span><strong>Deletion:</strong> Request that we delete your data (subject to legal retention requirements)</span>
+                                </li>
+                                <li className="body-font text-lg leading-relaxed flex gap-3" style={{ color: colors.teal }}>
+                                    <span style={{ color: colors.cyan }}>•</span>
+                                    <span><strong>Objection:</strong> Object to or restrict how we process your data</span>
+                                </li>
                             </ul>
-                        </section>
+                            <p className="body-font text-lg leading-relaxed mt-4" style={{ color: colors.teal }}>
+                                To exercise any of these rights, please contact us using the details below.
+                            </p>
+                        </div>
 
-                        <section className="mb-8">
-                            <h2
-                                className="heading-font font-bold text-2xl mb-4"
-                                style={{ color: colors.plum }}
-                            >
+                        {/* Cookies */}
+                        <div className="bg-white rounded-2xl p-8 shadow-sm border-l-4" style={{ borderLeftColor: colors.cyan }}>
+                            <h2 className="heading-font font-bold text-2xl mb-4" style={{ color: colors.plum }}>
                                 Cookies
                             </h2>
-                            <p className="mb-4 leading-relaxed">
-                                Our website uses essential cookies to function properly. We also use
-                                analytics cookies (with your consent) to understand how visitors use
-                                our site. You can manage your cookie preferences at any time.
+                            <p className="body-font text-lg leading-relaxed mb-4" style={{ color: colors.teal }}>
+                                Our website uses cookies to function properly:
                             </p>
-                        </section>
+                            <ul className="space-y-3">
+                                <li className="body-font text-lg leading-relaxed flex gap-3" style={{ color: colors.teal }}>
+                                    <span style={{ color: colors.cyan }}>•</span>
+                                    <span><strong>Essential cookies:</strong> Required for the website to work (no consent needed)</span>
+                                </li>
+                                <li className="body-font text-lg leading-relaxed flex gap-3" style={{ color: colors.teal }}>
+                                    <span style={{ color: colors.cyan }}>•</span>
+                                    <span><strong>Analytics cookies:</strong> Help us understand how visitors use our site (only with your consent)</span>
+                                </li>
+                            </ul>
+                            <p className="body-font text-lg leading-relaxed mt-4" style={{ color: colors.teal }}>
+                                When you first visit our site, you'll see a cookie banner where you can accept or decline non-essential cookies. You can change your preferences at any time through your browser settings.
+                            </p>
+                        </div>
 
-                        <section className="mb-8">
-                            <h2
-                                className="heading-font font-bold text-2xl mb-4"
-                                style={{ color: colors.plum }}
-                            >
+                        {/* Contact */}
+                        <div className="bg-white rounded-2xl p-8 shadow-sm border-l-4" style={{ borderLeftColor: colors.cyan }}>
+                            <h2 className="heading-font font-bold text-2xl mb-4" style={{ color: colors.plum }}>
                                 Contact Us
                             </h2>
-                            <p className="mb-4 leading-relaxed">
-                                If you have any questions about this Privacy Policy or our data
-                                practices, please contact us:
+                            <p className="body-font text-lg leading-relaxed mb-4" style={{ color: colors.teal }}>
+                                If you have any questions about this Privacy Policy, want to exercise your rights, or have concerns about how we handle your data:
                             </p>
-                            <ul className="list-none space-y-2">
-                                <li>📧 Email: leam@smarterdog.co.uk</li>
-                                <li>📞 Phone: 07507 731487</li>
-                                <li>📍 Address: 183 Kings Road, Ashton-under-Lyne, OL6 8HD</li>
+                            <ul className="space-y-3">
+                                <li className="body-font text-lg leading-relaxed flex gap-3" style={{ color: colors.teal }}>
+                                    <span style={{ color: colors.cyan }}>•</span>
+                                    <span><strong>Email:</strong> <a href="mailto:leam@smarterdog.co.uk" className="underline hover:opacity-70" style={{ color: colors.cyan }}>leam@smarterdog.co.uk</a></span>
+                                </li>
+                                <li className="body-font text-lg leading-relaxed flex gap-3" style={{ color: colors.teal }}>
+                                    <span style={{ color: colors.cyan }}>•</span>
+                                    <span><strong>Phone:</strong> <a href="tel:07507731487" className="underline hover:opacity-70" style={{ color: colors.cyan }}>07507 731487</a></span>
+                                </li>
+                                <li className="body-font text-lg leading-relaxed flex gap-3" style={{ color: colors.teal }}>
+                                    <span style={{ color: colors.cyan }}>•</span>
+                                    <span><strong>Address:</strong> 183 Kings Road, Ashton-under-Lyne, OL6 8HD</span>
+                                </li>
                             </ul>
-                        </section>
-
-                        <div className="mt-12 pt-8 border-t" style={{ borderColor: colors.tealLight }}>
-                            <Link
-                                to="/"
-                                className="inline-flex items-center gap-2 font-bold transition-all hover:opacity-70"
-                                style={{ color: colors.teal }}
-                            >
-                                ← Back to Home
-                            </Link>
+                            <p className="body-font text-lg leading-relaxed mt-4" style={{ color: colors.teal }}>
+                                If you're not satisfied with our response, you have the right to complain to the Information Commissioner's Office (ICO) at <a href="https://ico.org.uk" target="_blank" rel="noopener noreferrer" className="underline hover:opacity-70" style={{ color: colors.cyan }}>ico.org.uk</a>.
+                            </p>
                         </div>
+
+                    </div>
+
+                    {/* Back link */}
+                    <div className="mt-12 pt-8 border-t" style={{ borderColor: 'rgba(0,0,0,0.1)' }}>
+                        <Link
+                            to="/"
+                            className="inline-flex items-center gap-2 font-bold transition-all hover:opacity-70 body-font text-lg"
+                            style={{ color: colors.teal }}
+                        >
+                            ← Back to Home
+                        </Link>
                     </div>
                 </div>
             </main>
 
-            <FooterSection />
+            <FooterSection onBookClick={onBookClick} />
         </div>
     );
 };

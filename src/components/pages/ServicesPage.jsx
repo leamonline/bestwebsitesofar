@@ -19,26 +19,26 @@ const ServicesPage = () => {
 
     const services = [
         {
-            title: "The Full Groom",
-            price: "From £45",
-            description: "The complete makeover. Includes a double bath, blow dry, full body styling to your specification, nail trim, and ear cleaning.",
-            features: ["Double Bath & Blow Dry", "Full Body Styling", "Hygiene Clip", "Paw Pad Trim", "Nail Trim & Ear Clean"],
+            title: "Full Groom",
+            price: "From £42",
+            description: "The complete makeover. Includes a double bath and blow dry, full body styling to your preference, hygiene clip, paw pad trim, nail trim, and ear cleaning.",
+            bestFor: "First visits or dogs needing a full reset",
             color: colors.teal,
             bgColor: 'white'
         },
         {
             title: "Maintenance Groom",
-            price: "From £30",
-            description: "Perfect for in-between full grooms to keep your dog tidy. Includes bath, dry, and trimming of face, feet, and hygiene areas.",
-            features: ["Bath & Blow Dry", "Face Trim", "Feet & Pads Trim", "Hygiene Clip", "Nail Trim"],
+            price: "From £32",
+            description: "Perfect between full grooms to keep your dog tidy. Includes bath, dry, and trimming of face, feet, and hygiene areas, plus nail trim.",
+            bestFor: "Regulars between full grooms",
             color: colors.orange,
             bgColor: 'white'
         },
         {
-            title: "De-Shedding Package",
+            title: "De-shedding Groom",
             price: "From £35",
-            description: "Ideal for double-coated breeds. A deep clean and thorough undercoat removal to reduce shedding around your home.",
-            features: ["Deep Cleaning Bath", "Undercoat Removal", "High-Velocity Dry", "Brush Out", "Nail Trim"],
+            description: "Ideal for double-coated breeds. A deep cleaning bath, thorough undercoat removal with high-velocity drying, full brush out, and nail trim.",
+            bestFor: "Double coats and heavy shedders",
             color: colors.yellow,
             bgColor: 'white'
         }
@@ -57,7 +57,7 @@ const ServicesPage = () => {
         <div className="min-h-screen bg-white">
             <Navigation isLoaded={isLoaded} onBookClick={() => setIsModalOpen(true)} />
 
-            {/* Hero */}
+            {/* Hero - now care-focused */}
             <div className="pt-32 pb-16 px-6 text-center relative overflow-hidden" style={{ backgroundColor: colors.offWhite }}>
                 {/* Background Dog */}
                 <div className="absolute top-10 left-0 md:left-20 z-0 opacity-10 pointer-events-none">
@@ -68,14 +68,11 @@ const ServicesPage = () => {
                 </div>
 
                 <div className="relative z-10">
-                    <span className="handwriting text-3xl block mb-4" style={{ color: colors.orange }}>
-                        Pamper your pooch
-                    </span>
                     <h1 className="heading-font text-5xl md:text-6xl font-bold mb-6" style={{ color: colors.teal }}>
-                        Our Services
+                        How we look after your dog
                     </h1>
                     <p className="body-font text-xl max-w-2xl mx-auto" style={{ color: colors.teal, opacity: 0.8 }}>
-                        Professional grooming tailored to your dog's breed, coat, and personality.
+                        Calm, careful grooming shaped around your dog's coat, temperament, and comfort.
                     </p>
                 </div>
             </div>
@@ -95,21 +92,17 @@ const ServicesPage = () => {
                                 <h3 className="heading-font text-3xl font-bold mb-2" style={{ color: service.color }}>
                                     {service.title}
                                 </h3>
-                                <p className="text-2xl font-bold mb-6" style={{ color: colors.darkGray }}>{service.price}</p>
-                                <p className="body-font mb-8 text-gray-600 flex-grow">{service.description}</p>
-                                <ul className="space-y-3 mb-8">
-                                    {service.features.map((feature, idx) => (
-                                        <li key={idx} className="flex items-center gap-3 text-sm font-medium text-gray-700">
-                                            <span className="text-lg">🐾</span> {feature}
-                                        </li>
-                                    ))}
-                                </ul>
+                                <p className="text-2xl font-bold mb-4" style={{ color: colors.darkGray }}>{service.price}</p>
+                                <p className="body-font text-lg mb-6 text-gray-600 flex-grow leading-relaxed">{service.description}</p>
+                                <p className="body-font text-base italic mb-8 pt-4 border-t border-gray-100" style={{ color: colors.teal }}>
+                                    Best for: {service.bestFor}
+                                </p>
                                 <button
                                     onClick={() => setIsModalOpen(true)}
-                                    className="w-full py-3 rounded-full font-bold text-white transition-opacity hover:opacity-90"
+                                    className="w-full py-4 rounded-full font-bold text-lg text-white transition-opacity hover:opacity-90"
                                     style={{ backgroundColor: service.color }}
                                 >
-                                    Book Now
+                                    Book your visit
                                 </button>
                             </div>
                         ))}
@@ -119,27 +112,33 @@ const ServicesPage = () => {
                     <div className="grid md:grid-cols-2 gap-8">
                         <div className="bg-white rounded-3xl p-8 shadow-lg">
                             <h3 className="heading-font text-2xl font-bold mb-4" style={{ color: colors.teal }}>
-                                🐶 Puppy Introduction
+                                Puppy Intro
                             </h3>
-                            <p className="body-font text-gray-600 mb-4">
-                                A gentle first experience for puppies under 6 months. We focus on positive association with grooming sounds and sensations. Includes a gentle bath, slow dry, and lots of cuddles.
+                            <p className="body-font text-lg text-gray-600 mb-4 leading-relaxed">
+                                A gentle first experience for puppies under 6 months. We focus on positive association with grooming sounds and sensations. Includes a gentle bath, slow dry, and lots of reassurance.
                             </p>
-                            <p className="font-bold" style={{ color: colors.orange }}>£30</p>
+                            <p className="body-font text-base italic mb-4" style={{ color: colors.teal }}>
+                                No rushing. Plenty of cuddles.
+                            </p>
+                            <p className="font-bold text-lg" style={{ color: colors.orange }}>£35</p>
                         </div>
                         <div className="bg-white rounded-3xl p-8 shadow-lg">
                             <h3 className="heading-font text-2xl font-bold mb-4" style={{ color: colors.teal }}>
-                                ✂️ Walk-in Services
+                                Walk-in Services
                             </h3>
-                            <p className="body-font text-gray-600 mb-4">
-                                Quick services available without a full appointment.
+                            <p className="body-font text-lg text-gray-600 mb-4 leading-relaxed">
+                                Quick, calm services — no full appointment needed.
                                 <br />
                                 <strong>Available:</strong> Mon, Tue, Wed before 1pm.
                             </p>
-                            <ul className="space-y-2 text-sm text-gray-700">
-                                <li>• Nail Clipping - £10</li>
-                                <li>• Ear Cleaning - £8</li>
-                                <li>• Anal Gland Expression - £10</li>
+                            <ul className="space-y-2 text-lg text-gray-700">
+                                <li>Nail Clipping — £10</li>
+                                <li>Ear Cleaning — £10</li>
+                                <li>Anal Gland Expression — £10</li>
                             </ul>
+                            <p className="body-font text-base italic mt-4" style={{ color: colors.teal }}>
+                                Quick, calm, and over before they realise.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -150,10 +149,13 @@ const ServicesPage = () => {
             {/* What to Expect Timeline */}
             <section className="py-20 px-6" style={{ backgroundColor: colors.blueSlate }}>
                 <div className="max-w-4xl mx-auto">
-                    <h2 className="heading-font text-4xl font-bold text-center mb-16 text-white">
-                        What to Expect
+                    <h2 className="heading-font text-4xl font-bold text-center mb-4 text-white">
+                        What to expect on the day
                     </h2>
-                    <div className="mt-16">
+                    <p className="body-font text-lg text-center text-white/80 mb-16">
+                        We take things at your dog's pace. Here's how a typical visit flows.
+                    </p>
+                    <div className="mt-8">
                         <ProcessTimeline steps={timeline} />
                     </div>
                 </div>

@@ -2,8 +2,11 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SmarterDogHomepage from './components/SmarterDogHomepage';
 import ServicesPage from './components/pages/ServicesPage'
 import HoundslyPage from './components/pages/HoundslyPage'
-import GalleryPage from './components/pages/GalleryPage'
 import PrivacyPolicyPage from './components/pages/PrivacyPolicyPage'
+import OurApproachPage from './components/pages/OurApproachPage'
+import FAQPage from './components/pages/FAQPage'
+import TermsPage from './components/pages/TermsPage'
+import MattedCoatPolicyPage from './components/pages/MattedCoatPolicyPage'
 import CookieConsent from './components/CookieConsent';
 
 function App() {
@@ -13,8 +16,11 @@ function App() {
         <Route path="/" element={<SmarterDogHomepage />} />
         <Route path="/services" element={<ServicesPage />} />
         <Route path="/houndsly" element={<HoundslyPage />} />
-        <Route path="/gallery" element={<GalleryPage />} />
         <Route path="/privacy" element={<PrivacyPolicyPage />} />
+        <Route path="/approach" element={<OurApproachPage />} />
+        <Route path="/faq" element={<FAQPage />} />
+        <Route path="/terms" element={<TermsPage />} />
+        <Route path="/matted-coat-policy" element={<MattedCoatPolicyPage />} />
       </Routes>
       <CookieConsent />
       <div className="noise-overlay" />

@@ -11,6 +11,7 @@ import OfferSection from './sections/OfferSection';
 import CTASection from './sections/CTASection';
 import FooterSection from './sections/FooterSection';
 import HoundslySection from './sections/HoundslySection';
+import SectionDivider from './SectionDivider';
 
 import BookingModal from './BookingModal';
 import ScrollToTop from './ScrollToTop';
@@ -52,6 +53,7 @@ const SmarterDogHomepage = () => {
       <TrustSection />
       <ServicesSection />
       <GallerySection />
+      <SectionDivider type="grass" color={colors.mutedGreen} backgroundColor={colors.yellow} height="100px" />
       <HoundslySection />
       <TestimonialsSection />
       {/* OfferSection removed - breaks calm→joy→calm rhythm */}

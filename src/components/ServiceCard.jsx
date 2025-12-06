@@ -25,14 +25,14 @@ const ServiceCard = ({ icon, title, desc, bestFor, bgColor, accentColor }) => (
             {title}
         </h4>
         <p
-            className="body-font leading-relaxed relative z-10 flex-grow"
+            className="body-font text-base leading-relaxed relative z-10 flex-grow"
             style={{ color: colors.teal }}
         >
             {desc}
         </p>
         {bestFor && (
             <p
-                className="body-font mt-4 pt-4 border-t border-gray-100 relative z-10 italic"
+                className="body-font text-base mt-4 pt-4 border-t border-gray-100 relative z-10 italic"
                 style={{ color: colors.teal }}
             >
                 Best for: {bestFor}

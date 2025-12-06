@@ -114,7 +114,7 @@ const ServicesSection = () => {
                                         Ear Cleaning
                                     </h4>
                                     <p
-                                        className="body-font text-sm"
+                                        className="body-font text-base"
                                         style={{ color: colors.teal }}
                                     >
                                         We give their ears a good clean and check for any issues. Keeps them clean, comfy, and stops nasties building up.
@@ -141,7 +141,7 @@ const ServicesSection = () => {
                                         Anal Gland Expression
                                     </h4>
                                     <p
-                                        className="body-font text-sm"
+                                        className="body-font text-base"
                                         style={{ color: colors.teal }}
                                     >
                                         Nobody's favourite topic, but sometimes it needs doing — relieves discomfort and prevents impaction. We handle it so you don't have to.
@@ -168,7 +168,7 @@ const ServicesSection = () => {
                                         Nail Trims
                                     </h4>
                                     <p
-                                        className="body-font text-sm"
+                                        className="body-font text-base"
                                         style={{ color: colors.teal }}
                                     >
                                         Quick, stress-free nail clips. Healthier paws, fewer scratches on your floors. Everyone wins.

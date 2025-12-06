@@ -18,7 +18,7 @@ const TestimonialsSection = () => {
                             >
                                 Dogs who wouldn't go anywhere else
                             </h3>
-                            <p className="text-base max-w-xl mx-auto" style={{ color: colors.teal, opacity: 0.8 }}>
+                            <p className="text-lg max-w-xl mx-auto" style={{ color: colors.teal }}>
                                 Real words from long-time regulars, nervous pups and first-time visitors.
                             </p>
                         </FadeIn>

@@ -41,7 +41,7 @@ const CTASection = ({ onBookClick }) => {
                         >
                             We're open Monday to Wednesday, 8:30am–3pm. Slots go fast — get yours booked in.
                         </p>
-                        <div className="flex flex-wrap justify-center gap-4">
+                        <div className="flex flex-wrap justify-center gap-4 mb-10">
                             <button
                                 onClick={() => onBookClick('CTA Section')}
                                 className="px-10 py-4 rounded-full font-bold text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl"
@@ -64,6 +64,28 @@ const CTASection = ({ onBookClick }) => {
                                 <span>📞</span>
                                 <span>07507 731487</span>
                             </a>
+                        </div>
+
+                        {/* Signposts for different visitor types */}
+                        <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+                            <div
+                                className="p-5 rounded-2xl text-left"
+                                style={{ backgroundColor: 'rgba(255,255,255,0.15)' }}
+                            >
+                                <p className="font-semibold text-white mb-1">New to us?</p>
+                                <p className="text-base" style={{ color: 'rgba(255,255,255,0.9)' }}>
+                                    We'll talk through your dog's needs first — no rush.
+                                </p>
+                            </div>
+                            <div
+                                className="p-5 rounded-2xl text-left"
+                                style={{ backgroundColor: 'rgba(255,255,255,0.15)' }}
+                            >
+                                <p className="font-semibold text-white mb-1">Already a regular?</p>
+                                <p className="text-base" style={{ color: 'rgba(255,255,255,0.9)' }}>
+                                    Just tell us who you are and when you'd like to come in.
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </FadeIn>
