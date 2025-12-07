@@ -137,7 +137,7 @@ const BookingModal = ({ isOpen, onClose }) => {
     };
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4">
             {/* Backdrop */}
             <div
                 className="absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity"
@@ -146,7 +146,7 @@ const BookingModal = ({ isOpen, onClose }) => {
 
             {/* Modal Content */}
             <div
-                className="relative bg-white rounded-3xl w-full max-w-lg overflow-hidden shadow-2xl animate-fade-in-up"
+                className="relative bg-white rounded-2xl sm:rounded-3xl w-full max-w-lg max-h-[90vh] overflow-y-auto shadow-2xl animate-fade-in-up"
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby="modal-title"
@@ -154,27 +154,21 @@ const BookingModal = ({ isOpen, onClose }) => {
                 {/* Close Button */}
                 <button
                     onClick={onClose}
-                    className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100 transition-colors z-10"
+                    className="absolute top-3 right-3 sm:top-4 sm:right-4 p-2 rounded-full hover:bg-gray-100 transition-colors z-10 bg-white/80"
                     aria-label="Close modal"
                 >
                     ✕
                 </button>
 
                 {step === 'form' ? (
-                    <div className="p-8">
-                        <div className="text-center mb-8">
-                            <span
-                                className="inline-block px-4 py-2 rounded-full text-lg font-bold mb-4"
-                                style={{ backgroundColor: colors.cyan + '20', color: colors.teal }}
-                            >
-                                📅 Request Appointment
-                            </span>
+                    <div className="p-5 sm:p-8">
+                        <div className="text-center mb-4 sm:mb-6">
                             <h2
                                 id="modal-title"
-                                className="heading-font font-bold text-3xl mb-2"
+                                className="heading-font font-bold text-2xl sm:text-3xl mb-1"
                                 style={{ color: colors.teal }}
                             >
-                                Let's get you booked in!
+                                📅 Book Your Visit
                             </h2>
                             <p className="body-font text-sm text-gray-600">
                                 We'll check our diary and get back to you ASAP.
@@ -187,7 +181,7 @@ const BookingModal = ({ isOpen, onClose }) => {
                             </div>
                         )}
 
-                        <form ref={form} onSubmit={handleSubmit} className="space-y-4">
+                        <form ref={form} onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
                             {/* Honeypot Field - Hidden from users */}
                             <div className="hidden" aria-hidden="true">
                                 <label htmlFor="website">Website</label>
