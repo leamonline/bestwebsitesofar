@@ -27,9 +27,12 @@ const HoundslySection = () => {
                                 <div className="transform scale-[2]" style={{ width: '280px' }}>
                                     <PolaroidImage
                                         src="/assets/houndsly-shampoo.jpg"
-                                        caption=""
+                                        caption="Houndsly Natural Shampoo"
                                         rotation={-4}
                                         tapeColor={colors.green}
+                                        width={300}
+                                        height={300}
+                                        loading="lazy"
                                     />
                                 </div>
                             </FadeIn>
@@ -39,9 +42,12 @@ const HoundslySection = () => {
                                 <div className="transform scale-[1.35]" style={{ width: '280px' }}>
                                     <PolaroidImage
                                         src="/assets/drynamite.jpg"
-                                        caption=""
+                                        caption="Drynamite Dry Shampoo"
                                         rotation={5}
                                         tapeColor={colors.cyan}
+                                        width={300}
+                                        height={300}
+                                        loading="lazy"
                                     />
                                 </div>
                             </FadeIn>
@@ -54,7 +60,9 @@ const HoundslySection = () => {
                                 <img
                                     src="/assets/houndsly-logo-rainbow.png"
                                     alt="Houndsly Pet Products"
-                                    className="h-32 md:h-40 mb-8 drop-shadow-xl hover:scale-105 transition-transform duration-500"
+                                    className="h-32 md:h-40 w-auto object-contain mb-8 drop-shadow-xl hover:scale-105 transition-transform duration-500"
+                                    width="600"
+                                    height="446"
                                 />
 
                                 {/* Moved Header Text */}
@@ -69,9 +77,9 @@ const HoundslySection = () => {
                                     </div>
                                 </div>
 
-                                <h3 className="heading-font font-bold text-4xl mb-6" style={{ color: colors.plum }}>
+                                <h2 className="heading-font font-bold text-4xl mb-6" style={{ color: colors.plum }}>
                                     Made for Sensitive Skin
-                                </h3>
+                                </h2>
                                 <p className="body-font text-xl mb-6 leading-relaxed" style={{ color: colors.teal }}>
                                     We couldn't find products we actually wanted to use on our dogs, so we made our own.
                                     100% natural, vegan, and properly gentle — even on the fussiest skin.

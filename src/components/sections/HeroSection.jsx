@@ -22,13 +22,13 @@ const HeroSection = ({ isLoaded, onBookClick }) => {
                         />
                     </ParallaxSection>
                     <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center relative z-10">
-                        <div className={`${isLoaded ? 'animate-fade-in-up' : 'opacity-0'} max-w-lg`}>
+                        <div className="animate-fade-in-up max-w-lg">
 
                             {/* Headline — styled like a logo, not a paragraph */}
                             <h1
                                 className="heading-font font-semibold text-5xl md:text-6xl mb-8"
                                 style={{
-                                    color: 'white',
+                                    color: colors.plum,
                                     lineHeight: '1.0',
                                     letterSpacing: '-0.02em'
                                 }}
@@ -36,7 +36,7 @@ const HeroSection = ({ isLoaded, onBookClick }) => {
                                 Come scruffy.<br />
                                 <span
                                     className="relative inline-block mt-1"
-                                    style={{ color: 'white' }}
+                                    style={{ color: colors.plum }}
                                 >
                                     Leave gorgeous.
                                     {/* Yellow underline — slightly thinner, extends beyond text */}
@@ -50,8 +50,8 @@ const HeroSection = ({ isLoaded, onBookClick }) => {
                             <p
                                 className="body-font text-lg leading-relaxed mb-12 max-w-md"
                                 style={{
-                                    color: 'rgba(255,255,255,0.85)',
-                                    fontWeight: '400'
+                                    color: colors.teal,
+                                    fontWeight: '500'
                                 }}
                             >
                                 Over 40 years of calm, careful grooming.<br />
@@ -65,7 +65,7 @@ const HeroSection = ({ isLoaded, onBookClick }) => {
                                     className="px-10 py-4 rounded-full font-semibold text-base transition-all duration-300 hover:shadow-xl flex items-center gap-3 hover-lift active-squish"
                                     style={{
                                         backgroundColor: colors.yellow,
-                                        color: colors.teal
+                                        color: colors.plum
                                     }}
                                 >
                                     <span>Book your visit</span>
@@ -83,6 +83,12 @@ const HeroSection = ({ isLoaded, onBookClick }) => {
                                     rotation={-5}
                                     tapeColor={colors.cyan}
                                     src="/assets/client-dog-1.jpg"
+                                    caption="Happy freshly groomed pup"
+                                    fetchPriority="high"
+                                    loading="eager"
+                                    width={320}
+                                    height={400}
+                                    instant={true}
                                 />
                             </div>
                             <div className="absolute top-12 md:top-24 right-0 z-20 hover:z-40 transition-all duration-300 scale-[0.6] md:scale-100 origin-top-right">
@@ -90,6 +96,9 @@ const HeroSection = ({ isLoaded, onBookClick }) => {
                                     rotation={4}
                                     tapeColor={colors.cyan}
                                     src="/assets/client-dog-2.jpg"
+                                    caption="Fluffy and fabulous"
+                                    loading="eager"
+                                    instant={true}
                                 />
                             </div>
                             <div className="absolute bottom-0 left-1/4 z-30 hover:z-40 transition-all duration-300 scale-[0.6] md:scale-100 origin-bottom-left">
@@ -97,6 +106,8 @@ const HeroSection = ({ isLoaded, onBookClick }) => {
                                     rotation={-2}
                                     tapeColor={colors.cyan}
                                     src="/assets/client-dog-3.jpg"
+                                    caption="Feeling gorgeous"
+                                    loading="lazy"
                                 />
                             </div>
                         </div>

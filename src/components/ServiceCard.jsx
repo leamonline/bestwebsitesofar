@@ -18,12 +18,12 @@ const ServiceCard = ({ icon, title, desc, bestFor, bgColor, accentColor }) => (
         >
             {icon}
         </div>
-        <h4
+        <h3
             className="heading-font font-semibold text-xl mb-3 relative z-10"
             style={{ color: colors.teal }}
         >
             {title}
-        </h4>
+        </h3>
         <p
             className="body-font text-base leading-relaxed relative z-10 flex-grow"
             style={{ color: colors.teal }}

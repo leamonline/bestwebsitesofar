@@ -8,9 +8,14 @@ const PolaroidImage = ({
     tapeColor = colors.cyan,
     tapePosition = 'top', // top, top-left, top-right, left, right
     size = 'lg', // sm, md, lg
-    className = ""
+    className = "",
+    loading = "lazy",
+    fetchPriority,
+    width,
+    height,
+    instant = false // If true, skip develop animation
 }) => {
-    const [developStage, setDevelopStage] = useState(0); // 0=hidden, 1=emerging, 2=shapes, 3=detail, 4=revealed
+    const [developStage, setDevelopStage] = useState(instant ? 4 : 0); // 0=hidden, 1=emerging, 2=shapes, 3=detail, 4=revealed
     const polaroidRef = useRef(null);
 
     // Randomize tape rotation slightly for realism
@@ -170,13 +175,19 @@ const PolaroidImage = ({
                 )}
 
                 {src ? (
-                    <img
-                        src={src}
-                        alt={caption}
-                        className="w-full h-full object-cover transition-all duration-700 ease-out"
-                        style={imageStyles}
-                        loading="lazy"
-                    />
+                    <picture>
+                        <source srcSet={src.replace(/\.(jpg|jpeg|png)$/i, '.webp')} type="image/webp" />
+                        <img
+                            src={src}
+                            alt={caption || "Dog being groomed at Smarter Dog Grooming Salon"}
+                            className="w-full h-full object-cover transition-all duration-700 ease-out"
+                            style={imageStyles}
+                            loading={loading}
+                            fetchPriority={fetchPriority}
+                            width={width}
+                            height={height}
+                        />
+                    </picture>
                 ) : (
                     <div className="w-full h-full flex items-center justify-center bg-gray-50">
                         <span className="text-4xl opacity-20">🐾</span>

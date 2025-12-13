@@ -31,6 +31,8 @@ const Navigation = ({ isLoaded, onBookClick }) => {
                         <img
                             src="/assets/logo-text.png"
                             alt="Smarter Dog Grooming Salon"
+                            height="64"
+                            width="250"
                             className={`w-auto object-contain transition-all duration-300 ${scrolled ? 'h-12' : 'h-16'
                                 }`}
                         />
@@ -81,7 +83,7 @@ const Navigation = ({ isLoaded, onBookClick }) => {
                             className="px-6 py-3 rounded-full font-bold text-sm transition-all duration-300 hover:scale-105 hover:shadow-lg active-squish"
                             style={{
                                 backgroundColor: colors.green,
-                                color: 'white'
+                                color: colors.plum
                             }}
                         >
                             Book your visit

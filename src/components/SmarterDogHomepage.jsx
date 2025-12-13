@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { colors } from '../constants/colors';
 
 import Navigation from './sections/Navigation';
@@ -23,13 +23,8 @@ import ScrollToTop from './ScrollToTop';
 import { trackEvent } from '../utils/analytics';
 
 const SmarterDogHomepage = () => {
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoaded] = useState(true);
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoaded(true), 100);
-    return () => clearTimeout(timer);
-  }, []);
 
   const handleBookClick = (source = 'General') => {
     trackEvent('Engagement', 'Click Request Appointment', source);

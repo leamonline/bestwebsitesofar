@@ -21,40 +21,60 @@ const ServicesSection = () => {
                     <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
                         {/* Full Groom Icon */}
                         <div className="absolute top-10 right-20 w-32 h-32 opacity-10 animate-float" style={{ animationDelay: '0s' }}>
-                            <img src="/assets/icons/full-groom.jpg" alt="" className="w-full h-full rounded-full object-cover" style={{ filter: 'grayscale(100%) brightness(2)' }} />
+                            <picture>
+                                <source srcSet="/assets/icons/full-groom.webp" type="image/webp" />
+                                <img src="/assets/icons/full-groom.jpg" alt="" width="128" height="128" loading="lazy" className="w-full h-full rounded-full object-cover" style={{ filter: 'grayscale(100%) brightness(2)' }} />
+                            </picture>
                         </div>
                         {/* Puppy Intro Icon */}
                         <div className="absolute top-60 left-10 w-24 h-24 opacity-10 animate-float" style={{ animationDelay: '1s' }}>
-                            <img src="/assets/icons/puppy-intro.jpg" alt="" className="w-full h-full rounded-full object-cover" style={{ filter: 'grayscale(100%) brightness(2)' }} />
+                            <picture>
+                                <source srcSet="/assets/icons/puppy-intro.webp" type="image/webp" />
+                                <img src="/assets/icons/puppy-intro.jpg" alt="" width="96" height="96" loading="lazy" className="w-full h-full rounded-full object-cover" style={{ filter: 'grayscale(100%) brightness(2)' }} />
+                            </picture>
                         </div>
                         {/* De-Shedding Icon */}
                         <div className="absolute bottom-40 right-10 w-28 h-28 opacity-10 animate-float" style={{ animationDelay: '2s' }}>
-                            <img src="/assets/icons/deshedding.jpg" alt="" className="w-full h-full rounded-full object-cover" style={{ filter: 'grayscale(100%) brightness(2)' }} />
+                            <picture>
+                                <source srcSet="/assets/icons/deshedding.webp" type="image/webp" />
+                                <img src="/assets/icons/deshedding.jpg" alt="" width="112" height="112" loading="lazy" className="w-full h-full rounded-full object-cover" style={{ filter: 'grayscale(100%) brightness(2)' }} />
+                            </picture>
                         </div>
                         {/* Maintenance Icon */}
                         <div className="absolute top-1/3 right-1/4 w-20 h-20 opacity-10 animate-float" style={{ animationDelay: '1.5s' }}>
-                            <img src="/assets/icons/maintenance-groom.jpg" alt="" className="w-full h-full rounded-full object-cover" style={{ filter: 'grayscale(100%) brightness(2)' }} />
+                            <picture>
+                                <source srcSet="/assets/icons/maintenance-groom.webp" type="image/webp" />
+                                <img src="/assets/icons/maintenance-groom.jpg" alt="" width="80" height="80" loading="lazy" className="w-full h-full rounded-full object-cover" style={{ filter: 'grayscale(100%) brightness(2)' }} />
+                            </picture>
                         </div>
                         {/* Nail Trim Icon */}
                         <div className="absolute bottom-20 left-1/4 w-16 h-16 opacity-10 animate-float" style={{ animationDelay: '0.5s' }}>
-                            <img src="/assets/icons/nail-trim.jpg" alt="" className="w-full h-full rounded-full object-cover" style={{ filter: 'grayscale(100%) brightness(2)' }} />
+                            <picture>
+                                <source srcSet="/assets/icons/nail-trim.webp" type="image/webp" />
+                                <img src="/assets/icons/nail-trim.jpg" alt="" width="64" height="64" loading="lazy" className="w-full h-full rounded-full object-cover" style={{ filter: 'grayscale(100%) brightness(2)' }} />
+                            </picture>
                         </div>
                     </div>
                     <div className="max-w-6xl mx-auto text-center mb-16 relative z-10">
                         <FadeIn>
-                            <h3
+                            <h2
                                 className="heading-font font-bold text-4xl md:text-5xl"
                                 style={{ color: 'white' }}
                             >
                                 How we care for your dog
-                            </h3>
+                            </h2>
                         </FadeIn>
                     </div>
 
                     <div className="max-w-7xl mx-auto grid md:grid-cols-2 lg:grid-cols-4 gap-10 relative z-10">
                         <FadeIn delay={200} className="h-full">
                             <ServiceCard
-                                icon={<img src="/assets/icons/full-groom.jpg" alt="Full Groom" className="w-24 h-24 rounded-full object-cover shadow-sm" />}
+                                icon={
+                                    <picture>
+                                        <source srcSet="/assets/icons/full-groom.webp" type="image/webp" />
+                                        <img src="/assets/icons/full-groom.jpg" alt="Full Groom" width="96" height="96" loading="lazy" className="w-24 h-24 rounded-full object-cover shadow-sm" />
+                                    </picture>
+                                }
                                 title="Full Groom"
                                 desc="The full works — bath, dry, brush, trim, nails, ears, the lot. They'll leave looking like a million quid and smelling even better."
                                 bestFor="first visits or long-overdue tidy-ups"
@@ -64,7 +84,12 @@ const ServicesSection = () => {
                         </FadeIn>
                         <FadeIn delay={400} className="h-full">
                             <ServiceCard
-                                icon={<img src="/assets/icons/maintenance-groom.jpg" alt="Maintenance Groom" className="w-24 h-24 rounded-full object-cover shadow-sm" />}
+                                icon={
+                                    <picture>
+                                        <source srcSet="/assets/icons/maintenance-groom.webp" type="image/webp" />
+                                        <img src="/assets/icons/maintenance-groom.jpg" alt="Maintenance Groom" width="96" height="96" loading="lazy" className="w-24 h-24 rounded-full object-cover shadow-sm" />
+                                    </picture>
+                                }
                                 title="Maintenance Groom"
                                 desc="Not due a full groom but looking a bit scruffy? This keeps them fresh and tidy in between."
                                 bestFor="regulars between full grooms"
@@ -74,7 +99,12 @@ const ServicesSection = () => {
                         </FadeIn>
                         <FadeIn delay={600} className="h-full">
                             <ServiceCard
-                                icon={<img src="/assets/icons/deshedding.jpg" alt="De-Shedding" className="w-24 h-24 rounded-full object-cover shadow-sm" />}
+                                icon={
+                                    <picture>
+                                        <source srcSet="/assets/icons/deshedding.webp" type="image/webp" />
+                                        <img src="/assets/icons/deshedding.jpg" alt="De-Shedding" width="96" height="96" loading="lazy" className="w-24 h-24 rounded-full object-cover shadow-sm" />
+                                    </picture>
+                                }
                                 title="De-Shedding Package"
                                 desc="For the fluffier breeds who like to redecorate your house with fur. A proper deep clean and undercoat blowout."
                                 bestFor="double coats and heavy shedders"
@@ -84,7 +114,12 @@ const ServicesSection = () => {
                         </FadeIn>
                         <FadeIn delay={800} className="h-full">
                             <ServiceCard
-                                icon={<img src="/assets/icons/puppy-intro.jpg" alt="Puppy Intro" className="w-24 h-24 rounded-full object-cover shadow-sm" />}
+                                icon={
+                                    <picture>
+                                        <source srcSet="/assets/icons/puppy-intro.webp" type="image/webp" />
+                                        <img src="/assets/icons/puppy-intro.jpg" alt="Puppy Intro" width="96" height="96" loading="lazy" className="w-24 h-24 rounded-full object-cover shadow-sm" />
+                                    </picture>
+                                }
                                 title="Puppy Intro"
                                 desc="First salon visit? We take it nice and slow — no rushing, no drama. Just gentle introductions for pups under 6 months."
                                 bestFor="puppies under 6 months or nervous first-timers"
@@ -104,7 +139,10 @@ const ServicesSection = () => {
                                 <div
                                     className="w-20 h-20 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden shadow-sm"
                                 >
-                                    <img src="/assets/icons/ear-cleaning.jpg" alt="Ear Cleaning" className="w-full h-full object-cover" />
+                                    <picture>
+                                        <source srcSet="/assets/icons/ear-cleaning.webp" type="image/webp" />
+                                        <img src="/assets/icons/ear-cleaning.jpg" alt="Ear Cleaning" width="80" height="80" loading="lazy" className="w-full h-full object-cover" />
+                                    </picture>
                                 </div>
                                 <div>
                                     <h4
@@ -131,7 +169,10 @@ const ServicesSection = () => {
                                 <div
                                     className="w-20 h-20 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden shadow-sm"
                                 >
-                                    <img src="/assets/icons/anal-gland.jpg" alt="Anal Gland Expression" className="w-full h-full object-cover" />
+                                    <picture>
+                                        <source srcSet="/assets/icons/anal-gland.webp" type="image/webp" />
+                                        <img src="/assets/icons/anal-gland.jpg" alt="Anal Gland Expression" width="80" height="80" loading="lazy" className="w-full h-full object-cover" />
+                                    </picture>
                                 </div>
                                 <div>
                                     <h4
@@ -158,7 +199,10 @@ const ServicesSection = () => {
                                 <div
                                     className="w-20 h-20 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden shadow-sm"
                                 >
-                                    <img src="/assets/icons/nail-trim.jpg" alt="Nail Trims" className="w-full h-full object-cover" />
+                                    <picture>
+                                        <source srcSet="/assets/icons/nail-trim.webp" type="image/webp" />
+                                        <img src="/assets/icons/nail-trim.jpg" alt="Nail Trims" width="80" height="80" loading="lazy" className="w-full h-full object-cover" />
+                                    </picture>
                                 </div>
                                 <div>
                                     <h4
