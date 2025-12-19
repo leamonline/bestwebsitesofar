@@ -3,6 +3,16 @@
 
 import { colors } from './colors';
 
+// Available booking time slots
+export const timeSlots = [
+    { id: 'mon-am', label: 'Monday Morning' },
+    { id: 'mon-pm', label: 'Monday Afternoon' },
+    { id: 'tue-am', label: 'Tuesday Morning' },
+    { id: 'tue-pm', label: 'Tuesday Afternoon' },
+    { id: 'wed-am', label: 'Wednesday Morning' },
+    { id: 'wed-pm', label: 'Wednesday Afternoon' }
+];
+
 export const services = [
     {
         title: "Full Groom",

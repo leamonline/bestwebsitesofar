@@ -1,7 +1,8 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import emailjs from '@emailjs/browser';
 import { colors } from '../constants/colors';
 import { trackEvent } from '../utils/analytics';
+import { timeSlots } from '../constants/servicesData';
 
 // Validation helpers
 const validatePhone = (phone) => {
@@ -16,25 +17,26 @@ const validateEmail = (email) => {
     return emailRegex.test(email);
 };
 
+const initialFormState = {
+    ownerName: '',
+    phone: '',
+    email: '',
+    dogName: '',
+    breed: '',
+    service: 'Full Groom',
+    preferredTimes: [],
+    notes: '',
+    // Honeypot field - should remain empty
+    website: ''
+};
+
 const BookingModal = ({ isOpen, onClose }) => {
     const [step, setStep] = useState('form'); // 'form', 'success', or 'walkin'
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [error, setError] = useState(null);
     const [fieldErrors, setFieldErrors] = useState({});
-    const form = useRef();
 
-    const [formData, setFormData] = useState({
-        ownerName: '',
-        phone: '',
-        email: '',
-        dogName: '',
-        breed: '',
-        service: 'Full Groom',
-        preferredTimes: [],
-        notes: '',
-        // Honeypot field - should remain empty
-        website: ''
-    });
+    const [formData, setFormData] = useState(initialFormState);
 
     if (!isOpen) return null;
 
@@ -51,6 +53,45 @@ const BookingModal = ({ isOpen, onClose }) => {
 
         setFieldErrors(errors);
         return Object.keys(errors).length === 0;
+    };
+
+    const validateField = (name, value) => {
+        if (name === 'phone' && value) {
+            if (!validatePhone(value)) {
+                setFieldErrors(prev => ({ ...prev, phone: 'Please enter a valid UK phone number' }));
+            } else {
+                setFieldErrors(prev => {
+                    const { phone: _, ...rest } = prev;
+                    return rest;
+                });
+            }
+        }
+        if (name === 'email' && value) {
+            if (!validateEmail(value)) {
+                setFieldErrors(prev => ({ ...prev, email: 'Please enter a valid email address' }));
+            } else {
+                setFieldErrors(prev => {
+                    const { email: _, ...rest } = prev;
+                    return rest;
+                });
+            }
+        }
+    };
+
+    const handleBlur = (e) => {
+        validateField(e.target.name, e.target.value);
+    };
+
+    const resetForm = () => {
+        setFormData(initialFormState);
+        setFieldErrors({});
+        setError(null);
+        setStep('form');
+    };
+
+    const handleClose = () => {
+        resetForm();
+        onClose();
     };
 
     const handleSubmit = async (e) => {
@@ -141,7 +182,7 @@ const BookingModal = ({ isOpen, onClose }) => {
             {/* Backdrop */}
             <div
                 className="absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity"
-                onClick={onClose}
+                onClick={handleClose}
             />
 
             {/* Modal Content */}
@@ -153,7 +194,7 @@ const BookingModal = ({ isOpen, onClose }) => {
             >
                 {/* Close Button */}
                 <button
-                    onClick={onClose}
+                    onClick={handleClose}
                     className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100 transition-colors z-10"
                     aria-label="Close modal"
                 >
@@ -187,7 +228,7 @@ const BookingModal = ({ isOpen, onClose }) => {
                             </div>
                         )}
 
-                        <form ref={form} onSubmit={handleSubmit} className="space-y-4">
+                        <form onSubmit={handleSubmit} className="space-y-4">
                             {/* Honeypot Field - Hidden from users */}
                             <div className="hidden" aria-hidden="true">
                                 <label htmlFor="website">Website</label>
@@ -211,7 +252,8 @@ const BookingModal = ({ isOpen, onClose }) => {
                                         name="ownerName"
                                         value={formData.ownerName}
                                         onChange={handleChange}
-                                        className="w-full px-4 py-3 min-h-[48px] rounded-xl border-2 border-gray-100 focus:border-cyan-400 focus:outline-none transition-colors text-base"
+                                        disabled={isSubmitting}
+                                        className="w-full px-4 py-3 min-h-[48px] rounded-xl border-2 border-gray-100 focus:border-cyan-400 focus:outline-none transition-colors text-base disabled:opacity-60 disabled:cursor-not-allowed"
                                         placeholder="Jane Doe"
                                     />
                                 </div>
@@ -223,7 +265,9 @@ const BookingModal = ({ isOpen, onClose }) => {
                                         name="phone"
                                         value={formData.phone}
                                         onChange={handleChange}
-                                        className={`w-full px-4 py-3 min-h-[48px] rounded-xl border-2 focus:outline-none transition-colors text-base ${fieldErrors.phone ? 'border-red-400 bg-red-50' : 'border-gray-100 focus:border-cyan-400'}`}
+                                        onBlur={handleBlur}
+                                        disabled={isSubmitting}
+                                        className={`w-full px-4 py-3 min-h-[48px] rounded-xl border-2 focus:outline-none transition-colors text-base disabled:opacity-60 disabled:cursor-not-allowed ${fieldErrors.phone ? 'border-red-400 bg-red-50' : 'border-gray-100 focus:border-cyan-400'}`}
                                         placeholder="07123..."
                                     />
                                     {fieldErrors.phone && (
@@ -239,7 +283,9 @@ const BookingModal = ({ isOpen, onClose }) => {
                                     name="email"
                                     value={formData.email}
                                     onChange={handleChange}
-                                    className={`w-full px-4 py-3 min-h-[48px] rounded-xl border-2 focus:outline-none transition-colors text-base ${fieldErrors.email ? 'border-red-400 bg-red-50' : 'border-gray-100 focus:border-cyan-400'}`}
+                                    onBlur={handleBlur}
+                                    disabled={isSubmitting}
+                                    className={`w-full px-4 py-3 min-h-[48px] rounded-xl border-2 focus:outline-none transition-colors text-base disabled:opacity-60 disabled:cursor-not-allowed ${fieldErrors.email ? 'border-red-400 bg-red-50' : 'border-gray-100 focus:border-cyan-400'}`}
                                     placeholder="jane@example.com"
                                 />
                                 {fieldErrors.email && (
@@ -256,7 +302,8 @@ const BookingModal = ({ isOpen, onClose }) => {
                                         name="dogName"
                                         value={formData.dogName}
                                         onChange={handleChange}
-                                        className="w-full px-4 py-3 min-h-[48px] rounded-xl border-2 border-gray-100 focus:border-cyan-400 focus:outline-none transition-colors text-base"
+                                        disabled={isSubmitting}
+                                        className="w-full px-4 py-3 min-h-[48px] rounded-xl border-2 border-gray-100 focus:border-cyan-400 focus:outline-none transition-colors text-base disabled:opacity-60 disabled:cursor-not-allowed"
                                         placeholder="Barnaby"
                                     />
                                 </div>
@@ -267,7 +314,8 @@ const BookingModal = ({ isOpen, onClose }) => {
                                         name="breed"
                                         value={formData.breed}
                                         onChange={handleChange}
-                                        className="w-full px-4 py-3 min-h-[48px] rounded-xl border-2 border-gray-100 focus:border-cyan-400 focus:outline-none transition-colors text-base"
+                                        disabled={isSubmitting}
+                                        className="w-full px-4 py-3 min-h-[48px] rounded-xl border-2 border-gray-100 focus:border-cyan-400 focus:outline-none transition-colors text-base disabled:opacity-60 disabled:cursor-not-allowed"
                                         placeholder="Cockapoo"
                                     />
                                 </div>
@@ -279,7 +327,8 @@ const BookingModal = ({ isOpen, onClose }) => {
                                     name="service"
                                     value={formData.service}
                                     onChange={handleServiceChange}
-                                    className="w-full px-4 py-3 min-h-[48px] rounded-xl border-2 border-gray-100 focus:border-cyan-400 focus:outline-none transition-colors bg-white text-base"
+                                    disabled={isSubmitting}
+                                    className="w-full px-4 py-3 min-h-[48px] rounded-xl border-2 border-gray-100 focus:border-cyan-400 focus:outline-none transition-colors bg-white text-base disabled:opacity-60 disabled:cursor-not-allowed"
                                 >
                                     <option value="Full Groom">Full Groom (Bath, Cut, Nails, Ears)</option>
                                     <option value="Maintenance Groom">Maintenance Groom (Bath & Tidy)</option>
@@ -293,17 +342,10 @@ const BookingModal = ({ isOpen, onClose }) => {
                             <div>
                                 <label className="block text-sm font-bold mb-2" style={{ color: colors.teal }}>Preferred Days/Times</label>
                                 <div className="grid grid-cols-2 gap-2">
-                                    {[
-                                        { id: 'mon-am', label: 'Monday Morning' },
-                                        { id: 'mon-pm', label: 'Monday Afternoon' },
-                                        { id: 'tue-am', label: 'Tuesday Morning' },
-                                        { id: 'tue-pm', label: 'Tuesday Afternoon' },
-                                        { id: 'wed-am', label: 'Wednesday Morning' },
-                                        { id: 'wed-pm', label: 'Wednesday Afternoon' }
-                                    ].map(slot => (
+                                    {timeSlots.map(slot => (
                                         <label
                                             key={slot.id}
-                                            className={`flex items-center gap-2 p-3 rounded-xl border-2 cursor-pointer transition-all ${formData.preferredTimes.includes(slot.id)
+                                            className={`flex items-center gap-2 p-3 rounded-xl border-2 transition-all ${isSubmitting ? 'cursor-not-allowed opacity-60' : 'cursor-pointer'} ${formData.preferredTimes.includes(slot.id)
                                                 ? 'border-cyan-400 bg-cyan-50'
                                                 : 'border-gray-100 hover:border-gray-200'
                                                 }`}
@@ -312,6 +354,7 @@ const BookingModal = ({ isOpen, onClose }) => {
                                                 type="checkbox"
                                                 checked={formData.preferredTimes.includes(slot.id)}
                                                 onChange={() => handleCheckboxChange(slot.id)}
+                                                disabled={isSubmitting}
                                                 className="w-4 h-4 accent-cyan-500"
                                             />
                                             <span className="text-sm" style={{ color: colors.teal }}>{slot.label}</span>
@@ -326,8 +369,9 @@ const BookingModal = ({ isOpen, onClose }) => {
                                     name="notes"
                                     value={formData.notes}
                                     onChange={handleChange}
+                                    disabled={isSubmitting}
                                     rows="2"
-                                    className="w-full px-4 py-3 min-h-[48px] rounded-xl border-2 border-gray-100 focus:border-cyan-400 focus:outline-none transition-colors resize-none text-base"
+                                    className="w-full px-4 py-3 min-h-[48px] rounded-xl border-2 border-gray-100 focus:border-cyan-400 focus:outline-none transition-colors resize-none text-base disabled:opacity-60 disabled:cursor-not-allowed"
                                     placeholder="Nervous dog? Medical issues? Let us know."
                                 />
                             </div>
@@ -366,7 +410,7 @@ const BookingModal = ({ isOpen, onClose }) => {
                                 Back to booking form
                             </button>
                             <button
-                                onClick={onClose}
+                                onClick={handleClose}
                                 className="px-8 py-3 rounded-full font-bold transition-all hover:scale-105 border-2"
                                 style={{ borderColor: colors.teal, color: colors.teal }}
                             >
@@ -387,7 +431,7 @@ const BookingModal = ({ isOpen, onClose }) => {
                             Thanks {formData.ownerName}! We'll check the diary for {formData.dogName} and text you shortly to confirm a slot.
                         </p>
                         <button
-                            onClick={onClose}
+                            onClick={handleClose}
                             className="px-8 py-3 rounded-full font-bold text-white transition-all hover:scale-105"
                             style={{ backgroundColor: colors.teal }}
                         >
