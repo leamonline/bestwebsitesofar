@@ -1,12 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { colors } from '../../constants/colors';
-
-
+import { useFocusTrap } from '../../hooks/useFocusTrap';
 
 const Navigation = ({ isLoaded, onBookClick }) => {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
     const [scrolled, setScrolled] = React.useState(false);
+
+    const closeMenu = React.useCallback(() => setIsMenuOpen(false), []);
+    const menuRef = useFocusTrap(isMenuOpen, closeMenu);
 
     React.useEffect(() => {
         const handleScroll = () => {
@@ -96,7 +98,8 @@ const Navigation = ({ isLoaded, onBookClick }) => {
                     className="md:hidden text-2xl focus:outline-none"
                     onClick={toggleMenu}
                     style={{ color: colors.teal }}
-                    aria-label="Toggle menu"
+                    aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+                    aria-expanded={isMenuOpen}
                 >
                     {isMenuOpen ? '✕' : '☰'}
                 </button>
@@ -104,12 +107,17 @@ const Navigation = ({ isLoaded, onBookClick }) => {
 
             {/* Mobile Menu Overlay */}
             {isMenuOpen && (
-                <div className="md:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-md shadow-xl p-6 rounded-b-3xl flex flex-col gap-4 animate-fade-in-up border-t border-gray-100">
+                <div
+                    ref={menuRef}
+                    className="md:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-md shadow-xl p-6 rounded-b-3xl flex flex-col gap-4 animate-fade-in-up border-t border-gray-100"
+                    role="menu"
+                >
                     <Link
                         to="/services"
                         className="text-lg font-medium py-2 border-b border-gray-50"
                         style={{ color: colors.teal }}
-                        onClick={() => setIsMenuOpen(false)}
+                        onClick={closeMenu}
+                        role="menuitem"
                     >
                         Services
                     </Link>
@@ -117,7 +125,8 @@ const Navigation = ({ isLoaded, onBookClick }) => {
                         to="/houndsly"
                         className="text-lg font-medium py-2 border-b border-gray-50"
                         style={{ color: colors.teal }}
-                        onClick={() => setIsMenuOpen(false)}
+                        onClick={closeMenu}
+                        role="menuitem"
                     >
                         Houndsly
                     </Link>
@@ -125,7 +134,8 @@ const Navigation = ({ isLoaded, onBookClick }) => {
                         to="/approach"
                         className="text-lg font-medium py-2 border-b border-gray-50"
                         style={{ color: colors.teal }}
-                        onClick={() => setIsMenuOpen(false)}
+                        onClick={closeMenu}
+                        role="menuitem"
                     >
                         Our Approach
                     </Link>
@@ -133,17 +143,19 @@ const Navigation = ({ isLoaded, onBookClick }) => {
                         to="/faq"
                         className="text-lg font-medium py-2 border-b border-gray-50"
                         style={{ color: colors.teal }}
-                        onClick={() => setIsMenuOpen(false)}
+                        onClick={closeMenu}
+                        role="menuitem"
                     >
                         FAQ
                     </Link>
                     <button
                         onClick={() => {
-                            setIsMenuOpen(false);
+                            closeMenu();
                             onBookClick('Mobile Menu');
                         }}
                         className="w-full py-3 rounded-full font-bold text-white mt-2 active-squish"
                         style={{ backgroundColor: colors.green }}
+                        role="menuitem"
                     >
                         Book your visit
                     </button>
