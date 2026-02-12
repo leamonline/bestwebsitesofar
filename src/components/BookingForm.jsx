@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import emailjs from '@emailjs/browser';
 import { colors } from '../constants/colors';
@@ -20,6 +20,18 @@ const VISIT_PLAN_OPTIONS = [
     { value: 'every-8-weeks', label: 'Every 8 weeks (recommended for double coats)' }
 ];
 
+const SERVICE_OPTIONS = [
+    'Full Groom',
+    'Maintenance Groom',
+    'De-Shedding Package',
+    'Puppy Intro',
+    'Nail Clip',
+    'Anal Glands',
+];
+
+const VALID_VISIT_PLAN_VALUES = VISIT_PLAN_OPTIONS.map((option) => option.value);
+const VALID_TIME_SLOT_IDS = new Set(TIME_SLOTS.map((slot) => slot.id));
+
 const getVisitPlanLabel = (value) => (
     VISIT_PLAN_OPTIONS.find((option) => option.value === value)?.label || VISIT_PLAN_OPTIONS[0].label
 );
@@ -38,6 +50,25 @@ const INITIAL_FORM_DATA = {
     website: ''
 };
 
+const buildInitialFormState = (initialFormData = {}) => {
+    const safeInitialData = initialFormData || {};
+    const proposedService = safeInitialData.service;
+    const proposedVisitPlan = safeInitialData.visitPlan;
+    const proposedPreferredTimes = Array.isArray(safeInitialData.preferredTimes)
+        ? safeInitialData.preferredTimes.filter((slot) => VALID_TIME_SLOT_IDS.has(slot))
+        : [];
+
+    return {
+        ...INITIAL_FORM_DATA,
+        ...safeInitialData,
+        service: SERVICE_OPTIONS.includes(proposedService) ? proposedService : INITIAL_FORM_DATA.service,
+        visitPlan: VALID_VISIT_PLAN_VALUES.includes(proposedVisitPlan)
+            ? proposedVisitPlan
+            : INITIAL_FORM_DATA.visitPlan,
+        preferredTimes: proposedPreferredTimes,
+    };
+};
+
 /**
  * Shared booking form component used by both BookingModal and BookingPage.
  *
@@ -49,6 +80,8 @@ const INITIAL_FORM_DATA = {
  * @param {function} [props.onBackToForm] - Called when user clicks "back to form" from walk-in step
  * @param {boolean} [props.showAlternativeContact] - Show WhatsApp/phone alternative contact section
  * @param {'modal'|'page'} [props.variant] - Controls close/navigation behavior
+ * @param {Object} [props.initialFormData] - Optional prefill values for the booking form
+ * @param {string} [props.prefillSummary] - Optional summary copy to show when prefilled
  */
 const BookingForm = ({
     headingTag = 'h2',
@@ -58,14 +91,23 @@ const BookingForm = ({
     onBackToForm,
     showAlternativeContact = false,
     variant = 'page',
+    initialFormData,
+    prefillSummary = '',
 }) => {
     const HeadingTag = headingTag;
     const [step, setStep] = useState('form'); // 'form', 'success', or 'walkin'
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [error, setError] = useState(null);
     const [fieldErrors, setFieldErrors] = useState({});
-    const [formData, setFormData] = useState(INITIAL_FORM_DATA);
+    const [formData, setFormData] = useState(() => buildInitialFormState(initialFormData));
     const getFieldErrorId = (fieldName) => `${fieldName}-error`;
+
+    useEffect(() => {
+        setFormData(buildInitialFormState(initialFormData));
+        setFieldErrors({});
+        setError(null);
+        setStep('form');
+    }, [initialFormData]);
 
     const validateForm = () => {
         const errors = {};
@@ -279,6 +321,20 @@ const BookingForm = ({
                     </p>
                 )}
             </div>
+
+            {prefillSummary && (
+                <div
+                    className="mb-5 p-4 rounded-2xl border text-sm"
+                    style={{
+                        backgroundColor: colors.greenLight,
+                        borderColor: colors.green,
+                        color: colors.plum,
+                    }}
+                >
+                    <p className="font-semibold mb-1">AI concierge recommendation</p>
+                    <p>{prefillSummary}</p>
+                </div>
+            )}
 
             {error && (
                 <div

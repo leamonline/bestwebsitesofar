@@ -19,6 +19,9 @@ vi.mock('./sections/TrustSection', () => ({
 vi.mock('./sections/ServicesSection', () => ({
   default: () => <div data-testid="services-section">ServicesSection</div>
 }));
+vi.mock('./sections/AIConciergeSection', () => ({
+  default: () => <div data-testid="ai-concierge-section">AIConciergeSection</div>
+}));
 vi.mock('./sections/AftercareGuidesSection', () => ({
   default: () => <div data-testid="aftercare-guides-section">AftercareGuidesSection</div>
 }));
@@ -70,6 +73,7 @@ describe('SmarterDogHomepage', () => {
       expect(screen.getByTestId('hero-section')).toBeInTheDocument();
       expect(screen.getByTestId('trust-section')).toBeInTheDocument();
       expect(screen.getByTestId('services-section')).toBeInTheDocument();
+      expect(screen.getByTestId('ai-concierge-section')).toBeInTheDocument();
       expect(screen.getByTestId('aftercare-guides-section')).toBeInTheDocument();
       expect(screen.getByTestId('gallery-section')).toBeInTheDocument();
       expect(screen.getByTestId('testimonials-section')).toBeInTheDocument();
@@ -89,6 +93,7 @@ describe('SmarterDogHomepage', () => {
         'hero-section',
         'trust-section',
         'services-section',
+        'ai-concierge-section',
         'aftercare-guides-section',
         'gallery-section',
         'section-divider',
@@ -127,8 +132,8 @@ describe('SmarterDogHomepage', () => {
       const mainDiv = container.firstChild;
       const sections = mainDiv.querySelectorAll('[data-testid]');
 
-      // navigation, hero, trust, services, aftercare, gallery, divider, houndsly, testimonials, location, cta, footer = 12
-      expect(sections).toHaveLength(12);
+      // navigation, hero, trust, services, ai concierge, aftercare, gallery, divider, houndsly, testimonials, location, cta, footer = 13
+      expect(sections).toHaveLength(13);
     });
   });
 });

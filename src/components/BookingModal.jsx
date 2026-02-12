@@ -2,7 +2,7 @@ import React from 'react';
 import BookingForm from './BookingForm';
 import { useFocusTrap } from '../hooks/useFocusTrap';
 
-const BookingModal = ({ isOpen, onClose }) => {
+const BookingModal = ({ isOpen, onClose, initialFormData, prefillSummary }) => {
     const modalRef = useFocusTrap(isOpen, onClose);
 
     if (!isOpen) return null;
@@ -37,6 +37,8 @@ const BookingModal = ({ isOpen, onClose }) => {
                     headingId="modal-title"
                     onClose={onClose}
                     variant="modal"
+                    initialFormData={initialFormData}
+                    prefillSummary={prefillSummary}
                 />
             </div>
         </div>

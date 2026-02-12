@@ -5,6 +5,7 @@ import Navigation from './sections/Navigation';
 import HeroSection from './sections/HeroSection';
 import TrustSection from './sections/TrustSection';
 import ServicesSection from './sections/ServicesSection';
+import AIConciergeSection from './sections/AIConciergeSection';
 import AftercareGuidesSection from './sections/AftercareGuidesSection';
 import GallerySection from './sections/GallerySection';
 import TestimonialsSection from './sections/TestimonialsSection';
@@ -21,12 +22,20 @@ import { trackEvent } from '../utils/analytics';
 
 const SmarterDogHomepage = () => {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+  const [bookingPrefill, setBookingPrefill] = useState(null);
+  const [bookingPrefillSummary, setBookingPrefillSummary] = useState('');
 
-  const handleBookClick = (source = 'General') => {
+  const handleBookClick = (source = 'General', options = {}) => {
     trackEvent('Engagement', 'Click Request Appointment', source);
+    setBookingPrefill(options.prefill || null);
+    setBookingPrefillSummary(options.prefillSummary || '');
     setIsBookingModalOpen(true);
   };
-  const handleCloseModal = () => setIsBookingModalOpen(false);
+  const handleCloseModal = () => {
+    setIsBookingModalOpen(false);
+    setBookingPrefill(null);
+    setBookingPrefillSummary('');
+  };
 
   return (
     <div
@@ -41,6 +50,7 @@ const SmarterDogHomepage = () => {
         <HeroSection isLoaded onBookClick={handleBookClick} />
         <TrustSection />
         <ServicesSection />
+        <AIConciergeSection onBookClick={handleBookClick} />
         <AftercareGuidesSection onBookClick={handleBookClick} />
         <GallerySection />
         <SectionDivider type="grass" color={colors.mutedGreen} backgroundColor={colors.yellow} height="100px" />
@@ -54,6 +64,8 @@ const SmarterDogHomepage = () => {
       <BookingModal
         isOpen={isBookingModalOpen}
         onClose={handleCloseModal}
+        initialFormData={bookingPrefill}
+        prefillSummary={bookingPrefillSummary}
       />
       <ScrollToTop />
     </div>
