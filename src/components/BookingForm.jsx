@@ -54,6 +54,7 @@ const BookingForm = ({
     const [error, setError] = useState(null);
     const [fieldErrors, setFieldErrors] = useState({});
     const [formData, setFormData] = useState(INITIAL_FORM_DATA);
+    const getFieldErrorId = (fieldName) => `${fieldName}-error`;
 
     const validateForm = () => {
         const errors = {};
@@ -130,10 +131,17 @@ const BookingForm = ({
     };
 
     const handleChange = (e) => {
+        const { name, value } = e.target;
         setFormData(prev => ({
             ...prev,
-            [e.target.name]: e.target.value
+            [name]: value
         }));
+        if (fieldErrors[name]) {
+            setFieldErrors(prev => ({
+                ...prev,
+                [name]: undefined
+            }));
+        }
     };
 
     const handleCheckboxChange = (timeSlot) => {
@@ -180,7 +188,7 @@ const BookingForm = ({
                     <button
                         onClick={handleBackToForm}
                         className="px-8 py-3 rounded-full font-bold transition-all hover:scale-105"
-                        style={{ backgroundColor: colors.cyan, color: 'white' }}
+                        style={{ backgroundColor: colors.cyan, color: colors.plum }}
                     >
                         Back to booking form
                     </button>
@@ -261,12 +269,21 @@ const BookingForm = ({
             </div>
 
             {error && (
-                <div className="mb-4 p-3 bg-red-50 text-red-600 rounded-lg text-sm text-center">
+                <div
+                    className="mb-4 p-3 bg-red-50 text-red-600 rounded-lg text-sm text-center"
+                    role="alert"
+                    aria-live="assertive"
+                >
                     {error}
                 </div>
             )}
 
             <form onSubmit={handleSubmit} className="space-y-4">
+                <p className="sr-only" aria-live="polite">
+                    {Object.keys(fieldErrors).length > 0
+                        ? 'Please check the highlighted fields before submitting.'
+                        : ''}
+                </p>
                 {/* Honeypot Field - Hidden from users */}
                 <div className="hidden" aria-hidden="true">
                     <label htmlFor="website">Website</label>
@@ -283,8 +300,9 @@ const BookingForm = ({
 
                 <div className="grid grid-cols-2 gap-4">
                     <div>
-                        <label className="block text-sm font-bold mb-1" style={{ color: colors.teal }}>Your Name</label>
+                        <label htmlFor="ownerName" className="block text-sm font-bold mb-1" style={{ color: colors.teal }}>Your Name</label>
                         <input
+                            id="ownerName"
                             required
                             type="text"
                             name="ownerName"
@@ -295,8 +313,9 @@ const BookingForm = ({
                         />
                     </div>
                     <div>
-                        <label className="block text-sm font-bold mb-1" style={{ color: colors.teal }}>Phone</label>
+                        <label htmlFor="phone" className="block text-sm font-bold mb-1" style={{ color: colors.teal }}>Phone</label>
                         <input
+                            id="phone"
                             required
                             type="tel"
                             name="phone"
@@ -304,32 +323,52 @@ const BookingForm = ({
                             onChange={handleChange}
                             className={`w-full px-4 py-3 min-h-[48px] rounded-xl border-2 focus:outline-none transition-colors text-base ${fieldErrors.phone ? 'border-red-400 bg-red-50' : 'border-gray-100 focus:border-cyan-400'}`}
                             placeholder="07123..."
+                            aria-invalid={Boolean(fieldErrors.phone)}
+                            aria-describedby={fieldErrors.phone ? getFieldErrorId('phone') : undefined}
                         />
                         {fieldErrors.phone && (
-                            <p className="text-red-500 text-sm mt-1">{fieldErrors.phone}</p>
+                            <p
+                                id={getFieldErrorId('phone')}
+                                className="text-red-500 text-sm mt-1"
+                                role="alert"
+                                aria-live="assertive"
+                            >
+                                {fieldErrors.phone}
+                            </p>
                         )}
                     </div>
                 </div>
 
                 <div>
-                    <label className="block text-sm font-bold mb-1" style={{ color: colors.teal }}>Email (Optional)</label>
+                    <label htmlFor="email" className="block text-sm font-bold mb-1" style={{ color: colors.teal }}>Email (Optional)</label>
                     <input
+                        id="email"
                         type="email"
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
                         className={`w-full px-4 py-3 min-h-[48px] rounded-xl border-2 focus:outline-none transition-colors text-base ${fieldErrors.email ? 'border-red-400 bg-red-50' : 'border-gray-100 focus:border-cyan-400'}`}
                         placeholder="jane@example.com"
+                        aria-invalid={Boolean(fieldErrors.email)}
+                        aria-describedby={fieldErrors.email ? getFieldErrorId('email') : undefined}
                     />
                     {fieldErrors.email && (
-                        <p className="text-red-500 text-sm mt-1">{fieldErrors.email}</p>
+                        <p
+                            id={getFieldErrorId('email')}
+                            className="text-red-500 text-sm mt-1"
+                            role="alert"
+                            aria-live="assertive"
+                        >
+                            {fieldErrors.email}
+                        </p>
                     )}
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
                     <div>
-                        <label className="block text-sm font-bold mb-1" style={{ color: colors.teal }}>Dog's Name</label>
+                        <label htmlFor="dogName" className="block text-sm font-bold mb-1" style={{ color: colors.teal }}>Dog's Name</label>
                         <input
+                            id="dogName"
                             required
                             type="text"
                             name="dogName"
@@ -340,8 +379,9 @@ const BookingForm = ({
                         />
                     </div>
                     <div>
-                        <label className="block text-sm font-bold mb-1" style={{ color: colors.teal }}>Breed</label>
+                        <label htmlFor="breed" className="block text-sm font-bold mb-1" style={{ color: colors.teal }}>Breed</label>
                         <input
+                            id="breed"
                             type="text"
                             name="breed"
                             value={formData.breed}
@@ -353,8 +393,9 @@ const BookingForm = ({
                 </div>
 
                 <div>
-                    <label className="block text-sm font-bold mb-1" style={{ color: colors.teal }}>Service Required</label>
+                    <label htmlFor="service" className="block text-sm font-bold mb-1" style={{ color: colors.teal }}>Service Required</label>
                     <select
+                        id="service"
                         name="service"
                         value={formData.service}
                         onChange={handleServiceChange}
@@ -393,8 +434,9 @@ const BookingForm = ({
                 </div>
 
                 <div>
-                    <label className="block text-sm font-bold mb-1" style={{ color: colors.teal }}>Any Notes?</label>
+                    <label htmlFor="notes" className="block text-sm font-bold mb-1" style={{ color: colors.teal }}>Any Notes?</label>
                     <textarea
+                        id="notes"
                         name="notes"
                         value={formData.notes}
                         onChange={handleChange}
@@ -407,8 +449,8 @@ const BookingForm = ({
                 <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-4 min-h-[56px] rounded-xl font-bold text-lg text-white transition-all hover:scale-[1.02] hover:shadow-lg mt-4 disabled:opacity-70 disabled:cursor-not-allowed"
-                    style={{ backgroundColor: colors.green }}
+                    className="w-full py-4 min-h-[56px] rounded-xl font-bold text-lg transition-all hover:scale-[1.02] hover:shadow-lg mt-4 disabled:opacity-70 disabled:cursor-not-allowed"
+                    style={{ backgroundColor: colors.green, color: colors.plum }}
                 >
                     {isSubmitting ? 'Sending...' : 'Send Request'}
                 </button>
@@ -423,7 +465,7 @@ const BookingForm = ({
                         <a
                             href="https://wa.me/447507731487"
                             className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold transition-all hover:scale-105"
-                            style={{ backgroundColor: '#25D366', color: 'white' }}
+                            style={{ backgroundColor: '#25D366', color: colors.plum }}
                         >
                             💬 WhatsApp
                         </a>

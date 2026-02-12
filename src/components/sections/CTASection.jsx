@@ -37,7 +37,7 @@ const CTASection = ({ onBookClick }) => {
                         </h3>
                         <p
                             className="body-font text-lg mb-8"
-                            style={{ color: 'rgba(255,255,255,0.9)' }}
+                            style={{ color: colors.plum }}
                         >
                             We're open Monday to Wednesday, 8:30am–3pm. Slots go fast — get yours booked in.
                         </p>
@@ -47,7 +47,7 @@ const CTASection = ({ onBookClick }) => {
                                 className="px-10 py-4 rounded-full font-bold text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl"
                                 style={{
                                     backgroundColor: 'white',
-                                    color: colors.pink
+                                    color: colors.plum
                                 }}
                             >
                                 Book your visit
@@ -56,8 +56,8 @@ const CTASection = ({ onBookClick }) => {
                                 href="tel:07507731487"
                                 className="px-10 py-4 rounded-full font-bold text-lg transition-all duration-300 hover:scale-105 border-2 flex items-center gap-2"
                                 style={{
-                                    borderColor: 'white',
-                                    color: 'white',
+                                    borderColor: colors.plum,
+                                    color: colors.plum,
                                     backgroundColor: 'transparent'
                                 }}
                             >
@@ -72,8 +72,8 @@ const CTASection = ({ onBookClick }) => {
                                 className="p-5 rounded-2xl text-left"
                                 style={{ backgroundColor: 'rgba(255,255,255,0.15)' }}
                             >
-                                <p className="font-semibold text-white mb-1">New to us?</p>
-                                <p className="text-base" style={{ color: 'rgba(255,255,255,0.9)' }}>
+                                <p className="font-semibold mb-1" style={{ color: colors.plum }}>New to us?</p>
+                                <p className="text-base" style={{ color: colors.plum }}>
                                     We'll talk through your dog's needs first — no rush.
                                 </p>
                             </div>
@@ -81,8 +81,8 @@ const CTASection = ({ onBookClick }) => {
                                 className="p-5 rounded-2xl text-left"
                                 style={{ backgroundColor: 'rgba(255,255,255,0.15)' }}
                             >
-                                <p className="font-semibold text-white mb-1">Already a regular?</p>
-                                <p className="text-base" style={{ color: 'rgba(255,255,255,0.9)' }}>
+                                <p className="font-semibold mb-1" style={{ color: colors.plum }}>Already a regular?</p>
+                                <p className="text-base" style={{ color: colors.plum }}>
                                     Just tell us who you are and when you'd like to come in.
                                 </p>
                             </div>

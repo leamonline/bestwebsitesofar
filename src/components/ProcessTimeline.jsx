@@ -1,10 +1,21 @@
 import React, { useEffect, useRef } from 'react';
 import { colors } from '../constants/colors';
+import usePrefersReducedMotion from '../hooks/usePrefersReducedMotion';
 
 const ProcessTimeline = ({ steps }) => {
     const observerRef = useRef(null);
+    const prefersReducedMotion = usePrefersReducedMotion();
 
     useEffect(() => {
+        const elements = document.querySelectorAll('.timeline-item');
+
+        if (prefersReducedMotion) {
+            elements.forEach((el) => {
+                el.classList.remove('opacity-0', 'translate-y-10');
+            });
+            return;
+        }
+
         observerRef.current = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
@@ -17,7 +28,6 @@ const ProcessTimeline = ({ steps }) => {
             { threshold: 0.1 }
         );
 
-        const elements = document.querySelectorAll('.timeline-item');
         elements.forEach((el) => observerRef.current.observe(el));
 
         return () => {
@@ -25,7 +35,7 @@ const ProcessTimeline = ({ steps }) => {
                 observerRef.current.disconnect();
             }
         };
-    }, []);
+    }, [prefersReducedMotion]);
 
     return (
         <div className="relative max-w-4xl mx-auto px-4">
@@ -39,7 +49,7 @@ const ProcessTimeline = ({ steps }) => {
                 {steps.map((step, index) => (
                     <div
                         key={index}
-                        className={`timeline-item opacity-0 translate-y-10 transition-all duration-700 ease-out flex flex-col md:flex-row gap-4 md:gap-0 items-center ${index % 2 === 0 ? 'md:flex-row-reverse' : ''
+                        className={`timeline-item ${prefersReducedMotion ? '' : 'opacity-0 translate-y-10'} transition-all duration-700 ease-out flex flex-col md:flex-row gap-4 md:gap-0 items-center ${index % 2 === 0 ? 'md:flex-row-reverse' : ''
                             }`}
                         style={{ transitionDelay: `${index * 100}ms` }}
                     >

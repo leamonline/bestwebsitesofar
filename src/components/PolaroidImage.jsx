@@ -1,5 +1,19 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { colors } from '../constants/colors';
+import usePrefersReducedMotion from '../hooks/usePrefersReducedMotion';
+
+const RESPONSIVE_WIDTHS = [240, 360, 480, 640];
+const RESPONSIVE_SOURCE_LIMITS = {
+    '/assets/client-dog-9.jpg': 265,
+};
+
+const IMAGE_EXT_PATTERN = /\.(jpg|jpeg|png)$/i;
+
+const buildResponsiveSrcSet = (src, widths, format) => {
+    return widths
+        .map((width) => `${src.replace(IMAGE_EXT_PATTERN, `-${width}.${format}`)} ${width}w`)
+        .join(', ');
+};
 
 const PolaroidImage = ({
     src,
@@ -15,29 +29,37 @@ const PolaroidImage = ({
     height,
     instant = false // If true, skip develop animation
 }) => {
-    const [developStage, setDevelopStage] = useState(instant ? 4 : 0); // 0=hidden, 1=emerging, 2=shapes, 3=detail, 4=revealed
+    const isTest = typeof window !== 'undefined' && window.IS_TEST;
+    const prefersReducedMotion = usePrefersReducedMotion();
+    const skipDevelopAnimation = instant || isTest || prefersReducedMotion;
+    const [developStage, setDevelopStage] = useState(skipDevelopAnimation ? 4 : 0); // 0=hidden, 1=emerging, 2=shapes, 3=detail, 4=revealed
     const polaroidRef = useRef(null);
 
     // Randomize tape rotation slightly for realism
-    const [tapeRotation] = useState(() => Math.random() * 10 - 5);
-    const [developDelay] = useState(() => Math.random() * 500);
+    const [tapeRotation] = useState(() => (isTest ? 0 : Math.random() * 10 - 5));
+    const [developDelay] = useState(() => (skipDevelopAnimation ? 0 : Math.random() * 500));
 
     // Scroll-triggered reveal animation with stages
     useEffect(() => {
+        if (skipDevelopAnimation) return;
+
+        const timers = [];
+
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting && developStage === 0) {
                         // Start developing with random delay
-                        setTimeout(() => {
+                        const firstTimer = setTimeout(() => {
                             setDevelopStage(1);
                             // Stage 2: Blurry shapes emerge (1s)
-                            setTimeout(() => setDevelopStage(2), 800);
+                            timers.push(setTimeout(() => setDevelopStage(2), 800));
                             // Stage 3: Desaturated details (1.5s)
-                            setTimeout(() => setDevelopStage(3), 2000);
+                            timers.push(setTimeout(() => setDevelopStage(3), 2000));
                             // Stage 4: Full color (2.5s)
-                            setTimeout(() => setDevelopStage(4), 3500);
+                            timers.push(setTimeout(() => setDevelopStage(4), 3500));
                         }, developDelay);
+                        timers.push(firstTimer);
                     }
                 });
             },
@@ -48,8 +70,11 @@ const PolaroidImage = ({
             observer.observe(polaroidRef.current);
         }
 
-        return () => observer.disconnect();
-    }, [developStage, developDelay]);
+        return () => {
+            observer.disconnect();
+            timers.forEach(clearTimeout);
+        };
+    }, [developStage, developDelay, skipDevelopAnimation]);
 
     // Get filter based on development stage
     const getImageStyles = () => {
@@ -146,6 +171,23 @@ const PolaroidImage = ({
     // Size mapping
     const sizeMap = { sm: '180px', md: '240px', lg: '300px' };
     const polaroidWidth = sizeMap[size] || sizeMap.lg;
+    const isResponsiveClientDog = Boolean(src && src.startsWith('/assets/client-dog-') && IMAGE_EXT_PATTERN.test(src));
+    const maxSourceWidth = isResponsiveClientDog ? (RESPONSIVE_SOURCE_LIMITS[src] || 800) : null;
+    const responsiveWidths = isResponsiveClientDog
+        ? RESPONSIVE_WIDTHS.filter((widthValue) => widthValue <= maxSourceWidth)
+        : [];
+    const hasResponsiveVariants = responsiveWidths.length > 0;
+    const imageSizesByPolaroidSize = {
+        sm: '(max-width: 768px) 44vw, 180px',
+        md: '(max-width: 768px) 46vw, 240px',
+        lg: '(max-width: 768px) 62vw, 300px',
+    };
+    const imageSizes = imageSizesByPolaroidSize[size] || imageSizesByPolaroidSize.lg;
+    const fallbackWebpSrc = src?.replace(IMAGE_EXT_PATTERN, '.webp');
+    const avifSrcSet = hasResponsiveVariants ? buildResponsiveSrcSet(src, responsiveWidths, 'avif') : null;
+    const webpSrcSet = hasResponsiveVariants ? buildResponsiveSrcSet(src, responsiveWidths, 'webp') : null;
+    const jpegCandidates = hasResponsiveVariants ? buildResponsiveSrcSet(src, responsiveWidths, 'jpg') : null;
+    const jpegSrcSet = hasResponsiveVariants ? `${jpegCandidates}, ${src} ${maxSourceWidth}w` : null;
 
     return (
         <div
@@ -176,9 +218,19 @@ const PolaroidImage = ({
 
                 {src ? (
                     <picture>
-                        <source srcSet={src.replace(/\.(jpg|jpeg|png)$/i, '.webp')} type="image/webp" />
+                        {hasResponsiveVariants ? (
+                            <>
+                                <source srcSet={avifSrcSet} sizes={imageSizes} type="image/avif" />
+                                <source srcSet={webpSrcSet} sizes={imageSizes} type="image/webp" />
+                                <source srcSet={jpegSrcSet} sizes={imageSizes} type="image/jpeg" />
+                            </>
+                        ) : (
+                            <source srcSet={fallbackWebpSrc} type="image/webp" />
+                        )}
                         <img
                             src={src}
+                            srcSet={jpegSrcSet || undefined}
+                            sizes={hasResponsiveVariants ? imageSizes : undefined}
                             alt={caption || "Dog being groomed at Smarter Dog Grooming Salon"}
                             className="w-full h-full object-cover transition-all duration-700 ease-out"
                             style={imageStyles}

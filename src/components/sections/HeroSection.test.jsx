@@ -1,28 +1,28 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import HeroSection from './HeroSection';
+import { colors } from '../../constants/colors';
 
 describe('HeroSection', () => {
-    it('renders without crashing', () => {
-        render(<HeroSection isLoaded={true} />);
-        expect(screen.getByText(/VIP treatment/i)).toBeInTheDocument();
-    });
+  it('renders hero headline', () => {
+    render(<HeroSection isLoaded={true} onBookClick={() => {}} />);
 
-    it('renders "Book Your Visit" button', () => {
-        render(<HeroSection isLoaded={true} />);
-        const button = screen.getByRole('button', { name: /Book Your Visit/i });
-        expect(button).toBeInTheDocument();
-        expect(button.style.backgroundColor).toBe('rgb(255, 204, 0)');
-        expect(button.style.color).toBe('rgb(42, 111, 107)');
-    });
+    expect(screen.getByText(/Come scruffy/i)).toBeInTheDocument();
+    expect(screen.getByText(/Leave gorgeous/i)).toBeInTheDocument();
+  });
 
-    it('calls onBookClick when "Book Your Visit" button is clicked', () => {
-        const handleBookClick = vi.fn();
-        render(<HeroSection isLoaded={true} onBookClick={handleBookClick} />);
+  it('renders booking button with brand colors', () => {
+    render(<HeroSection isLoaded={true} onBookClick={() => {}} />);
 
-        const button = screen.getByRole('button', { name: /Book Your Visit/i });
-        fireEvent.click(button);
+    const button = screen.getByRole('button', { name: /Book your visit/i });
+    expect(button).toHaveStyle({ backgroundColor: colors.yellow, color: colors.plum });
+  });
 
-        expect(handleBookClick).toHaveBeenCalledTimes(1);
-    });
+  it('calls onBookClick from hero button', () => {
+    const onBookClick = vi.fn();
+    render(<HeroSection isLoaded={true} onBookClick={onBookClick} />);
+
+    fireEvent.click(screen.getByRole('button', { name: /Book your visit/i }));
+    expect(onBookClick).toHaveBeenCalledWith('Hero Section');
+  });
 });

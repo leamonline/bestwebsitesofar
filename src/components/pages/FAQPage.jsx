@@ -46,30 +46,11 @@ const FAQPage = ({ onBookClick }) => {
         setOpenIndex(openIndex === index ? null : index);
     };
 
-    // Generate FAQ Schema for this page
-    const faqSchema = {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": faqs.map(faq => ({
-            "@type": "Question",
-            "name": faq.question,
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": faq.answer
-            }
-        }))
-    };
-
     return (
         <div className="min-h-screen" style={{ backgroundColor: colors.offWhite }}>
-            {/* FAQ Schema */}
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-            />
             <Navigation isLoaded={isLoaded} onBookClick={onBookClick} />
 
-            <main className="pt-24 pb-16 px-6">
+            <main id="main-content" className="pt-24 pb-16 px-6">
                 <div className="max-w-3xl mx-auto">
                     {/* Header */}
                     <div className="text-center mb-16">
@@ -104,7 +85,7 @@ const FAQPage = ({ onBookClick }) => {
                                     <span
                                         className="text-2xl transition-transform duration-300 flex-shrink-0"
                                         style={{
-                                            color: colors.cyan,
+                                            color: colors.teal,
                                             transform: openIndex === i ? 'rotate(45deg)' : 'rotate(0)'
                                         }}
                                     >
@@ -131,16 +112,16 @@ const FAQPage = ({ onBookClick }) => {
                         <p className="body-font mb-2" style={{ color: colors.teal }}>
                             Got a question we haven't answered?
                         </p>
-                        <p className="body-font mb-6" style={{ color: colors.teal, opacity: 0.8 }}>
+                        <p className="body-font mb-6" style={{ color: colors.teal }}>
                             Give us a call or send a message — we're happy to help.
                         </p>
                         <div className="flex flex-wrap justify-center gap-4">
                             <button
-                                onClick={() => onBookClick('FAQ Page')}
+                                onClick={() => onBookClick?.('FAQ Page')}
                                 className="px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl"
                                 style={{
                                     backgroundColor: colors.cyan,
-                                    color: 'white'
+                                    color: colors.plum
                                 }}
                             >
                                 Book your visit
@@ -149,8 +130,8 @@ const FAQPage = ({ onBookClick }) => {
                                 href="tel:07507731487"
                                 className="px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 hover:scale-105 border-2 flex items-center gap-2"
                                 style={{
-                                    borderColor: colors.cyan,
-                                    color: colors.cyan,
+                                    borderColor: colors.teal,
+                                    color: colors.teal,
                                     backgroundColor: 'transparent'
                                 }}
                             >

@@ -2,10 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { colors } from '../../constants/colors';
 import { useFocusTrap } from '../../hooks/useFocusTrap';
+import usePrefersReducedMotion from '../../hooks/usePrefersReducedMotion';
 
 const Navigation = ({ isLoaded, onBookClick }) => {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
     const [scrolled, setScrolled] = React.useState(false);
+    const prefersReducedMotion = usePrefersReducedMotion();
+    const navLinkColor = scrolled ? colors.teal : colors.plum;
 
     const closeMenu = React.useCallback(() => setIsMenuOpen(false), []);
     const menuRef = useFocusTrap(isMenuOpen, closeMenu);
@@ -32,8 +35,14 @@ const Navigation = ({ isLoaded, onBookClick }) => {
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
                 ? 'bg-white/80 backdrop-blur-md shadow-sm py-3'
                 : 'bg-transparent py-6'
-                } ${isLoaded ? 'animate-fade-in' : 'opacity-0'}`}
+                } ${isLoaded && !prefersReducedMotion ? 'animate-fade-in' : ''}`}
         >
+            <a
+                href="#main-content"
+                className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:px-4 focus:py-2 focus:rounded-md focus:bg-white focus:text-black focus:shadow-md"
+            >
+                Skip to main content
+            </a>
             <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
                 <div className="flex items-center gap-3">
                     <Link to="/" className="block relative group">
@@ -53,7 +62,7 @@ const Navigation = ({ isLoaded, onBookClick }) => {
                     <Link
                         to="/services"
                         className="font-medium text-sm transition-colors relative group px-3 py-1 hover-wiggle"
-                        style={{ color: colors.teal }}
+                        style={{ color: navLinkColor }}
                     >
                         Services
                         <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-current transition-all duration-300 group-hover:w-full" />
@@ -62,7 +71,7 @@ const Navigation = ({ isLoaded, onBookClick }) => {
                     <Link
                         to="/houndsly"
                         className="font-medium text-sm transition-colors relative group px-3 py-1 hover-wiggle"
-                        style={{ color: colors.teal }}
+                        style={{ color: navLinkColor }}
                     >
                         Houndsly
                         <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-current transition-all duration-300 group-hover:w-full" />
@@ -71,7 +80,7 @@ const Navigation = ({ isLoaded, onBookClick }) => {
                     <Link
                         to="/approach"
                         className="font-medium text-sm transition-colors relative group px-3 py-1 hover-wiggle"
-                        style={{ color: colors.teal }}
+                        style={{ color: navLinkColor }}
                     >
                         Our Approach
                         <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-current transition-all duration-300 group-hover:w-full" />
@@ -80,7 +89,7 @@ const Navigation = ({ isLoaded, onBookClick }) => {
                     <Link
                         to="/faq"
                         className="font-medium text-sm transition-colors relative group px-3 py-1 hover-wiggle"
-                        style={{ color: colors.teal }}
+                        style={{ color: navLinkColor }}
                     >
                         FAQ
                         <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-current transition-all duration-300 group-hover:w-full" />
@@ -88,7 +97,7 @@ const Navigation = ({ isLoaded, onBookClick }) => {
 
                     <div className="ml-6">
                         <button
-                            onClick={() => onBookClick('Navigation')}
+                            onClick={() => onBookClick?.('Navigation')}
                             className="px-6 py-3 rounded-full font-bold text-sm transition-all duration-300 hover:scale-105 hover:shadow-lg active-squish"
                             style={{
                                 backgroundColor: colors.green,
@@ -104,7 +113,7 @@ const Navigation = ({ isLoaded, onBookClick }) => {
                 <button
                     className="md:hidden text-2xl focus:outline-none"
                     onClick={toggleMenu}
-                    style={{ color: colors.teal }}
+                    style={{ color: navLinkColor }}
                     aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
                     aria-expanded={isMenuOpen}
                 >
@@ -158,10 +167,10 @@ const Navigation = ({ isLoaded, onBookClick }) => {
                     <button
                         onClick={() => {
                             closeMenu();
-                            onBookClick('Mobile Menu');
+                            onBookClick?.('Mobile Menu');
                         }}
-                        className="w-full py-3 rounded-full font-bold text-white mt-2 active-squish"
-                        style={{ backgroundColor: colors.green }}
+                        className="w-full py-3 rounded-full font-bold mt-2 active-squish"
+                        style={{ backgroundColor: colors.green, color: colors.plum }}
                         role="menuitem"
                     >
                         Book your visit

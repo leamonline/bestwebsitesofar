@@ -1,12 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
+import usePrefersReducedMotion from '../hooks/usePrefersReducedMotion';
 
 const FadeIn = ({ children, delay = 0, className = '' }) => {
     const isTest = typeof window !== 'undefined' && window.IS_TEST;
-    const [isVisible, setIsVisible] = useState(isTest);
+    const prefersReducedMotion = usePrefersReducedMotion();
+    const [isVisible, setIsVisible] = useState(isTest || prefersReducedMotion);
     const domRef = useRef();
 
     useEffect(() => {
-        if (isTest) return;
+        if (isTest || prefersReducedMotion) return;
 
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
@@ -27,9 +29,9 @@ const FadeIn = ({ children, delay = 0, className = '' }) => {
                 observer.unobserve(current);
             }
         };
-    }, [isTest]);
+    }, [isTest, prefersReducedMotion]);
 
-    if (isTest) {
+    if (isTest || prefersReducedMotion) {
         return <>{children}</>;
     }
 

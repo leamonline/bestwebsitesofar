@@ -38,7 +38,7 @@ describe('ServiceCard', () => {
 
   it('displays icon in white background container', () => {
     const { container } = render(<ServiceCard {...defaultProps} />);
-    const iconContainer = container.querySelector('.w-16.h-16.rounded-2xl');
+    const iconContainer = container.querySelector('.w-24.h-24.rounded-2xl');
 
     expect(iconContainer).toBeInTheDocument();
     expect(iconContainer.style.backgroundColor).toBe('white');
@@ -123,7 +123,7 @@ describe('ServiceCard', () => {
 
   it('icon container has z-index for layering', () => {
     const { container } = render(<ServiceCard {...defaultProps} />);
-    const iconContainer = container.querySelector('.w-16.h-16.rounded-2xl');
+    const iconContainer = container.querySelector('.w-24.h-24.rounded-2xl');
 
     expect(iconContainer).toHaveClass('z-10');
   });

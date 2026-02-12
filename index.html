@@ -18,7 +18,9 @@
     rel="stylesheet">
 
   <!-- Preload LCP Hero Image -->
-  <link rel="preload" as="image" href="/assets/client-dog-1.webp" type="image/webp">
+  <link rel="preload" as="image" href="/assets/client-dog-1-640.avif" type="image/avif"
+    imagesrcset="/assets/client-dog-1-240.avif 240w, /assets/client-dog-1-360.avif 360w, /assets/client-dog-1-480.avif 480w, /assets/client-dog-1-640.avif 640w"
+    imagesizes="(max-width: 768px) 62vw, 300px" fetchpriority="high">
 
   <!-- Web App Manifest -->
   <link rel="manifest" href="/manifest.json">
@@ -56,158 +58,7 @@
   <!-- Canonical URL -->
   <link rel="canonical" href="https://smarterdog.co.uk/" />
 
-  <!-- JSON-LD Structured Data for LocalBusiness -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "@id": "https://smarterdog.co.uk/#organization",
-    "name": "Smarter Dog Grooming Salon",
-    "alternateName": "Smarter Dog",
-    "image": "https://smarterdog.co.uk/assets/logo-text.png",
-    "logo": "https://smarterdog.co.uk/assets/logo-text.png",
-    "description": "Professional dog grooming salon with 40+ years of experience. Specialist in calm, patient grooming for nervous, elderly, and reactive dogs. Serving Ashton-under-Lyne and Greater Manchester.",
-    "url": "https://smarterdog.co.uk",
-    "telephone": "+447507731487",
-    "email": "leam@smarterdog.co.uk",
-    "foundingDate": "1982",
-    "slogan": "Come scruffy. Leave gorgeous.",
-    "knowsAbout": ["dog grooming", "pet grooming", "nervous dog handling", "elderly dog care", "de-shedding", "puppy grooming"],
-    "areaServed": [
-      {
-        "@type": "City",
-        "name": "Ashton-under-Lyne",
-        "containedInPlace": { "@type": "AdministrativeArea", "name": "Tameside" }
-      },
-      { "@type": "City", "name": "Denton" },
-      { "@type": "City", "name": "Stalybridge" },
-      { "@type": "City", "name": "Dukinfield" },
-      { "@type": "City", "name": "Droylsden" },
-      { "@type": "City", "name": "Mossley" },
-      { "@type": "City", "name": "Audenshaw" },
-      { "@type": "City", "name": "Hyde" },
-      { "@type": "AdministrativeArea", "name": "Tameside" },
-      { "@type": "AdministrativeArea", "name": "Greater Manchester" }
-    ],
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "183 Kings Road",
-      "addressLocality": "Ashton-under-Lyne",
-      "addressRegion": "Greater Manchester",
-      "postalCode": "OL6 8HD",
-      "addressCountry": "GB"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": 53.4875,
-      "longitude": -2.0934
-    },
-    "openingHoursSpecification": [
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday", "Tuesday", "Wednesday"],
-        "opens": "08:30",
-        "closes": "15:00"
-      }
-    ],
-    "priceRange": "££",
-    "currenciesAccepted": "GBP",
-    "paymentAccepted": "Cash, Credit Card, Debit Card",
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.9",
-      "bestRating": "5",
-      "worstRating": "1",
-      "reviewCount": "500",
-      "ratingCount": "500"
-    },
-    "hasOfferCatalog": {
-      "@type": "OfferCatalog",
-      "name": "Dog Grooming Services",
-      "itemListElement": [
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Full Groom",
-            "description": "Complete grooming including bath, blow dry, haircut, nail clipping, ear cleaning"
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Maintenance Groom",
-            "description": "Regular upkeep service: bath, brush out, nail trim, tidy up"
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "De-Shedding Treatment",
-            "description": "Specialist treatment to reduce loose undercoat and minimize shedding"
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Puppy Introduction",
-            "description": "Gentle first grooming experience to build confidence in puppies"
-          }
-        }
-      ]
-    },
-    "sameAs": [
-      "https://facebook.com/smarterdog",
-      "https://instagram.com/smarterdog",
-      "https://tiktok.com/@smarterdog"
-    ]
-  }
-  </script>
-
-  <!-- FAQ Schema for AI assistants -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "Do you groom nervous or reactive dogs?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes! We specialize in calm, patient grooming for nervous, reactive, and anxious dogs. With 40+ years of experience, we know how to help dogs feel safe and comfortable."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What are your opening hours?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "We are open Monday, Tuesday, and Wednesday from 8:30am to 3:00pm."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Where is Smarter Dog Grooming Salon located?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "We are located at 183 Kings Road, Ashton-under-Lyne, OL6 8HD, Greater Manchester, UK."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How do I book an appointment?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "You can request an appointment through our website at smarterdog.co.uk or call us on 07507 731487. We respond within 24 hours."
-        }
-      }
-    ]
-  }
-  </script>
+  <!-- Route-specific JSON-LD is injected by the SPA SEO hook -->
 </head>
 
 <body>

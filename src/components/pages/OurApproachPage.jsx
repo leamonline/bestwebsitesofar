@@ -41,7 +41,7 @@ const OurApproachPage = ({ onBookClick }) => {
     return (
         <div className="min-h-screen relative overflow-hidden" style={{ backgroundColor: colors.offWhite }}>
             {/* Background Decorations - simplified */}
-            <div className="absolute bottom-40 right-0 z-0 opacity-5 pointer-events-none">
+            <div className="absolute bottom-40 right-0 z-0 opacity-5 pointer-events-none" aria-hidden="true">
                 <DogSilhouette
                     color={colors.plum}
                     className="w-72 h-auto rotate-6 scale-x-[-1]"
@@ -50,7 +50,7 @@ const OurApproachPage = ({ onBookClick }) => {
 
             <Navigation isLoaded={isLoaded} onBookClick={onBookClick} />
 
-            <main className="pt-24 pb-16 px-6 relative z-10">
+            <main id="main-content" className="pt-24 pb-16 px-6 relative z-10">
                 <div className="max-w-3xl mx-auto">
                     {/* Header */}
                     <div className="text-center mb-16">
@@ -91,11 +91,11 @@ const OurApproachPage = ({ onBookClick }) => {
                             Ready to book your dog's first visit?
                         </p>
                         <button
-                            onClick={() => onBookClick('Approach Page')}
+                            onClick={() => onBookClick?.('Approach Page')}
                             className="px-10 py-4 rounded-full font-bold text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl"
                             style={{
                                 backgroundColor: colors.cyan,
-                                color: 'white'
+                                color: colors.plum
                             }}
                         >
                             Book your visit

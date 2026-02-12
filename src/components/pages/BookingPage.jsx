@@ -19,7 +19,7 @@ const BookingPage = () => {
         <div className="min-h-screen" style={{ backgroundColor: colors.offWhite }}>
             <Navigation isLoaded={isLoaded} />
 
-            <main className="pt-24 pb-16 px-6">
+            <main id="main-content" className="pt-24 pb-16 px-6">
                 <div className="max-w-lg mx-auto">
                     <div className="bg-white rounded-3xl shadow-xl">
                         <BookingForm

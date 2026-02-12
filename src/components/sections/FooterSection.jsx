@@ -74,12 +74,12 @@ const FooterSection = () => {
                     </div>
 
                     <div>
-                        <h4
+                        <h2
                             className="heading-font font-semibold mb-4"
                             style={{ color: 'white' }}
                         >
                             Opening Hours
-                        </h4>
+                        </h2>
                         <div
                             className="body-font text-lg space-y-2"
                             style={{ color: 'rgba(255,255,255,0.9)' }}
@@ -99,12 +99,12 @@ const FooterSection = () => {
                     </div>
 
                     <div>
-                        <h4
+                        <h2
                             className="heading-font font-semibold mb-4"
                             style={{ color: 'white' }}
                         >
                             Find Us
-                        </h4>
+                        </h2>
                         <div
                             className="body-font text-lg space-y-2"
                             style={{ color: 'rgba(255,255,255,0.9)' }}
@@ -116,12 +116,12 @@ const FooterSection = () => {
                     </div>
 
                     <div>
-                        <h4
+                        <h2
                             className="heading-font font-semibold mb-4"
                             style={{ color: 'white' }}
                         >
                             Get in Touch
-                        </h4>
+                        </h2>
                         <div
                             className="body-font text-lg space-y-2"
                             style={{ color: 'rgba(255,255,255,0.9)' }}

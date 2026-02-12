@@ -5,6 +5,7 @@ import CookieConsent from './components/CookieConsent';
 import ErrorBoundary from './components/ErrorBoundary';
 import ScrollRestoration from './components/ScrollRestoration';
 import { usePageTracking } from './hooks/usePageTracking';
+import { useRouteSeo } from './hooks/useRouteSeo';
 
 // Lazy-loaded routes for code splitting (homepage is eagerly loaded)
 const ServicesPage = lazy(() => import('./components/pages/ServicesPage'));
@@ -30,6 +31,7 @@ const PageFallback = () => (
 // Component that uses the page tracking hook
 function PageTracker() {
   usePageTracking();
+  useRouteSeo();
   return null;
 }
 

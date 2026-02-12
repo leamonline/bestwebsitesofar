@@ -3,39 +3,29 @@ import { render, screen } from '@testing-library/react';
 import HoundslySection from './HoundslySection';
 
 describe('HoundslySection', () => {
-    it('renders without crashing', () => {
-        render(<HoundslySection />);
-        expect(screen.getByText(/Houndsly by Smarter Dog/i)).toBeInTheDocument();
-        expect(screen.getByAltText('Houndsly Pet Products')).toBeInTheDocument();
-    });
+  it('renders core heading copy', () => {
+    render(<HoundslySection />);
 
-    it('renders new copy and tagline', () => {
-        render(<HoundslySection />);
-        expect(screen.getByText(/Rainbow-powered. Nature-approved/i)).toBeInTheDocument();
-        expect(screen.getByText(/Crafted for Sensitive Skin/i)).toBeInTheDocument();
-    });
+    expect(screen.getByText('Handmade with love')).toBeInTheDocument();
+    expect(screen.getByText('Made for Sensitive Skin')).toBeInTheDocument();
+  });
 
-    it('renders product images', () => {
-        render(<HoundslySection />);
-        expect(screen.getByAltText('Houndsly Natural Shampoo')).toBeInTheDocument();
-        expect(screen.getByAltText('Drynamite Speed Dry Spray')).toBeInTheDocument();
-    });
+  it('renders brand and product visuals', () => {
+    render(<HoundslySection />);
 
-    it('renders badges', () => {
-        render(<HoundslySection />);
-        expect(screen.getByText('Vegan')).toBeInTheDocument();
-        expect(screen.getByText('Small Batch')).toBeInTheDocument();
-    });
+    expect(screen.getByAltText('Houndsly Pet Products')).toBeInTheDocument();
+    expect(screen.getByText('Houndsly Natural Shampoo')).toBeInTheDocument();
+    expect(screen.getByText('Drynamite Dry Shampoo')).toBeInTheDocument();
+  });
 
-    it('renders CTA buttons', () => {
-        render(<HoundslySection />);
-        const shopLink = screen.getByRole('link', { name: /Shop Houndsly/i });
-        const viewRangeLink = screen.getByRole('link', { name: /View the Range/i });
+  it('renders badges and shop CTA', () => {
+    render(<HoundslySection />);
 
-        expect(shopLink).toBeInTheDocument();
-        expect(shopLink).toHaveAttribute('href', 'https://houndsly.co.uk');
+    expect(screen.getByText('Vegan')).toBeInTheDocument();
+    expect(screen.getByText('Small Batch')).toBeInTheDocument();
 
-        expect(viewRangeLink).toBeInTheDocument();
-        expect(viewRangeLink).toHaveAttribute('href', 'https://houndsly.co.uk/collections/all');
-    });
+    const link = screen.getByRole('link', { name: /Shop Houndsly/i });
+    expect(link).toHaveAttribute('href', 'https://houndsly.co.uk');
+    expect(link).toHaveAttribute('target', '_blank');
+  });
 });

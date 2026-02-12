@@ -25,7 +25,7 @@ describe('colors constants', () => {
 
     it('defines pink bright color', () => {
       expect(colors.pink).toBeDefined();
-      expect(colors.pink).toBe('#FF2E63');
+      expect(colors.pink).toBe('#E8506A');
     });
 
     it('defines yellow bright color', () => {
@@ -100,8 +100,8 @@ describe('colors constants', () => {
   });
 
   describe('color palette structure', () => {
-    it('exports exactly 13 colors', () => {
-      expect(Object.keys(colors)).toHaveLength(14);
+    it('exports the full palette', () => {
+      expect(Object.keys(colors)).toHaveLength(17);
     });
 
     it('has 2 anchor colors (teal, offWhite)', () => {

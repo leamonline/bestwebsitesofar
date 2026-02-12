@@ -113,10 +113,10 @@ const TermsPage = ({ onBookClick }) => {
         <div className="min-h-screen" style={{ backgroundColor: colors.offWhite }}>
             <Navigation isLoaded={isLoaded} onBookClick={onBookClick} />
 
-            <main className="pt-24 pb-16 px-6">
+            <main id="main-content" className="pt-24 pb-16 px-6">
                 <div className="max-w-3xl mx-auto">
                     {/* Breadcrumb */}
-                    <p className="body-font text-base mb-4" style={{ color: colors.teal, opacity: 0.7 }}>
+                    <p className="body-font text-base mb-4" style={{ color: colors.teal }}>
                         Policies & Terms
                     </p>
 
@@ -154,7 +154,7 @@ const TermsPage = ({ onBookClick }) => {
                                             className="body-font text-lg leading-relaxed flex gap-3"
                                             style={{ color: colors.teal }}
                                         >
-                                            <span style={{ color: colors.cyan }} className="flex-shrink-0">•</span>
+                                            <span style={{ color: colors.teal }} className="flex-shrink-0">•</span>
                                             <span>{item}</span>
                                         </li>
                                     ))}
@@ -173,7 +173,7 @@ const TermsPage = ({ onBookClick }) => {
                         </p>
                         <p className="body-font text-base" style={{ color: colors.teal }}>
                             If you have questions about any of these policies, please give us a call on{' '}
-                            <a href="tel:07507731487" className="font-semibold underline hover:opacity-70" style={{ color: colors.cyan }}>
+                            <a href="tel:07507731487" className="font-semibold underline hover:opacity-70" style={{ color: colors.teal }}>
                                 07507 731487
                             </a>
                         </p>

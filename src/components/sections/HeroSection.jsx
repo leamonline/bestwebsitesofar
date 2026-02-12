@@ -4,10 +4,17 @@ import DogSilhouette from '../DogSilhouette';
 import PolaroidImage from '../PolaroidImage';
 import BackgroundSticker from '../BackgroundSticker';
 import MagneticButton from '../MagneticButton';
+import usePrefersReducedMotion from '../../hooks/usePrefersReducedMotion';
 
 import ParallaxSection from '../ParallaxSection';
 
 const HeroSection = ({ isLoaded, onBookClick }) => {
+    const prefersReducedMotion = usePrefersReducedMotion();
+    const headlineAnimationClass = prefersReducedMotion ? '' : 'animate-fade-in-up';
+    const imageClusterAnimationClass = prefersReducedMotion
+        ? ''
+        : (isLoaded ? 'animate-fade-in' : 'opacity-0');
+
     return (
         <>
             <section className="pt-32 pb-24 relative overflow-hidden" style={{ backgroundColor: colors.cyan }}>
@@ -22,7 +29,7 @@ const HeroSection = ({ isLoaded, onBookClick }) => {
                         />
                     </ParallaxSection>
                     <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center relative z-10">
-                        <div className="animate-fade-in-up max-w-lg">
+                        <div className={`${headlineAnimationClass} max-w-lg`}>
 
                             {/* Headline — styled like a logo, not a paragraph */}
                             <h1
@@ -50,7 +57,7 @@ const HeroSection = ({ isLoaded, onBookClick }) => {
                             <p
                                 className="body-font text-lg leading-relaxed mb-12 max-w-md"
                                 style={{
-                                    color: colors.teal,
+                                    color: colors.plum,
                                     fontWeight: '500'
                                 }}
                             >
@@ -77,7 +84,7 @@ const HeroSection = ({ isLoaded, onBookClick }) => {
                         </div>
 
                         {/* Hero Polaroid Cluster - Responsive */}
-                        <div className={`relative h-[350px] md:h-[500px] ${isLoaded ? 'animate-fade-in' : 'opacity-0'} `} style={{ animationDelay: '0.3s' }}>
+                        <div className={`relative h-[350px] md:h-[500px] ${imageClusterAnimationClass} `} style={{ animationDelay: '0.3s' }}>
                             <div className="absolute top-0 left-0 md:left-4 z-10 hover:z-40 transition-all duration-300 scale-[0.6] md:scale-100 origin-top-left">
                                 <PolaroidImage
                                     rotation={-5}
@@ -97,7 +104,7 @@ const HeroSection = ({ isLoaded, onBookClick }) => {
                                     tapeColor={colors.cyan}
                                     src="/assets/client-dog-2.jpg"
                                     caption="Fluffy and fabulous"
-                                    loading="eager"
+                                    loading="lazy"
                                     instant={true}
                                 />
                             </div>
