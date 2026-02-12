@@ -1,5 +1,5 @@
 {
-  "name": "sidereal-gravity",
+  "name": "smarter-dog-website",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -37,9 +37,7 @@
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",
-    "@types/react": "^19.2.5",
-    "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^5.1.1",
+    "@vitejs/plugin-react": "^5.1.4",
     "@vitest/coverage-v8": "^4.0.14",
     "@vitest/ui": "^4.0.14",
     "autoprefixer": "^10.4.22",

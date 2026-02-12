@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { colors } from '../../constants/colors';
+import useDocumentTitle from '../../hooks/useDocumentTitle';
 import Navigation from '../sections/Navigation';
 import FooterSection from '../sections/FooterSection';
 import DogSilhouette from '../DogSilhouette';
@@ -11,6 +12,8 @@ const OurApproachPage = ({ onBookClick }) => {
         const timer = setTimeout(() => setIsLoaded(true), 100);
         return () => clearTimeout(timer);
     }, []);
+
+    useDocumentTitle('Our Approach');
 
     const approaches = [
         {

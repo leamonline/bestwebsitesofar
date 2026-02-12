@@ -28,8 +28,8 @@ export default defineConfig({
     }),
   ],
   build: {
-    // Enable sourcemaps for bundle analysis
-    sourcemap: true,
+    // Hidden sourcemaps: generated for error tracking but not exposed to end users
+    sourcemap: 'hidden',
     // Set chunk size warnings
     chunkSizeWarningLimit: 500, // 500KB
     rollupOptions: {
@@ -37,6 +37,7 @@ export default defineConfig({
         // Manual chunking for better code splitting
         manualChunks: {
           'react-vendor': ['react', 'react-dom'],
+          'router-vendor': ['react-router-dom'],
         },
       },
     },

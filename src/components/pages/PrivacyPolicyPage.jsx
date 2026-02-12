@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { colors } from '../../constants/colors';
+import useDocumentTitle from '../../hooks/useDocumentTitle';
 import Navigation from '../sections/Navigation';
 import FooterSection from '../sections/FooterSection';
 
@@ -11,6 +12,8 @@ const PrivacyPolicyPage = ({ onBookClick }) => {
         const timer = setTimeout(() => setIsLoaded(true), 100);
         return () => clearTimeout(timer);
     }, []);
+
+    useDocumentTitle('Privacy Policy');
 
     return (
         <div className="min-h-screen" style={{ backgroundColor: colors.offWhite }}>

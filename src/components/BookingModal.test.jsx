@@ -1,16 +1,22 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import BookingModal from './BookingModal';
 
-// Mock dependencies
-vi.mock('../utils/analytics', () => ({
-    trackEvent: vi.fn(),
+// Mock the BookingForm component
+vi.mock('./BookingForm', () => ({
+    default: ({ headingTag, headingId }) => {
+        const HeadingTag = headingTag;
+        return (
+            <div data-testid="booking-form">
+                <HeadingTag id={headingId}>Let's get you booked in!</HeadingTag>
+            </div>
+        );
+    },
 }));
 
-vi.mock('@emailjs/browser', () => ({
-    default: {
-        send: vi.fn().mockResolvedValue({ status: 200, text: 'OK' }),
-    },
+// Mock useFocusTrap hook
+vi.mock('../hooks/useFocusTrap', () => ({
+    useFocusTrap: () => ({ current: null }),
 }));
 
 describe('BookingModal', () => {
@@ -46,22 +52,8 @@ describe('BookingModal', () => {
         expect(handleClose).toHaveBeenCalledTimes(1);
     });
 
-    it('submits form and shows success message', async () => {
+    it('renders BookingForm inside the dialog', () => {
         render(<BookingModal isOpen={true} onClose={() => { }} />);
-
-        // Fill out form
-        fireEvent.change(screen.getByPlaceholderText('Jane Doe'), { target: { value: 'John Smith' } });
-        fireEvent.change(screen.getByPlaceholderText('07123...'), { target: { value: '07123456789' } });
-        fireEvent.change(screen.getByPlaceholderText('Barnaby'), { target: { value: 'Rex' } });
-
-        // Submit
-        const submitButton = screen.getByText('Send Request');
-        fireEvent.click(submitButton);
-
-        // Check for success message
-        await waitFor(() => {
-            expect(screen.getByText('Request Received!')).toBeInTheDocument();
-        }, { timeout: 3000 });
-        expect(screen.getByText(/Thanks John Smith!/)).toBeInTheDocument();
+        expect(screen.getByTestId('booking-form')).toBeInTheDocument();
     });
 });

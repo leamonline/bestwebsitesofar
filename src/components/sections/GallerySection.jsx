@@ -3,17 +3,19 @@ import { colors } from '../../constants/colors';
 import PolaroidImage from '../PolaroidImage';
 import DogSilhouette from '../DogSilhouette';
 
+// Photos with unique tape positions and colors — static, no need to recreate per render
+const GALLERY_PHOTOS = [
+    { src: '/assets/client-dog-1.jpg', rotation: -4, tape: colors.cyan, tapePos: 'top' },
+    { src: '/assets/client-dog-9.jpg', rotation: 5, tape: colors.pink, tapePos: 'top-left' },
+    { src: '/assets/client-dog-3.jpg', rotation: -2, tape: colors.orange, tapePos: 'top-right' },
+    { src: '/assets/client-dog-4.jpg', rotation: 6, tape: colors.green, tapePos: 'left' },
+    { src: '/assets/client-dog-10.jpg', rotation: -5, tape: colors.yellow, tapePos: 'right' },
+    { src: '/assets/client-dog-2.jpg', rotation: 3, tape: '#E8506A', tapePos: 'top-left' },
+    { src: '/assets/client-dog-5.jpg', rotation: -3, tape: colors.teal, tapePos: 'top-right' },
+];
+
 const GallerySection = () => {
-    // Photos with unique tape positions and colors
-    const photos = [
-        { src: '/assets/client-dog-1.jpg', rotation: -4, tape: colors.cyan, tapePos: 'top' },
-        { src: '/assets/client-dog-9.jpg', rotation: 5, tape: colors.pink, tapePos: 'top-left' },
-        { src: '/assets/client-dog-3.jpg', rotation: -2, tape: colors.orange, tapePos: 'top-right' },
-        { src: '/assets/client-dog-4.jpg', rotation: 6, tape: colors.green, tapePos: 'left' },
-        { src: '/assets/client-dog-10.jpg', rotation: -5, tape: colors.yellow, tapePos: 'right' },
-        { src: '/assets/client-dog-2.jpg', rotation: 3, tape: '#E8506A', tapePos: 'top-left' },
-        { src: '/assets/client-dog-5.jpg', rotation: -3, tape: colors.teal, tapePos: 'top-right' },
-    ];
+    const photos = GALLERY_PHOTOS;
 
     return (
         <>
@@ -23,12 +25,12 @@ const GallerySection = () => {
             >
                 <div className="max-w-[1600px] mx-auto px-4">
                     <div className="text-center mb-12">
-                        <h3
+                        <h2
                             className="heading-font font-bold text-4xl md:text-5xl"
                             style={{ color: colors.teal }}
                         >
                             Strike a pose, wet nose.
-                        </h3>
+                        </h2>
                     </div>
 
                     {/* Wide horizontal collage layout */}

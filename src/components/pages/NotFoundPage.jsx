@@ -1,11 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { colors } from '../../constants/colors';
+import useDocumentTitle from '../../hooks/useDocumentTitle';
 import Navigation from '../sections/Navigation';
 import FooterSection from '../sections/FooterSection';
 import DogSilhouette from '../DogSilhouette';
 
 const NotFoundPage = () => {
+    useDocumentTitle('Page Not Found');
     return (
         <div className="min-h-screen flex flex-col" style={{ backgroundColor: colors.offWhite }}>
             <Navigation isLoaded={true} onBookClick={() => { }} />
