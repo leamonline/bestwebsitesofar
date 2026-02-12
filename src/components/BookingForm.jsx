@@ -75,7 +75,7 @@ const BookingForm = ({
 
         // Spam check (honeypot)
         if (formData.website) {
-            console.log("Bot detected");
+            if (import.meta.env.DEV) console.log("Bot detected");
             return;
         }
 

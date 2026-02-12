@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import useDocumentTitle from '../../hooks/useDocumentTitle';
 import Navigation from '../sections/Navigation';
 import FooterSection from '../sections/FooterSection';
 import CTASection from '../sections/CTASection';
@@ -14,6 +15,17 @@ const HoundslyPage = () => {
     useEffect(() => {
         const timer = setTimeout(() => setIsLoaded(true), 100);
         return () => clearTimeout(timer);
+    }, []);
+
+    useDocumentTitle('Houndsly Shop');
+
+    // Prevent search engines from indexing this "Coming Soon" page
+    useEffect(() => {
+        const meta = document.createElement('meta');
+        meta.name = 'robots';
+        meta.content = 'noindex';
+        document.head.appendChild(meta);
+        return () => document.head.removeChild(meta);
     }, []);
 
     const products = [

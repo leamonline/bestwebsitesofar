@@ -153,7 +153,7 @@ const FooterSection = () => {
                     style={{ borderColor: 'rgba(255,255,255,0.2)', color: 'rgba(255,255,255,0.8)' }}
                 >
                     <div className="flex flex-col md:flex-row items-center gap-2 md:gap-6">
-                        <p>© 2025 Smarter Dog Grooming Salon. All rights reserved.</p>
+                        <p>© {new Date().getFullYear()} Smarter Dog Grooming Salon. All rights reserved.</p>
                         <span className="hidden md:inline" style={{ color: 'rgba(255,255,255,0.4)' }}>|</span>
                         <div className="flex items-center gap-2">
                             <span className="text-sm opacity-70">Legal:</span>

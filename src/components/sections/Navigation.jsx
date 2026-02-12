@@ -11,10 +11,17 @@ const Navigation = ({ isLoaded, onBookClick }) => {
     const menuRef = useFocusTrap(isMenuOpen, closeMenu);
 
     React.useEffect(() => {
+        let ticking = false;
         const handleScroll = () => {
-            setScrolled(window.scrollY > 20);
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    setScrolled(window.scrollY > 20);
+                    ticking = false;
+                });
+                ticking = true;
+            }
         };
-        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
@@ -109,7 +116,7 @@ const Navigation = ({ isLoaded, onBookClick }) => {
             {isMenuOpen && (
                 <div
                     ref={menuRef}
-                    className="md:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-md shadow-xl p-6 rounded-b-3xl flex flex-col gap-4 animate-fade-in-up border-t border-gray-100"
+                    className="md:hidden absolute top-full left-0 right-0 bg-white backdrop-blur-md shadow-xl p-6 rounded-b-3xl flex flex-col gap-4 animate-fade-in-up border-t border-gray-100"
                     role="menu"
                 >
                     <Link

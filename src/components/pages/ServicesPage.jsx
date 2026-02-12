@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import useDocumentTitle from '../../hooks/useDocumentTitle';
 import Navigation from '../sections/Navigation';
 import CTASection from '../sections/CTASection';
 import FooterSection from '../sections/FooterSection';
@@ -18,6 +19,7 @@ const ServicesPage = () => {
         return () => clearTimeout(timer);
     }, []);
 
+    useDocumentTitle('Services');
 
     return (
         <div className="min-h-screen bg-white">
