@@ -11,6 +11,8 @@
   --font-size-xl: clamp(1.95rem, 1.56vw + 1.56rem, 2.81rem);
   --font-size-xxl: clamp(2.44rem, 2.38vw + 1.85rem, 3.75rem);
   --font-size-huge: clamp(3.05rem, 3.54vw + 2.17rem, 5rem);
+  --texture-paper: radial-gradient(circle at 1px 1px, rgba(0, 0, 0, 0.08) 1px, transparent 0);
+  --texture-speckle: radial-gradient(circle at 1px 1px, rgba(20, 31, 38, 0.08) 1px, transparent 0);
 }
 
 .heading-font {
@@ -57,6 +59,50 @@
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   mix-blend-mode: multiply;
   border-radius: inherit;
+}
+
+.texture-paper {
+  position: relative;
+}
+
+.texture-paper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: var(--texture-paper);
+  background-size: 18px 18px;
+  opacity: 0.18;
+}
+
+.texture-speckle {
+  position: relative;
+  isolation: isolate;
+}
+
+.texture-speckle::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background-image: var(--texture-speckle);
+  background-size: 14px 14px;
+  opacity: 0.12;
+}
+
+.card-glow {
+  box-shadow:
+    0 10px 24px rgba(9, 25, 32, 0.08),
+    0 2px 8px rgba(9, 25, 32, 0.06);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.card-glow:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 18px 34px rgba(9, 25, 32, 0.1),
+    0 6px 16px rgba(9, 25, 32, 0.08);
 }
 
 /* Soft Shadows */
@@ -156,6 +202,18 @@
   }
 }
 
+@keyframes revealRise {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .animate-fade-in-up {
   animation: fadeInUp 0.8s ease-out forwards;
 }
@@ -201,6 +259,27 @@
   transform: scale(1.05);
 }
 
+.reveal-sequence>* {
+  opacity: 0;
+  animation: revealRise 0.7s ease-out forwards;
+}
+
+.reveal-sequence>*:nth-child(1) {
+  animation-delay: 0.06s;
+}
+
+.reveal-sequence>*:nth-child(2) {
+  animation-delay: 0.14s;
+}
+
+.reveal-sequence>*:nth-child(3) {
+  animation-delay: 0.22s;
+}
+
+.reveal-sequence>*:nth-child(4) {
+  animation-delay: 0.3s;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -239,6 +318,12 @@ html {
   .hover-wiggle:hover,
   .active-squish:active {
     animation: none !important;
+  }
+
+  .reveal-sequence>* {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
 
   .noise-overlay {

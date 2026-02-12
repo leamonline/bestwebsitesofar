@@ -14,6 +14,16 @@ const TIME_SLOTS = [
     { id: 'wed-pm', label: 'Wednesday Afternoon' }
 ];
 
+const VISIT_PLAN_OPTIONS = [
+    { value: 'one-off', label: 'One-off visit' },
+    { value: 'every-6-weeks', label: 'Every 6 weeks (recommended for curly coats)' },
+    { value: 'every-8-weeks', label: 'Every 8 weeks (recommended for double coats)' }
+];
+
+const getVisitPlanLabel = (value) => (
+    VISIT_PLAN_OPTIONS.find((option) => option.value === value)?.label || VISIT_PLAN_OPTIONS[0].label
+);
+
 const INITIAL_FORM_DATA = {
     ownerName: '',
     phone: '',
@@ -21,6 +31,7 @@ const INITIAL_FORM_DATA = {
     dogName: '',
     breed: '',
     service: 'Full Groom',
+    visitPlan: 'one-off',
     preferredTimes: [],
     notes: '',
     // Honeypot field - should remain empty
@@ -111,9 +122,10 @@ const BookingForm = ({
                         dog_name: formData.dogName,
                         breed: formData.breed,
                         service: formData.service,
+                        visit_plan: getVisitPlanLabel(formData.visitPlan),
                         preferred_time: formData.preferredTimes.join(', '),
                         notes: formData.notes,
-                        message: `New booking request for ${formData.dogName} (${formData.breed}). Service: ${formData.service}. Preferred times: ${formData.preferredTimes.join(', ')}. Notes: ${formData.notes}`
+                        message: `New booking request for ${formData.dogName} (${formData.breed}). Service: ${formData.service}. Visit plan: ${getVisitPlanLabel(formData.visitPlan)}. Preferred times: ${formData.preferredTimes.join(', ')}. Notes: ${formData.notes}`
                     },
                     publicKey
                 );
@@ -408,6 +420,30 @@ const BookingForm = ({
                         <option value="Nail Clip">Nail Clip Only</option>
                         <option value="Anal Glands">Anal Gland Expression</option>
                     </select>
+                </div>
+
+                <div>
+                    <label htmlFor="visitPlan" className="block text-sm font-bold mb-1" style={{ color: colors.teal }}>
+                        Visit Schedule
+                    </label>
+                    <select
+                        id="visitPlan"
+                        name="visitPlan"
+                        value={formData.visitPlan}
+                        onChange={handleChange}
+                        className="w-full px-4 py-3 min-h-[48px] rounded-xl border-2 border-gray-100 focus:border-cyan-400 focus:outline-none transition-colors bg-white text-base"
+                    >
+                        {VISIT_PLAN_OPTIONS.map((option) => (
+                            <option key={option.value} value={option.value}>
+                                {option.label}
+                            </option>
+                        ))}
+                    </select>
+                    {formData.visitPlan !== 'one-off' && (
+                        <p className="text-sm mt-2" style={{ color: colors.teal }}>
+                            We will prioritize keeping a recurring slot around this rhythm.
+                        </p>
+                    )}
                 </div>
 
                 <div>

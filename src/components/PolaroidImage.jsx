@@ -33,6 +33,7 @@ const PolaroidImage = ({
     const prefersReducedMotion = usePrefersReducedMotion();
     const skipDevelopAnimation = instant || isTest || prefersReducedMotion;
     const [developStage, setDevelopStage] = useState(skipDevelopAnimation ? 4 : 0); // 0=hidden, 1=emerging, 2=shapes, 3=detail, 4=revealed
+    const [useOptimizedSources, setUseOptimizedSources] = useState(true);
     const polaroidRef = useRef(null);
 
     // Randomize tape rotation slightly for realism
@@ -188,6 +189,10 @@ const PolaroidImage = ({
     const webpSrcSet = hasResponsiveVariants ? buildResponsiveSrcSet(src, responsiveWidths, 'webp') : null;
     const jpegCandidates = hasResponsiveVariants ? buildResponsiveSrcSet(src, responsiveWidths, 'jpg') : null;
     const jpegSrcSet = hasResponsiveVariants ? `${jpegCandidates}, ${src} ${maxSourceWidth}w` : null;
+    const handleOptimizedLoadError = () => {
+        if (!useOptimizedSources) return;
+        setUseOptimizedSources(false);
+    };
 
     return (
         <div
@@ -217,20 +222,36 @@ const PolaroidImage = ({
                 )}
 
                 {src ? (
-                    <picture>
-                        {hasResponsiveVariants ? (
-                            <>
-                                <source srcSet={avifSrcSet} sizes={imageSizes} type="image/avif" />
-                                <source srcSet={webpSrcSet} sizes={imageSizes} type="image/webp" />
-                                <source srcSet={jpegSrcSet} sizes={imageSizes} type="image/jpeg" />
-                            </>
-                        ) : (
-                            <source srcSet={fallbackWebpSrc} type="image/webp" />
-                        )}
+                    useOptimizedSources ? (
+                        <picture>
+                            {hasResponsiveVariants ? (
+                                <>
+                                    <source srcSet={avifSrcSet} sizes={imageSizes} type="image/avif" />
+                                    <source srcSet={webpSrcSet} sizes={imageSizes} type="image/webp" />
+                                    <source srcSet={jpegSrcSet} sizes={imageSizes} type="image/jpeg" />
+                                </>
+                            ) : (
+                                <source srcSet={fallbackWebpSrc} type="image/webp" />
+                            )}
+                            <img
+                                key="optimized"
+                                src={src}
+                                srcSet={jpegSrcSet || undefined}
+                                sizes={hasResponsiveVariants ? imageSizes : undefined}
+                                alt={caption || "Dog being groomed at Smarter Dog Grooming Salon"}
+                                className="w-full h-full object-cover transition-all duration-700 ease-out"
+                                style={imageStyles}
+                                loading={loading}
+                                fetchPriority={fetchPriority}
+                                width={width}
+                                height={height}
+                                onError={handleOptimizedLoadError}
+                            />
+                        </picture>
+                    ) : (
                         <img
+                            key="fallback"
                             src={src}
-                            srcSet={jpegSrcSet || undefined}
-                            sizes={hasResponsiveVariants ? imageSizes : undefined}
                             alt={caption || "Dog being groomed at Smarter Dog Grooming Salon"}
                             className="w-full h-full object-cover transition-all duration-700 ease-out"
                             style={imageStyles}
@@ -239,7 +260,7 @@ const PolaroidImage = ({
                             width={width}
                             height={height}
                         />
-                    </picture>
+                    )
                 ) : (
                     <div className="w-full h-full flex items-center justify-center bg-gray-50">
                         <span className="text-4xl opacity-20">🐾</span>

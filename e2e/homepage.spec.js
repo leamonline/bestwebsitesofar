@@ -39,12 +39,13 @@ test.describe('Homepage E2E', () => {
   });
 
   test('shows footer contact details', async ({ page }) => {
+    const footer = page.locator('footer');
     const footerHeading = page.getByRole('heading', { name: 'Opening Hours' });
     await footerHeading.scrollIntoViewIfNeeded();
 
     await expect(footerHeading).toBeVisible();
-    await expect(page.getByText('183 Kings Road')).toBeVisible();
-    await expect(page.getByRole('link', { name: 'leam@smarterdog.co.uk' })).toBeVisible();
+    await expect(footer.getByText('183 Kings Road', { exact: true })).toBeVisible();
+    await expect(footer.getByRole('link', { name: 'leam@smarterdog.co.uk' })).toBeVisible();
   });
 
   test('has no automatically detectable accessibility violations on home view', async ({ page }) => {

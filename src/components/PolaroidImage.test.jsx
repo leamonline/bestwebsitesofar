@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import PolaroidImage from './PolaroidImage';
 import { colors } from '../constants/colors';
 
@@ -32,5 +32,18 @@ describe('PolaroidImage', () => {
 
     expect(tape).toBeInTheDocument();
     expect(tape.getAttribute('style')).toMatch(/transform:/);
+  });
+
+  it('falls back to base src image when optimized source fails', () => {
+    const { container } = render(<PolaroidImage src="/assets/client-dog-1.jpg" caption="Fallback pup" />);
+
+    const optimizedImage = screen.getByRole('img', { name: 'Fallback pup' });
+    expect(container.querySelector('picture')).toBeInTheDocument();
+
+    fireEvent.error(optimizedImage);
+
+    const fallbackImage = screen.getByRole('img', { name: 'Fallback pup' });
+    expect(container.querySelector('picture')).not.toBeInTheDocument();
+    expect(fallbackImage).toHaveAttribute('src', '/assets/client-dog-1.jpg');
   });
 });

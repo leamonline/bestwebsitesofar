@@ -19,6 +19,9 @@ vi.mock('./sections/TrustSection', () => ({
 vi.mock('./sections/ServicesSection', () => ({
   default: () => <div data-testid="services-section">ServicesSection</div>
 }));
+vi.mock('./sections/AftercareGuidesSection', () => ({
+  default: () => <div data-testid="aftercare-guides-section">AftercareGuidesSection</div>
+}));
 vi.mock('./sections/GallerySection', () => ({
   default: () => <div data-testid="gallery-section">GallerySection</div>
 }));
@@ -30,6 +33,9 @@ vi.mock('./sections/HoundslySection', () => ({
 }));
 vi.mock('./sections/CTASection', () => ({
   default: () => <div data-testid="cta-section">CTASection</div>
+}));
+vi.mock('./sections/LocationCredibilitySection', () => ({
+  default: () => <div data-testid="location-credibility-section">LocationCredibilitySection</div>
 }));
 vi.mock('./sections/FooterSection', () => ({
   default: () => <div data-testid="footer-section">FooterSection</div>
@@ -64,9 +70,11 @@ describe('SmarterDogHomepage', () => {
       expect(screen.getByTestId('hero-section')).toBeInTheDocument();
       expect(screen.getByTestId('trust-section')).toBeInTheDocument();
       expect(screen.getByTestId('services-section')).toBeInTheDocument();
+      expect(screen.getByTestId('aftercare-guides-section')).toBeInTheDocument();
       expect(screen.getByTestId('gallery-section')).toBeInTheDocument();
       expect(screen.getByTestId('testimonials-section')).toBeInTheDocument();
       expect(screen.getByTestId('houndsly-section')).toBeInTheDocument();
+      expect(screen.getByTestId('location-credibility-section')).toBeInTheDocument();
       expect(screen.getByTestId('cta-section')).toBeInTheDocument();
       expect(screen.getByTestId('footer-section')).toBeInTheDocument();
     });
@@ -81,10 +89,12 @@ describe('SmarterDogHomepage', () => {
         'hero-section',
         'trust-section',
         'services-section',
+        'aftercare-guides-section',
         'gallery-section',
         'section-divider',
         'houndsly-section',
         'testimonials-section',
+        'location-credibility-section',
         'cta-section',
         'footer-section',
       ]);
@@ -117,8 +127,8 @@ describe('SmarterDogHomepage', () => {
       const mainDiv = container.firstChild;
       const sections = mainDiv.querySelectorAll('[data-testid]');
 
-      // navigation, hero, trust, services, gallery, divider, houndsly, testimonials, cta, footer = 10
-      expect(sections).toHaveLength(10);
+      // navigation, hero, trust, services, aftercare, gallery, divider, houndsly, testimonials, location, cta, footer = 12
+      expect(sections).toHaveLength(12);
     });
   });
 });
