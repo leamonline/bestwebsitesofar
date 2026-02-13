@@ -7,12 +7,12 @@ const OG_IMAGE = `${SITE_URL}/assets/logo-text.png`;
 const ROUTE_SEO = {
   '/': {
     canonical: '/',
-    description: 'Over 40 years of calm, careful dog grooming in Ashton-under-Lyne. Nervous dogs welcome. Book your visit with Smarter Dog Grooming Salon.',
+    description: 'Dog grooming in Ashton-under-Lyne for over 40 years. Nervous dogs welcome. Trusted by owners in Dukinfield, Stalybridge, Hyde, Denton, and Mossley.',
     robots: 'index,follow',
   },
   '/services': {
     canonical: '/services',
-    description: 'Explore full groom, maintenance groom, de-shedding, and puppy intro services from Smarter Dog Grooming Salon in Ashton-under-Lyne.',
+    description: 'Explore full groom, maintenance groom, de-shedding, and puppy intro services at Smarter Dog Grooming Salon in Ashton-under-Lyne, Greater Manchester.',
     robots: 'index,follow',
   },
   '/approach': {
@@ -22,12 +22,12 @@ const ROUTE_SEO = {
   },
   '/faq': {
     canonical: '/faq',
-    description: 'Answers to common questions about appointments, nervous dogs, pricing, and first visits at Smarter Dog Grooming Salon.',
+    description: 'Answers to common questions about appointments, nervous dogs, pricing, and first visits at our Ashton-under-Lyne dog grooming salon.',
     robots: 'index,follow',
   },
   '/book': {
     canonical: '/book',
-    description: 'Request your dog grooming appointment online with Smarter Dog Grooming Salon. We are open Monday to Wednesday, 8:30am-3pm.',
+    description: 'Request your dog grooming appointment online with Smarter Dog Grooming Salon in Ashton-under-Lyne. Open Monday to Wednesday, 8:30am-3pm.',
     robots: 'index,follow',
   },
   '/privacy': {

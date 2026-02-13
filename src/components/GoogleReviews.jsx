@@ -85,7 +85,7 @@ const GoogleReviews = () => {
             <div className="flex items-center justify-center gap-2 mb-10">
                 <Stars />
                 <span className="text-sm" style={{ color: colors.teal }}>
-                    4.9 on Google
+                    4.9 on Google from local dog owners
                 </span>
             </div>
 

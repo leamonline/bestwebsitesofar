@@ -9,6 +9,7 @@ const Navigation = ({ isLoaded, onBookClick }) => {
     const [scrolled, setScrolled] = React.useState(false);
     const prefersReducedMotion = usePrefersReducedMotion();
     const navLinkColor = scrolled ? colors.teal : colors.plum;
+    const hasBookHandler = typeof onBookClick === 'function';
 
     const closeMenu = React.useCallback(() => setIsMenuOpen(false), []);
     const menuRef = useFocusTrap(isMenuOpen, closeMenu);
@@ -96,16 +97,29 @@ const Navigation = ({ isLoaded, onBookClick }) => {
                     </Link>
 
                     <div className="ml-6">
-                        <button
-                            onClick={() => onBookClick?.('Navigation')}
-                            className="px-6 py-3 rounded-full font-bold text-sm transition-all duration-300 hover:scale-105 hover:shadow-lg active-squish"
-                            style={{
-                                backgroundColor: colors.green,
-                                color: colors.plum
-                            }}
-                        >
-                            Book your visit
-                        </button>
+                        {hasBookHandler ? (
+                            <button
+                                onClick={() => onBookClick('Navigation')}
+                                className="px-6 py-3 rounded-full font-bold text-sm transition-all duration-300 hover:scale-105 hover:shadow-lg active-squish"
+                                style={{
+                                    backgroundColor: colors.green,
+                                    color: colors.plum
+                                }}
+                            >
+                                Book your visit
+                            </button>
+                        ) : (
+                            <Link
+                                to="/book"
+                                className="inline-block px-6 py-3 rounded-full font-bold text-sm transition-all duration-300 hover:scale-105 hover:shadow-lg active-squish"
+                                style={{
+                                    backgroundColor: colors.green,
+                                    color: colors.plum
+                                }}
+                            >
+                                Book your visit
+                            </Link>
+                        )}
                     </div>
                 </div>
 
@@ -164,17 +178,29 @@ const Navigation = ({ isLoaded, onBookClick }) => {
                     >
                         FAQ
                     </Link>
-                    <button
-                        onClick={() => {
-                            closeMenu();
-                            onBookClick?.('Mobile Menu');
-                        }}
-                        className="w-full py-3 rounded-full font-bold mt-2 active-squish"
-                        style={{ backgroundColor: colors.green, color: colors.plum }}
-                        role="menuitem"
-                    >
-                        Book your visit
-                    </button>
+                    {hasBookHandler ? (
+                        <button
+                            onClick={() => {
+                                closeMenu();
+                                onBookClick('Mobile Menu');
+                            }}
+                            className="w-full py-3 rounded-full font-bold mt-2 active-squish"
+                            style={{ backgroundColor: colors.green, color: colors.plum }}
+                            role="menuitem"
+                        >
+                            Book your visit
+                        </button>
+                    ) : (
+                        <Link
+                            to="/book"
+                            onClick={closeMenu}
+                            className="w-full py-3 rounded-full font-bold mt-2 text-center"
+                            style={{ backgroundColor: colors.green, color: colors.plum }}
+                            role="menuitem"
+                        >
+                            Book your visit
+                        </Link>
+                    )}
                 </div>
             )}
         </nav>

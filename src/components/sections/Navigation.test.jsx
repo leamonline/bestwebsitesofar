@@ -34,4 +34,10 @@ describe('Navigation', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Close menu' }));
     expect(screen.queryByRole('menu')).not.toBeInTheDocument();
   });
+
+  it('renders book link fallback when no click handler is provided', () => {
+    renderNavigation({ onBookClick: undefined });
+
+    expect(screen.getByRole('link', { name: /Book your visit/i })).toHaveAttribute('href', '/book');
+  });
 });

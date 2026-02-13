@@ -2,9 +2,9 @@ import React from 'react';
 import { colors } from '../../constants/colors';
 import DogSilhouette from '../DogSilhouette';
 import PolaroidImage from '../PolaroidImage';
-import BackgroundSticker from '../BackgroundSticker';
 import MagneticButton from '../MagneticButton';
 import usePrefersReducedMotion from '../../hooks/usePrefersReducedMotion';
+import { trackEvent } from '../../utils/analytics';
 
 import ParallaxSection from '../ParallaxSection';
 
@@ -61,12 +61,12 @@ const HeroSection = ({ isLoaded, onBookClick }) => {
                                     fontWeight: '500'
                                 }}
                             >
-                                Over 40 years of calm, careful grooming.<br />
-                                No fuss. No rushing. Just experience.
+                                Over 40 years grooming dogs across Ashton-under-Lyne and Tameside.<br />
+                                No fuss. No rushing. Just experienced local care.
                             </p>
 
-                            {/* CTA — one only, sentence case, breathing room */}
-                            <div className="mt-4">
+                            {/* CTA + direct contact */}
+                            <div className="mt-4 flex flex-wrap items-center gap-3">
                                 <MagneticButton
                                     onClick={() => onBookClick('Hero Section')}
                                     className="px-10 py-4 rounded-full font-semibold text-base transition-all duration-300 hover:shadow-xl flex items-center gap-3 hover-lift active-squish"
@@ -78,9 +78,16 @@ const HeroSection = ({ isLoaded, onBookClick }) => {
                                     <span>Book your visit</span>
                                     <span>→</span>
                                 </MagneticButton>
+                                <a
+                                    href="tel:07507731487"
+                                    onClick={() => trackEvent('Engagement', 'Click Call', 'Hero Section')}
+                                    className="px-7 py-4 rounded-full font-semibold text-base border-2 transition-all duration-300 hover:shadow-xl"
+                                    style={{ borderColor: colors.plum, color: colors.plum }}
+                                >
+                                    Call 07507 731487
+                                </a>
                             </div>
 
-                            {/* Trust indicators REMOVED — hero's job is emotional settlement, not proof */}
                         </div>
 
                         {/* Hero Polaroid Cluster - Responsive */}

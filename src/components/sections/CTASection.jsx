@@ -4,6 +4,21 @@ import { colors } from '../../constants/colors';
 import SectionDivider from '../SectionDivider';
 import FadeIn from '../FadeIn';
 
+const BOOKING_STEPS = [
+    {
+        title: '1) Send your request',
+        detail: 'Tell us your dog, service, and best times in about 2 minutes.',
+    },
+    {
+        title: '2) We confirm a slot',
+        detail: 'Our Ashton team checks the diary and replies by text or call.',
+    },
+    {
+        title: '3) Easy drop-off',
+        detail: 'Bring them in on the day and we will handle the rest.',
+    },
+];
+
 const CTASection = ({ onBookClick }) => {
     return (
         <>
@@ -39,7 +54,7 @@ const CTASection = ({ onBookClick }) => {
                             className="body-font text-lg mb-8"
                             style={{ color: colors.plum }}
                         >
-                            We're open Monday to Wednesday, 8:30am–3pm. Slots go fast — get yours booked in.
+                            We're open Monday to Wednesday, 8:30am–3pm in Ashton-under-Lyne. Slots go fast — get yours booked in.
                         </p>
                         <div className="flex flex-wrap justify-center gap-4 mb-10">
                             <button
@@ -64,6 +79,30 @@ const CTASection = ({ onBookClick }) => {
                                 <span>📞</span>
                                 <span>07507 731487</span>
                             </a>
+                        </div>
+
+                        <div
+                            className="rounded-3xl p-6 mb-10 text-left"
+                            style={{ backgroundColor: 'rgba(255,255,255,0.2)' }}
+                        >
+                            <h4 className="heading-font text-2xl font-bold mb-4" style={{ color: colors.plum }}>
+                                What happens next
+                            </h4>
+                            <div className="grid md:grid-cols-3 gap-4">
+                                {BOOKING_STEPS.map((step) => (
+                                    <article
+                                        key={step.title}
+                                        className="rounded-2xl p-4 h-full"
+                                        style={{ backgroundColor: 'rgba(255,255,255,0.7)' }}
+                                    >
+                                        <p className="font-semibold mb-2" style={{ color: colors.plum }}>{step.title}</p>
+                                        <p className="text-sm" style={{ color: colors.teal }}>{step.detail}</p>
+                                    </article>
+                                ))}
+                            </div>
+                            <p className="text-sm mt-4" style={{ color: colors.plum }}>
+                                Serving Ashton-under-Lyne, Dukinfield, Stalybridge, Hyde, Denton, and Mossley.
+                            </p>
                         </div>
 
                         {/* Signposts for different visitor types */}

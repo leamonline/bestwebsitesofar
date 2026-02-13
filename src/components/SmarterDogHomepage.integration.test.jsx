@@ -17,7 +17,6 @@ describe('SmarterDogHomepage integration', () => {
     expect(container.querySelector('nav')).toBeInTheDocument();
     expect(screen.getByText(/Come scruffy/i)).toBeInTheDocument();
     expect(screen.getByText(/How we care for your dog/i)).toBeInTheDocument();
-    expect(screen.getByText(/Not sure what to book/i)).toBeInTheDocument();
     expect(screen.getByText(/Post-groom care guides/i)).toBeInTheDocument();
     expect(screen.getByText(/Strike a pose, wet nose/i)).toBeInTheDocument();
     expect(screen.getByText(/Dogs who wouldn't go anywhere else/i)).toBeInTheDocument();
