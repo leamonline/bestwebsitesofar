@@ -51,9 +51,9 @@ class ErrorBoundary extends React.Component {
                             className="body-font text-sm mt-6"
                             style={{ color: colors.teal, opacity: 0.6 }}
                         >
-                            Or call us on{' '}
+                            Or message us on{' '}
                             <a
-                                href="tel:07507731487"
+                                href="sms:07507731487"
                                 className="underline hover:opacity-80"
                                 style={{ color: colors.cyan }}
                             >

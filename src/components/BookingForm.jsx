@@ -25,8 +25,6 @@ const SERVICE_OPTIONS = [
     'Maintenance Groom',
     'De-Shedding Package',
     'Puppy Intro',
-    'Nail Clip',
-    'Anal Glands',
 ];
 
 const VALID_VISIT_PLAN_VALUES = VISIT_PLAN_OPTIONS.map((option) => option.value);
@@ -77,7 +75,6 @@ const buildInitialFormState = (initialFormData = {}) => {
  * @param {string} [props.headingId] - Optional id for the heading element (for aria-labelledby)
  * @param {function} [props.onSuccess] - Called after successful submission
  * @param {function} [props.onClose] - Called when user clicks close/done (modal variant)
- * @param {function} [props.onBackToForm] - Called when user clicks "back to form" from walk-in step
  * @param {boolean} [props.showAlternativeContact] - Show WhatsApp/phone alternative contact section
  * @param {'modal'|'page'} [props.variant] - Controls close/navigation behavior
  * @param {Object} [props.initialFormData] - Optional prefill values for the booking form
@@ -88,14 +85,13 @@ const BookingForm = ({
     headingId,
     onSuccess,
     onClose,
-    onBackToForm,
     showAlternativeContact = false,
     variant = 'page',
     initialFormData,
     prefillSummary = '',
 }) => {
     const HeadingTag = headingTag;
-    const [step, setStep] = useState('form'); // 'form', 'success', or 'walkin'
+    const [step, setStep] = useState('form');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [error, setError] = useState(null);
     const [fieldErrors, setFieldErrors] = useState({});
@@ -206,59 +202,6 @@ const BookingForm = ({
                 : [...prev.preferredTimes, timeSlot]
         }));
     };
-
-    const handleServiceChange = (e) => {
-        const service = e.target.value;
-        if (service === 'Nail Clip' || service === 'Anal Glands') {
-            setStep('walkin');
-        } else {
-            handleChange(e);
-        }
-    };
-
-    const handleBackToForm = () => {
-        setStep('form');
-        onBackToForm?.();
-    };
-
-    // Walk-in step
-    if (step === 'walkin') {
-        return (
-            <div className="p-12 text-center">
-                <div className="text-6xl mb-6">🐾</div>
-                <HeadingTag
-                    className="heading-font font-bold text-3xl mb-4"
-                    style={{ color: colors.teal }}
-                >
-                    No booking needed!
-                </HeadingTag>
-                <p className="body-font text-lg text-gray-600 mb-8">
-                    Just pop in before 1pm on a day we're open. We'll sort you out!
-                </p>
-                <p className="body-font text-sm text-gray-500 mb-8">
-                    (That's Monday, Tuesday or Wednesday)
-                </p>
-                <div className="flex flex-col gap-3">
-                    <button
-                        onClick={handleBackToForm}
-                        className="px-8 py-3 rounded-full font-bold transition-all hover:scale-105"
-                        style={{ backgroundColor: colors.cyan, color: colors.plum }}
-                    >
-                        Back to booking form
-                    </button>
-                    {variant === 'modal' && onClose && (
-                        <button
-                            onClick={onClose}
-                            className="px-8 py-3 rounded-full font-bold transition-all hover:scale-105 border-2"
-                            style={{ borderColor: colors.teal, color: colors.teal }}
-                        >
-                            Got it, thanks!
-                        </button>
-                    )}
-                </div>
-            </div>
-        );
-    }
 
     // Success step
     if (step === 'success') {
@@ -466,15 +409,13 @@ const BookingForm = ({
                         id="service"
                         name="service"
                         value={formData.service}
-                        onChange={handleServiceChange}
+                        onChange={handleChange}
                         className="w-full px-4 py-3 min-h-[48px] rounded-xl border-2 border-gray-100 focus:border-cyan-400 focus:outline-none transition-colors bg-white text-base"
                     >
                         <option value="Full Groom">Full Groom (Bath, Cut, Nails, Ears)</option>
                         <option value="Maintenance Groom">Maintenance Groom (Bath & Tidy)</option>
                         <option value="De-Shedding Package">De-Shedding Package</option>
                         <option value="Puppy Intro">Puppy Intro (Under 6 months)</option>
-                        <option value="Nail Clip">Nail Clip Only</option>
-                        <option value="Anal Glands">Anal Gland Expression</option>
                     </select>
                 </div>
 
@@ -562,11 +503,11 @@ const BookingForm = ({
                             💬 WhatsApp
                         </a>
                         <a
-                            href="tel:07507731487"
+                            href="sms:07507731487"
                             className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold border-2 transition-all hover:scale-105"
                             style={{ borderColor: colors.teal, color: colors.teal }}
                         >
-                            📞 07507 731487
+                            💬 Message 07507 731487
                         </a>
                     </div>
                 </div>

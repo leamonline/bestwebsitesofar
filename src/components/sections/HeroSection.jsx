@@ -79,12 +79,12 @@ const HeroSection = ({ isLoaded, onBookClick }) => {
                                     <span>→</span>
                                 </MagneticButton>
                                 <a
-                                    href="tel:07507731487"
-                                    onClick={() => trackEvent('Engagement', 'Click Call', 'Hero Section')}
+                                    href="sms:07507731487"
+                                    onClick={() => trackEvent('Engagement', 'Click Message', 'Hero Section')}
                                     className="px-7 py-4 rounded-full font-semibold text-base border-2 transition-all duration-300 hover:shadow-xl"
                                     style={{ borderColor: colors.plum, color: colors.plum }}
                                 >
-                                    Call 07507 731487
+                                    Message 07507 731487
                                 </a>
                             </div>
 

@@ -68,7 +68,7 @@ const CTASection = ({ onBookClick }) => {
                                 Book your visit
                             </button>
                             <a
-                                href="tel:07507731487"
+                                href="sms:07507731487"
                                 className="px-10 py-4 rounded-full font-bold text-lg transition-all duration-300 hover:scale-105 border-2 flex items-center gap-2"
                                 style={{
                                     borderColor: colors.plum,
@@ -76,8 +76,8 @@ const CTASection = ({ onBookClick }) => {
                                     backgroundColor: 'transparent'
                                 }}
                             >
-                                <span>📞</span>
-                                <span>07507 731487</span>
+                                <span>💬</span>
+                                <span>Message 07507 731487</span>
                             </a>
                         </div>
 
@@ -100,9 +100,6 @@ const CTASection = ({ onBookClick }) => {
                                     </article>
                                 ))}
                             </div>
-                            <p className="text-sm mt-4" style={{ color: colors.plum }}>
-                                Serving Ashton-under-Lyne, Dukinfield, Stalybridge, Hyde, Denton, and Mossley.
-                            </p>
                         </div>
 
                         {/* Signposts for different visitor types */}

@@ -172,8 +172,8 @@ const TermsPage = ({ onBookClick }) => {
                             Thank you for supporting a safe, calm, and welfare-focused grooming environment for every dog who visits us.
                         </p>
                         <p className="body-font text-base" style={{ color: colors.teal }}>
-                            If you have questions about any of these policies, please give us a call on{' '}
-                            <a href="tel:07507731487" className="font-semibold underline hover:opacity-70" style={{ color: colors.teal }}>
+                            If you have questions about any of these policies, please message us on{' '}
+                            <a href="sms:07507731487" className="font-semibold underline hover:opacity-70" style={{ color: colors.teal }}>
                                 07507 731487
                             </a>
                         </p>

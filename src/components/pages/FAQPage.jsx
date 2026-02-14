@@ -113,7 +113,7 @@ const FAQPage = ({ onBookClick }) => {
                             Got a question we haven't answered?
                         </p>
                         <p className="body-font mb-6" style={{ color: colors.teal }}>
-                            Give us a call or send a message — we're happy to help.
+                            Send us a message — we're happy to help.
                         </p>
                         <div className="flex flex-wrap justify-center gap-4">
                             <button
@@ -127,7 +127,7 @@ const FAQPage = ({ onBookClick }) => {
                                 Book your visit
                             </button>
                             <a
-                                href="tel:07507731487"
+                                href="sms:07507731487"
                                 className="px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 hover:scale-105 border-2 flex items-center gap-2"
                                 style={{
                                     borderColor: colors.teal,
@@ -135,7 +135,7 @@ const FAQPage = ({ onBookClick }) => {
                                     backgroundColor: 'transparent'
                                 }}
                             >
-                                📞 07507 731487
+                                💬 Message 07507 731487
                             </a>
                         </div>
                     </div>

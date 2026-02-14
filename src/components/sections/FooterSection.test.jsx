@@ -32,7 +32,7 @@ describe('FooterSection', () => {
     renderFooter();
 
     expect(screen.getByRole('link', { name: 'leam@smarterdog.co.uk' })).toHaveAttribute('href', 'mailto:leam@smarterdog.co.uk');
-    expect(screen.getByRole('link', { name: '07507 731487' })).toHaveAttribute('href', 'tel:07507731487');
+    expect(screen.getByRole('link', { name: /Message 07507 731487/i })).toHaveAttribute('href', 'sms:07507731487');
     expect(screen.getByRole('link', { name: /WhatsApp Available/i })).toHaveAttribute('href', 'https://wa.me/447507731487');
   });
 

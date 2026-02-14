@@ -3,8 +3,8 @@ import { colors } from '../constants/colors';
 import { trackEvent } from '../utils/analytics';
 
 const MobileQuickActions = ({ onBookClick }) => {
-    const handleCallClick = () => {
-        trackEvent('Engagement', 'Click Call', 'Mobile Quick Actions');
+    const handleMessageClick = () => {
+        trackEvent('Engagement', 'Click Message', 'Mobile Quick Actions');
     };
 
     return (
@@ -26,12 +26,12 @@ const MobileQuickActions = ({ onBookClick }) => {
                         Book now
                     </button>
                     <a
-                        href="tel:07507731487"
-                        onClick={handleCallClick}
+                        href="sms:07507731487"
+                        onClick={handleMessageClick}
                         className="w-full rounded-xl px-4 py-3 font-bold text-sm text-center border-2"
                         style={{ borderColor: colors.teal, color: colors.teal }}
                     >
-                        Call salon
+                        Message salon
                     </a>
                 </div>
             </div>

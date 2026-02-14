@@ -64,16 +64,11 @@ describe('BookingForm', () => {
         expect(screen.getByLabelText('Monday Morning')).toBeChecked();
     });
 
-    it('switches to walk-in flow for nail clip and can return to form', () => {
+    it('does not include nail clip or anal gland expression in service options', () => {
         renderBookingForm({ variant: 'modal' });
 
-        fireEvent.change(screen.getByRole('combobox', { name: 'Service Required' }), {
-            target: { value: 'Nail Clip' },
-        });
-
-        expect(screen.getByText('No booking needed!')).toBeInTheDocument();
-        fireEvent.click(screen.getByRole('button', { name: /Back to booking form/i }));
-        expect(screen.getByRole('heading', { name: /Let's get you booked in!/i })).toBeInTheDocument();
+        expect(screen.queryByRole('option', { name: /Nail Clip Only/i })).not.toBeInTheDocument();
+        expect(screen.queryByRole('option', { name: /Anal Gland Expression/i })).not.toBeInTheDocument();
     });
 
     it('shows validation errors for invalid phone and email', async () => {

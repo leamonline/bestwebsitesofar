@@ -133,8 +133,8 @@ const MattedCoatPolicyPage = ({ onBookClick }) => {
                             Our goal is always a calm, safe, and positive grooming experience.
                         </p>
                         <p className="body-font text-base" style={{ color: colors.teal }}>
-                            If you have questions about your dog's coat or how to care for it between grooms, please call us on{' '}
-                            <a href="tel:07507731487" className="font-semibold underline hover:opacity-70" style={{ color: colors.teal }}>
+                            If you have questions about your dog's coat or how to care for it between grooms, please message us on{' '}
+                            <a href="sms:07507731487" className="font-semibold underline hover:opacity-70" style={{ color: colors.teal }}>
                                 07507 731487
                             </a>
                         </p>

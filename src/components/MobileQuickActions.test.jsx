@@ -15,9 +15,9 @@ describe('MobileQuickActions', () => {
     expect(onBookClick).toHaveBeenCalledWith('Mobile Quick Actions');
   });
 
-  it('renders call link with phone href', () => {
+  it('renders message link with sms href', () => {
     render(<MobileQuickActions onBookClick={() => {}} />);
 
-    expect(screen.getByRole('link', { name: /Call salon/i })).toHaveAttribute('href', 'tel:07507731487');
+    expect(screen.getByRole('link', { name: /Message salon/i })).toHaveAttribute('href', 'sms:07507731487');
   });
 });

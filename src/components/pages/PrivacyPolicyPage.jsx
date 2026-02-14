@@ -242,7 +242,7 @@ const PrivacyPolicyPage = ({ onBookClick }) => {
                                 </li>
                                 <li className="body-font text-lg leading-relaxed flex gap-3" style={{ color: colors.teal }}>
                                     <span style={{ color: colors.teal }}>•</span>
-                                    <span><strong>Phone:</strong> <a href="tel:07507731487" className="underline hover:opacity-70" style={{ color: colors.teal }}>07507 731487</a></span>
+                                    <span><strong>Message:</strong> <a href="sms:07507731487" className="underline hover:opacity-70" style={{ color: colors.teal }}>07507 731487</a></span>
                                 </li>
                                 <li className="body-font text-lg leading-relaxed flex gap-3" style={{ color: colors.teal }}>
                                     <span style={{ color: colors.teal }}>•</span>

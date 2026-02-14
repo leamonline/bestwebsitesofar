@@ -21,10 +21,10 @@ describe('CTASection', () => {
     expect(onBookClick).toHaveBeenCalledWith('CTA Section');
   });
 
-  it('renders phone link with correct href', () => {
+  it('renders message link with correct href', () => {
     render(<CTASection onBookClick={() => {}} />);
 
-    expect(screen.getByRole('link', { name: /07507 731487/i })).toHaveAttribute('href', 'tel:07507731487');
+    expect(screen.getByRole('link', { name: /Message 07507 731487/i })).toHaveAttribute('href', 'sms:07507731487');
   });
 
   it('uses brand pink background', () => {
